@@ -8,16 +8,16 @@ Transforming complex business challenges into elegant, high-performance, and sca
 ## Quick Actions & Contact Info
 
 <div align="center">
-  <a href="https://drive.google.com/file/d/1_TXPBNeQByNsvacKaBYxcM9SNU9aWxIR/view?usp=drive_link" target="_blank">
+  <a href="https://drive.google.com/file/d/1bUkgK9kbWEC54IfEGYMK653G3g51O9lq/view?usp=drive_link" target="_blank">
     <img src="https://img.shields.io/badge/Download-Resume%20%2F%20CV-blue?style=for-the-badge&logo=google-drive&logoColor=white" alt="Resume" />
   </a>
-  <a href="mailto:rafkhan9323@gmail.com">
-    <img src="https://img.shields.io/badge/Email-rafkhan9323%40gmail.com-red?style=for-the-badge&logo=gmail&logoColor=white" alt="Email" />
+  <a href="mailto:mrafiqdot825@gmail.com">
+    <img src="https://img.shields.io/badge/Email-mrafiqdot825%40gmail.com-red?style=for-the-badge&logo=gmail&logoColor=white" alt="Email" />
   </a>
-  <a href="https://www.linkedin.com/in/mrafiq825/" target="_blank">
+  <a href="https://www.linkedin.com/in/mrafiqdot825/" target="_blank">
     <img src="https://img.shields.io/badge/LinkedIn-Connect%20on%20LinkedIn-0077B5?style=for-the-badge&logo=linkedin" alt="LinkedIn" />
   </a>
-  <a href="https://github.com/mrafiq825" target="_blank">
+  <a href="https://github.com/mrafiqdot825" target="_blank">
     <img src="https://img.shields.io/badge/GitHub-Follow%20on%20GitHub-181717?style=for-the-badge&logo=github" alt="GitHub" />
   </a>
   <a href="https://wa.me/923129185825" target="_blank">
@@ -26,11 +26,14 @@ Transforming complex business challenges into elegant, high-performance, and sca
   <a href="https://www.facebook.com/profile.php?id=100069771234437&mibextid=wwXIfr&mibextid=wwXIfr" target="_blank">
     <img src="https://img.shields.io/badge/Facebook-Follow%20on%20Facebook-1877F2?style=for-the-badge&logo=facebook&logoColor=white" alt="Facebook" />
   </a>
-  <a href="https://x.com/mrafiq825" target="_blank">
+  <a href="https://x.com/mrafiqdot825" target="_blank">
     <img src="https://img.shields.io/badge/X-Follow%20on%20X-000000?style=for-the-badge&logo=x&logoColor=white" alt="X" />
   </a>
-  <a href="https://www.instagram.com/dmrafiq825/" target="_blank">
+  <a href="https://www.instagram.com/mrafiqdot825/" target="_blank">
     <img src="https://img.shields.io/badge/Instagram-Follow%20on%20Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white" alt="Instagram" />
+  </a>
+  <a href="https://www.tiktok.com/@mrafiqdot825" target="_blank">
+    <img src="https://img.shields.io/badge/TikTok-Follow%20on%20TikTok-000000?style=for-the-badge&logo=tiktok&logoColor=white" alt="TikTok" />
   </a>
 </div>
 
@@ -86,56 +89,6 @@ Transforming complex business challenges into elegant, high-performance, and sca
 
 ---
 
-## Professional Experience
-
-### **Developer Experience (DevEx) Engineer** | **ZiriumAI**
-*June 2026 - Present | Onsite*
-- Engineered and maintained high-performance customer-facing **Next.js** applications using **TypeScript** and **Tailwind CSS**, increasing application stability and page responsiveness.
-- Advocated for developer-centric integrations, API usability, and comprehensive documentation to optimize team workflows and accelerate feature delivery.
-- Collaborated with product and design teams to build modular, accessible UI components utilizing **Radix UI** and **shadcn/ui**, increasing frontend development efficiency by **20%**.
-- *Technologies:* Next.js, React.js, TypeScript, Tailwind CSS, shadcn/ui, Radix UI, API Usability.
-
-### **Full Stack Developer** | **Freelance / Self-Employed**
-*Jan 2023 - Present | Remote*
-- Delivered end-to-end web and mobile applications for **5+ startups** from scoping and MVP through scaled production deployment, serving as sole technical lead on multiple concurrent engagements.
-- Integrated **OpenAI** and **Google Gemini** APIs into client products to build AI chatbots, resume analyzers, and recommendation engines, directly improving user engagement for paying customers.
-- Reduced client mobile development costs by building cross-platform iOS and Android apps with **React Native (Expo)**, eliminating the need for separate native codebases.
-- Designed and deployed secure REST APIs using **Node.js/Express** and **FastAPI** with **JWT authentication**, **MongoDB** schemas, and CI/CD pipelines via **GitHub Actions**.
-- *Technologies:* React Native, Expo, Node.js, Express.js, FastAPI, MongoDB, OpenAI API, Google Gemini API, GitHub Actions, JWT.
-
-### **Backend Developer Intern** | **Clouditecture**
-*November 2024 - April 2025 | Hybrid*
-- Architected and deployed scalable, containerized microservices handling **10K+ daily API requests**, utilizing **Node.js, Express, and FastAPI**.
-- Designed and implemented secure RESTful endpoints featuring **JWT authorization**, reducing potential security vulnerabilities by **60%**.
-- Optimized SQL database query efficiency and integrated **Redis caching**, resulting in a **50% improvement** in API response times.
-- Established structured logging, error handling, and health-check endpoints to maintain **99.9% service availability**.
-- *Technologies:* Node.js, Express.js, Python, FastAPI, RESTful APIs, Microservices, Docker, Redis, JWT.
-
-### **Frontend Developer** | **Zypher Enterprise**
-*July 2025 - September 2025 | Onsite*
-- Developed and launched **5+ high-traffic web applications** with a mobile-first approach, driving a **45% increase** in mobile user engagement.
-- Improved page loading times by **55%** through code splitting, lazy loading, and frontend asset optimization.
-- Collaborated closely with UX designers and backend engineers to implement pixel-perfect, accessible, and responsive user interfaces.
-- Wrote comprehensive unit and integration tests using **Jest and Vitest**, achieving **85% code coverage** to ensure application reliability.
-- *Technologies:* React.js, JavaScript, TypeScript, HTML5/CSS3, Responsive Design, Jest/Vitest, Git.
-
-### **Software Ambassador** | **Insite**
-*July 2025 - October 2025 | Remote*
-- Performed comprehensive usability and quality assurance (QA) testing on beta releases, providing detailed feedback to the engineering team.
-- Conducted market and technical research that influenced key product features, usability enhancements, and release strategies.
-- Contributed to developer community forums, discussing safe practices for Large Language Model (LLM) prompt engineering and application integration.
-- *Technologies:* Software Testing, UX Research, Product Development, AI/LLM, Community Engagement.
-
-### **Full-Stack Developer Intern** | **HiSkyTech**
-*August 2024 - September 2024 | Remote*
-- Engineered internal web automation tools that automated repetitive data entry, reducing manual team workflow time by **35%**.
-- Refactored and optimized Node.js API endpoints, resulting in a **40% reduction** in server response latency.
-- Collaborated on key UI/UX features using React.js, contributing to a **25% increase** in user session duration.
-- Implemented cross-browser compatible, responsive styling patterns to ensure seamless rendering across desktop and mobile viewports.
-- *Technologies:* JavaScript, React.js, Node.js, RESTful APIs, Git, Responsive Design.
-
----
-
 ## Featured Projects
 
 ### **JobPsych: AI-Powered Career Intelligence Platform**
@@ -161,6 +114,12 @@ Transforming complex business challenges into elegant, high-performance, and sca
 - **Description:** An AI-driven code analysis and review agent leveraging LangChain and Node.js to evaluate repository quality, safety vulnerabilities, and maintainability with chat-assisted feedback.
 - **Tech Stack:** React, Tailwind CSS, Express.js, LangChain
 - **Links:** [Live Demo](https://codify-omega.vercel.app/)
+
+### **SkillFlow: Reusable AI Agent Skills**
+*Production-ready framework for reusable AI agent skills*
+- **Description:** A production-ready open-source repository containing reusable AI engineering skills for coding agents, standardizing tasks like testing, security audits, performance, and prompt engineering.
+- **Tech Stack:** AI Agents, Node.js, CI/CD
+- **Links:** [GitHub Repository](https://github.com/mrafiqdot825/SkillFlow)
 
 ### **HisabKitab: Personal Budget Tracker**
 *Cross-platform mobile personal finance utility*
@@ -220,3 +179,4 @@ I am always open to discussing full-time engineering roles, remote consulting wo
 - Facebook: [facebook.com/mrafiq825](https://www.facebook.com/mrafiq825)
 - Instagram: [instagram.com/dmrafiq825](https://www.instagram.com/dmrafiq825/)
 - X: [x.com/mrafiq825](https://x.com/mrafiq825)
+- TikTok: [tiktok.com/@mrafiqdot825](https://www.tiktok.com/@mrafiqdot825)

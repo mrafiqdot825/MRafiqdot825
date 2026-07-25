@@ -13,7 +13,7 @@ export const projects: Project[] = [
       "CI/CD",
     ],
     imageAlt: "SkillFlow AI Agent Skills framework preview",
-    liveUrl: "https://github.com/mrafiq825/SkillFlow",
+    liveUrl: "https://github.com/mrafiqdot825/SkillFlow",
     featured: true,
     thumbnail: "/thumbnails/SkillFlow.png",
   },

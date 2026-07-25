@@ -18,7 +18,6 @@ import { useEffect, useRef, useState } from "react";
 import Section from "@/components/layout/Section";
 import Card from "@/components/ui/Card";
 import Button from "@/components/ui/Button";
-import AnimatedButton from "@/components/ui/AnimatedButton";
 import Chatbot from "@/components/ui/Chatbot";
 import { site } from "@/data/site";
 import { socials } from "@/data/socials";
