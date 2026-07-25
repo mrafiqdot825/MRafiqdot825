@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/AppleIcons";
 import Section from "@/components/layout/Section";
 import Button from "@/components/ui/Button";
+import LiquidGlassFrame from "@/components/ui/LiquidGlassFrame";
 import { site } from "@/data/site";
 import { education } from "@/data/education";
 
@@ -66,16 +67,17 @@ const AboutSection = () => {
           </div>
         </div>
 
-        {/* Profile Glass Frame */}
-        <div className="relative group max-w-sm mx-auto lg:mr-0 w-full">
-          <div className="absolute -inset-2 bg-gradient-to-r from-[#7C3AED] to-[#00E5FF] rounded-3xl opacity-30 group-hover:opacity-60 blur-xl transition-opacity duration-500" />
-          <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-[#101010] p-3 shadow-2xl">
-            <Image
-              src="/profile.png"
-              alt="Muhammad Rafiq"
-              width={900} height={900} priority className="w-full h-full object-contain rounded-2xl group-hover:scale-105 transition-transform duration-700 ease-out" />
-          </div>
-        </div>
+        {/* Profile Liquid Glass Frame */}
+        <LiquidGlassFrame badgeText="ENGINEER // ONLINE" subBadgeText="Full-Stack Architect">
+          <Image
+            src="/profile.png"
+            alt="Muhammad Rafiq"
+            width={900}
+            height={900}
+            priority
+            className="w-full h-full object-contain rounded-2xl group-hover:scale-105 transition-transform duration-700 ease-out"
+          />
+        </LiquidGlassFrame>
       </div>
 
       {/* 3D Timeline & Academic Foundation */}
