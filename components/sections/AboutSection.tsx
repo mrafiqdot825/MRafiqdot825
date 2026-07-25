@@ -73,11 +73,7 @@ const AboutSection = () => {
             <Image
               src="/profile.png"
               alt="Muhammad Rafiq"
-              width={900}
-              height={900}
-              priority
-              className="w-full h-full object-contain rounded-2xl group-hover:scale-105 transition-transform duration-700 ease-out"
-            />
+              width={900} height={900} priority className="w-full h-full object-contain rounded-2xl group-hover:scale-105 transition-transform duration-700 ease-out" />
           </div>
         </div>
       </div>
