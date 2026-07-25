@@ -103,7 +103,7 @@ const Navbar = () => {
         >
           <span className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-border-default/50 bg-white/10 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.1)] overflow-hidden">
             <Image
-              src="/Rafiq-logo.png"
+              src="/logo.png"
               alt="Muhammad Rafiq Logo"
               width={36}
               height={36}
