@@ -104,7 +104,7 @@ export default function LoadingScreen({
         {/* Glowing Logo Icon */}
         <div className="relative flex h-24 w-24 items-center justify-center rounded-full border border-[#7C3AED]/40 bg-black/60 shadow-[0_0_35px_rgba(124,58,237,0.4)] backdrop-blur-md overflow-hidden mb-6">
           <Image
-            src="/Rafiq-logo.png"
+            src="/logo.png"
             alt="Muhammad Rafiq logo"
             width={72}
             height={72}
