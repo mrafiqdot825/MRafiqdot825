@@ -3,6 +3,8 @@
 import { useState, useEffect, useMemo } from "react";
 import Link from "next/link";
 import Navbar from "@/components/layout/Navbar";
+import CustomCursor from "@/components/ui/CustomCursor";
+import MouseBackgroundGlow from "@/components/ui/MouseBackgroundGlow";
 import { blogPosts, getAeoEnrichedPost } from "@/data/blog";
 import { AppleArrowLeft, AppleCalendar, AppleClock, AppleShare, AppleArrowRight, AppleGithub, AppleLinkedin } from "@/components/ui/AppleIcons";
 import Button from "@/components/ui/Button";
@@ -150,6 +152,8 @@ const BlogDetailClient = ({ slug }: BlogDetailClientProps) => {
 
   return (
     <>
+      <CustomCursor />
+      <MouseBackgroundGlow />
       <Navbar />
       {/* Reading Scroll Progress Bar */}
       <div className="fixed top-0 left-0 right-0 z-50 h-[3px] bg-border-default/30">

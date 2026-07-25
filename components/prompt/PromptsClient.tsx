@@ -3,6 +3,8 @@
 import { useState, useMemo } from "react";
 import Link from "next/link";
 import Navbar from "@/components/layout/Navbar";
+import CustomCursor from "@/components/ui/CustomCursor";
+import MouseBackgroundGlow from "@/components/ui/MouseBackgroundGlow";
 import RadialGlowButton from "@/components/ui/RadialGlowButton";
 import { prompts, type Prompt, type PromptCategory } from "@/data/prompts";
 import {
@@ -118,6 +120,8 @@ export default function PromptsClient() {
 
   return (
     <>
+      <CustomCursor />
+      <MouseBackgroundGlow />
       <Navbar />
       <div className="fixed inset-0 pointer-events-none overflow-hidden z-0" aria-hidden="true">
         <div className="absolute top-[20%] left-[10%] w-[350px] h-[350px] rounded-full bg-accent-600/5 blur-[120px]" />

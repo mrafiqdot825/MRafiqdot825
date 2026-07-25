@@ -3,6 +3,8 @@
 import { useState, useMemo } from "react";
 import Link from "next/link";
 import Navbar from "@/components/layout/Navbar";
+import CustomCursor from "@/components/ui/CustomCursor";
+import MouseBackgroundGlow from "@/components/ui/MouseBackgroundGlow";
 import { blogPosts, type BlogCategory } from "@/data/blog";
 import { AppleSearch, AppleCalendar, AppleClock, AppleArrowRight, AppleUser, AppleArrowLeft } from "@/components/ui/AppleIcons";
 
@@ -63,6 +65,8 @@ const BlogListClient = () => {
 
   return (
     <>
+      <CustomCursor />
+      <MouseBackgroundGlow />
       <Navbar />
       {/* Dynamic ambient lights in the background for a modern glow effect */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden z-0" aria-hidden="true">
