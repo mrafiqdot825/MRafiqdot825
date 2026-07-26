@@ -4,6 +4,7 @@ import Image from "next/image";
 import { ICON_CLASS } from "@/lib/constants";
 import { useGlassCursor } from "@/hooks/useGlassCursor";
 import {
+  AppleHome,
   AppleUser,
   AppleBriefcase,
   AppleLayers,
@@ -15,6 +16,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 const NAV_ITEMS = [
+  { label: "Home", href: "#home", icon: AppleHome },
   { label: "About", href: "#about", icon: AppleUser },
   { label: "Experience", href: "#experience", icon: AppleBriefcase },
   {
@@ -50,15 +52,20 @@ const Navbar = () => {
       return;
     }
 
-    const sections = NAV_ITEMS.filter((item) => item.href.startsWith("#"))
+    const sections = NAV_ITEMS.filter((item) => item.href.startsWith("#") && item.href !== "#home")
       .map((item) => document.getElementById(item.href.slice(1)))
       .filter((section): section is HTMLElement => section !== null);
 
-    if (!sections.length) {
-      return;
-    }
-
     const updateActiveSection = () => {
+      if (window.scrollY < 150) {
+        setActiveHref("#home");
+        return;
+      }
+
+      if (!sections.length) {
+        return;
+      }
+
       const triggerLine = window.scrollY + window.innerHeight * 0.35;
       let current = sections[0];
 
@@ -88,162 +95,187 @@ const Navbar = () => {
     return isHomePage ? href : `/${href}`;
   };
 
+  const handleNavClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    href: string,
+  ) => {
+    if (href === "#home") {
+      if (isHomePage) {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        setActiveHref("#home");
+      }
+    }
+  };
+
   return (
     <header className="fixed inset-x-0 bottom-4 z-50 px-4 transition-all duration-300 translate-y-0 opacity-100">
       <nav
         ref={glassRef}
-        className="relative mx-auto flex w-full max-w-4xl items-center justify-between rounded-full px-4 py-2.5 transition-all duration-300 liquid-glass-nav focus-within:ring-2 focus-within:ring-accent-100"
+        className="relative mx-auto flex w-full max-w-4xl items-center justify-between rounded-full px-3.5 sm:px-4 py-2 transition-all duration-300 liquid-glass-nav focus-within:ring-2 focus-within:ring-accent-100"
         aria-label="Main navigation"
       >
         <div className="liquid-glass-cursor-glow" aria-hidden="true" />
-        <a
-          href={isHomePage ? "#home" : "/"}
-          className="relative inline-flex items-center gap-1.5 sm:gap-2 rounded-full p-1 sm:pr-3 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-accent-600"
-          aria-label="Go to home"
-        >
-          <span className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-border-default/50 bg-white/10 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.1)] overflow-hidden">
-            <Image
-              src="/logo.png"
-              alt="Muhammad Rafiq Logo"
-              width={36}
-              height={36}
-              className="h-full w-full object-cover"
-            />
-          </span>
-          <span className="hidden sm:inline text-base font-bold tracking-tight text-text-primary font-heading">
-            Rafiq
-          </span>
-        </a>
+        
+        {/* Left: Brand / Logo */}
+        <div className="flex items-center justify-start md:flex-1">
+          <a
+            href={isHomePage ? "#home" : "/"}
+            onClick={(e) => handleNavClick(e, "#home")}
+            className="relative inline-flex items-center gap-1.5 sm:gap-2 rounded-full p-1 sm:pr-3 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-accent-600"
+            aria-label="Go to home"
+          >
+            <span className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-border-default/50 bg-white/10 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.1)] overflow-hidden">
+              <Image
+                src="/logo.png"
+                alt="Muhammad Rafiq Logo"
+                width={36}
+                height={36}
+                className="h-full w-full object-cover scale-[1.35]"
+              />
+            </span>
+            <span className="hidden sm:inline text-base font-bold tracking-tight text-text-primary font-heading">
+              Rafiq
+            </span>
+          </a>
+        </div>
 
-        <ul
-          ref={ulRef}
-          onMouseLeave={() => {
-            setHoveredIndex(null);
-            setDirection(0);
-          }}
-          className="relative flex items-center gap-1 md:gap-2"
-        >
-          <li className="pointer-events-none absolute top-0 left-0 z-30">
-            <AnimatePresence>
-              {hoveredIndex !== null && (
-                <motion.div
-                  layout
-                  initial={{ opacity: 0, scale: 0.92, y: 12 }}
-                  animate={{
-                    opacity: 1,
-                    scale: 1,
-                    y: -54,
-                    x: tooltipX,
-                  }}
-                  exit={{ opacity: 0, scale: 0.92, y: 12 }}
-                  transition={{ type: "spring", stiffness: 120, damping: 18 }}
-                  className="absolute top-0 left-0 pointer-events-none z-30"
-                >
-                  <div
-                    className={cn(
-                      "-translate-x-1/2 px-5 py-2 rounded-lg",
-                      "bg-black text-white dark:bg-white dark:text-black",
-                      "shadow-md flex items-center justify-center",
-                      "border border-neutral-700 dark:border-neutral-300",
-                      "min-w-25",
-                    )}
-                  >
-                    <div className="relative h-4 flex items-center justify-center overflow-hidden w-full">
-                      <AnimatePresence mode="popLayout" custom={direction}>
-                        <motion.span
-                          key={NAV_ITEMS[hoveredIndex].label}
-                          custom={direction}
-                          initial={{
-                            x: direction > 0 ? 35 : -35,
-                            opacity: 0,
-                            filter: "blur(6px)",
-                          }}
-                          animate={{
-                            x: 0,
-                            opacity: 1,
-                            filter: "blur(0px)",
-                          }}
-                          exit={{
-                            x: direction > 0 ? -35 : 35,
-                            opacity: 0,
-                            filter: "blur(6px)",
-                          }}
-                          transition={{
-                            duration: 0.3,
-                            ease: "easeOut",
-                          }}
-                          className="text-sm font-medium tracking-wide whitespace-nowrap text-current"
-                        >
-                          {NAV_ITEMS[hoveredIndex].label}
-                        </motion.span>
-                      </AnimatePresence>
-                    </div>
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </li>
-
-          {NAV_ITEMS.map((item, index) => {
-            const IconComponent = item.icon;
-            const itemHref = getHref(item.href);
-            const isItemHovered = hoveredIndex === index;
-
-            const handleMouseEnter = (
-              e: React.MouseEvent<HTMLAnchorElement>,
-            ) => {
-              if (hoveredIndex !== null && index !== hoveredIndex) {
-                setDirection(index > hoveredIndex ? 1 : -1);
-              }
-              setHoveredIndex(index);
-
-              const target = e.currentTarget;
-              const container = ulRef.current;
-              if (container) {
-                const targetRect = target.getBoundingClientRect();
-                const containerRect = container.getBoundingClientRect();
-                const x =
-                  targetRect.left - containerRect.left + targetRect.width / 2;
-                setTooltipX(x);
-              }
-            };
-
-            return (
-              <li key={item.href}>
-                <a
-                  href={itemHref}
-                  onMouseEnter={handleMouseEnter}
-                  aria-label={item.label}
-                  aria-current={activeHref === item.href ? "page" : undefined}
-                  className={`inline-flex items-center justify-center rounded-full p-2.5 md:px-5 md:py-2 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-accent-600 focus:ring-offset-2 ${activeHref === item.href
-                    ? "liquid-glass-active-item text-accent-700 font-semibold shadow-sm"
-                    : "text-text-secondary hover:bg-white/10 hover:text-text-primary"
-                    }`}
-                >
+        {/* Center: Nav Items */}
+        <div className="flex items-center justify-center">
+          <ul
+            ref={ulRef}
+            onMouseLeave={() => {
+              setHoveredIndex(null);
+              setDirection(0);
+            }}
+            className="relative flex items-center gap-1 md:gap-2"
+          >
+            <li className="pointer-events-none absolute top-0 left-0 z-30">
+              <AnimatePresence>
+                {hoveredIndex !== null && (
                   <motion.div
-                    whileTap={{ scale: 0.95 }}
+                    layout
+                    initial={{ opacity: 0, scale: 0.92, y: 12 }}
                     animate={{
-                      scale: isItemHovered ? 1.15 : 1,
-                      y: isItemHovered ? -3 : 0,
+                      opacity: 1,
+                      scale: 1,
+                      y: -54,
+                      x: tooltipX,
                     }}
-                    transition={{ type: "spring", stiffness: 300, damping: 24 }}
-                    className="flex items-center justify-center w-5.5 h-5.5"
+                    exit={{ opacity: 0, scale: 0.92, y: 12 }}
+                    transition={{ type: "spring", stiffness: 120, damping: 18 }}
+                    className="absolute top-0 left-0 pointer-events-none z-30"
                   >
-                    <IconComponent className={ICON_CLASS.nav} />
+                    <div
+                      className={cn(
+                        "-translate-x-1/2 px-5 py-2 rounded-lg",
+                        "bg-black text-white dark:bg-white dark:text-black",
+                        "shadow-md flex items-center justify-center",
+                        "border border-neutral-700 dark:border-neutral-300",
+                        "min-w-25",
+                      )}
+                    >
+                      <div className="relative h-4 flex items-center justify-center overflow-hidden w-full">
+                        <AnimatePresence mode="popLayout" custom={direction}>
+                          <motion.span
+                            key={NAV_ITEMS[hoveredIndex].label}
+                            custom={direction}
+                            initial={{
+                              x: direction > 0 ? 35 : -35,
+                              opacity: 0,
+                              filter: "blur(6px)",
+                            }}
+                            animate={{
+                              x: 0,
+                              opacity: 1,
+                              filter: "blur(0px)",
+                            }}
+                            exit={{
+                              x: direction > 0 ? -35 : 35,
+                              opacity: 0,
+                              filter: "blur(6px)",
+                            }}
+                            transition={{
+                              duration: 0.3,
+                              ease: "easeOut",
+                            }}
+                            className="text-sm font-medium tracking-wide whitespace-nowrap text-current"
+                          >
+                            {NAV_ITEMS[hoveredIndex].label}
+                          </motion.span>
+                        </AnimatePresence>
+                      </div>
+                    </div>
                   </motion.div>
-                </a>
-              </li>
-            );
-          })}
-        </ul>
+                )}
+              </AnimatePresence>
+            </li>
 
-        <a
-          href={isHomePage ? "#contact" : "/#contact"}
-          className="relative hidden items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition focus:outline-none focus:ring-2 focus:ring-accent-600 focus:ring-offset-2 md:inline-flex liquid-glass-accent-button text-white"
-        >
-          <AppleMessage className={ICON_CLASS.action} />
-          Let's Talk
-        </a>
+            {NAV_ITEMS.map((item, index) => {
+              const IconComponent = item.icon;
+              const itemHref = getHref(item.href);
+              const isItemHovered = hoveredIndex === index;
+
+              const handleMouseEnter = (
+                e: React.MouseEvent<HTMLAnchorElement>,
+              ) => {
+                if (hoveredIndex !== null && index !== hoveredIndex) {
+                  setDirection(index > hoveredIndex ? 1 : -1);
+                }
+                setHoveredIndex(index);
+
+                const target = e.currentTarget;
+                const container = ulRef.current;
+                if (container) {
+                  const targetRect = target.getBoundingClientRect();
+                  const containerRect = container.getBoundingClientRect();
+                  const x =
+                    targetRect.left - containerRect.left + targetRect.width / 2;
+                  setTooltipX(x);
+                }
+              };
+
+              return (
+                <li key={item.href}>
+                  <a
+                    href={itemHref}
+                    onClick={(e) => handleNavClick(e, item.href)}
+                    onMouseEnter={handleMouseEnter}
+                    aria-label={item.label}
+                    aria-current={activeHref === item.href ? "page" : undefined}
+                    className={`inline-flex items-center justify-center rounded-full p-2.5 md:px-5 md:py-2 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-accent-600 focus:ring-offset-2 ${activeHref === item.href
+                      ? "liquid-glass-active-item text-accent-700 font-semibold shadow-sm"
+                      : "text-text-secondary hover:bg-white/10 hover:text-text-primary"
+                      }`}
+                  >
+                    <motion.div
+                      whileTap={{ scale: 0.95 }}
+                      animate={{
+                        scale: isItemHovered ? 1.15 : 1,
+                        y: isItemHovered ? -3 : 0,
+                      }}
+                      transition={{ type: "spring", stiffness: 300, damping: 24 }}
+                      className="flex items-center justify-center w-5.5 h-5.5"
+                    >
+                      <IconComponent className={ICON_CLASS.nav} />
+                    </motion.div>
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+
+        {/* Right: CTA Button */}
+        <div className="hidden items-center justify-end md:flex md:flex-1">
+          <a
+            href={isHomePage ? "#contact" : "/#contact"}
+            className="relative inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition focus:outline-none focus:ring-2 focus:ring-accent-600 focus:ring-offset-2 liquid-glass-accent-button text-white"
+          >
+            <AppleMessage className={ICON_CLASS.action} />
+            Let's Talk
+          </a>
+        </div>
       </nav>
     </header>
   );

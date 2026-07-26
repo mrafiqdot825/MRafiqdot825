@@ -92,7 +92,7 @@ const ContactSection = () => {
           Futuristic Control Center
         </>
       }
-      description="Connect directly via the holographic transmission terminal or query the Gemini AI chatbot assistant."
+      description="Connect directly via the holographic transmission terminal or query the AI chatbot assistant."
       className="border-t border-white/10 bg-transparent pt-12 pb-40 md:pb-10 mb-10"
     >
       <div className="grid gap-6 lg:grid-cols-[1.05fr_0.95fr]">
@@ -248,7 +248,6 @@ const ContactSection = () => {
           </div>
         </Card>
 
-        {/* Gemini Chatbot Console */}
         <Chatbot />
       </div>
     </Section>

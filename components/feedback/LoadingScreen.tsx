@@ -108,7 +108,7 @@ export default function LoadingScreen({
             alt="Muhammad Rafiq logo"
             width={72}
             height={72}
-            className="h-full w-full object-cover animate-pulse"
+            className="h-full w-full object-cover scale-[1.35] animate-pulse"
           />
         </div>
 
