@@ -68,7 +68,7 @@ const AboutSection = () => {
         </div>
 
         {/* Profile Liquid Glass Frame */}
-        <LiquidGlassFrame badgeText="ENGINEER // ONLINE" subBadgeText="Full-Stack Architect">
+        <LiquidGlassFrame >
           <Image
             src="/profile.png"
             alt="Muhammad Rafiq"
@@ -80,7 +80,7 @@ const AboutSection = () => {
         </LiquidGlassFrame>
       </div>
 
-      {/* 3D Timeline & Academic Foundation */}
+      {/* Timeline & Academic Foundation */}
       <div className="mt-20 mb-12 border-b border-white/10 pb-4">
         <h3 className="font-heading text-3xl font-bold tracking-tight text-white">
           Academic <span className="text-[#00E5FF]">Foundation</span>
@@ -215,11 +215,10 @@ const AboutSection = () => {
               <button
                 key={year}
                 onClick={() => setSelectedYear(year)}
-                className={`px-3 py-1 rounded-md font-mono text-[10px] font-bold uppercase tracking-wider transition-all cursor-pointer ${
-                  selectedYear === year
-                    ? 'bg-[#7C3AED] text-white'
-                    : 'bg-white/5 border border-white/10 text-text-secondary hover:text-white'
-                }`}
+                className={`px-3 py-1 rounded-md font-mono text-[10px] font-bold uppercase tracking-wider transition-all cursor-pointer ${selectedYear === year
+                  ? 'bg-[#7C3AED] text-white'
+                  : 'bg-white/5 border border-white/10 text-text-secondary hover:text-white'
+                  }`}
               >
                 {year === 'last' ? 'Last Year' : year}
               </button>
