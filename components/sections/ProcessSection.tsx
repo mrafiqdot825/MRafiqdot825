@@ -12,7 +12,7 @@ const PROCESS_STEPS = [
 
 export default function ProcessSection() {
   return (
-    <section id="process" className="py-20 relative bg-transparent border-t border-white/10">
+    <section id="process" className="py-4 relative bg-transparent border-t border-white/10">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <span className="font-mono text-xs font-bold uppercase tracking-[0.25em] text-[#00E5FF]">

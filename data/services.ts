@@ -112,5 +112,33 @@ export const services: Service[] = [
         answer: "I write GitHub Actions workflows that automatically run linting, type-checks, and testing on pull requests, then build and deploy Docker containers to hosting environments."
       }
     ]
+  },
+  {
+    id: "ai-agents-chatbots",
+    title: "AI Agents & Chatbots",
+    subtitle: "Autonomous Agentic Workflows & Intelligent Conversational Bots",
+    description: "Architecting custom AI agents and conversational chatbots powered by Gemini, OpenAI, and LangChain. Integrating Retrieval-Augmented Generation (RAG) to connect intelligent bots directly to your business data and user workflows.",
+    iconName: "AppleMessage",
+    techStack: ["Gemini API", "OpenAI API", "LangChain", "Vector DBs (Pinecone/Qdrant)", "RAG Pipelines", "TypeScript", "Python"],
+    benefits: [
+      "24/7 automated user support and lead generation bots",
+      "Context-aware RAG pipelines using domain-specific documents",
+      "Multi-agent task routing and automated tool orchestration",
+      "Strict safety rails preventing prompt injections and hallucinations"
+    ],
+    metrics: [
+      { label: "Customer Support Automation", value: "70%" },
+      { label: "Response Resolution Speed", value: "< 2s" }
+    ],
+    faqs: [
+      {
+        question: "What is the difference between a simple chatbot and an AI agent?",
+        answer: "A simple chatbot follows rule-based responses, whereas an AI agent uses LLMs to reason, plan, select external tools, execute code, and make decisions autonomously to complete complex user requests."
+      },
+      {
+        question: "Can these AI chatbots integrate with our existing website or database?",
+        answer: "Yes! I build server-side route handlers and web components that seamlessly embed into your web app, connecting directly to your APIs, databases, or documents via RAG."
+      }
+    ]
   }
 ];

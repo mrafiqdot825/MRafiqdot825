@@ -52,25 +52,22 @@ const ExperienceSection = () => {
 
                 {/* Date Period */}
                 <div
-                  className={`order-1 mb-1 font-mono text-xs font-bold uppercase tracking-wider md:mb-0 md:flex md:items-center ${
-                    isEven
-                      ? "md:order-1 md:justify-end md:pr-10 text-[#00E5FF]"
-                      : "md:order-2 md:justify-start md:pl-10 text-text-secondary"
-                  }`}
+                  className={`order-1 mb-1 font-mono text-xs font-bold uppercase tracking-wider md:mb-0 md:flex md:items-center ${isEven
+                    ? "md:order-1 md:justify-end md:pr-10 text-[#00E5FF]"
+                    : "md:order-2 md:justify-start md:pl-10 text-text-secondary"
+                    }`}
                 >
                   {item.period}
                 </div>
 
                 {/* 3D Tilted Glass Card */}
                 <div
-                  className={`order-2 ${
-                    isEven ? "md:order-2 md:pl-10" : "md:order-1 md:pr-10"
-                  }`}
+                  className={`order-2 ${isEven ? "md:order-2 md:pl-10" : "md:order-1 md:pr-10"
+                    }`}
                 >
                   <div
-                    className={`glass-panel rounded-2xl p-6 max-w-[480px] border border-white/10 bg-[#101010]/90 hover:border-[#00E5FF]/40 hover:-translate-y-1.5 transition-all duration-300 ${
-                      isEven ? "mr-auto" : "ml-auto"
-                    }`}
+                    className={`glass-panel rounded-2xl p-6 max-w-[480px] border border-white/10 bg-[#101010]/90 hover:border-[#00E5FF]/40 hover:-translate-y-1.5 transition-all duration-300 ${isEven ? "mr-auto" : "ml-auto"
+                      }`}
                   >
                     <div className="flex flex-wrap items-center justify-between gap-2">
                       <h3 className="font-heading text-lg font-bold text-white">

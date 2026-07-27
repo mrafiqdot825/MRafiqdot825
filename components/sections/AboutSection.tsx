@@ -25,9 +25,9 @@ const GitHubCalendar = dynamic(
     loading: () => (
       <div className="flex items-center justify-center min-h-[160px]">
         <div className="animate-pulse flex space-x-2">
-          <div className="h-3 w-3 bg-[#7C3AED] rounded-full animate-bounce [animation-delay:-0.3s]"></div>
-          <div className="h-3 w-3 bg-[#00E5FF] rounded-full animate-bounce [animation-delay:-0.15s]"></div>
-          <div className="h-3 w-3 bg-[#8B5CF6] rounded-full animate-bounce"></div>
+          <div className="h-3 w-3 bg-[#0e4429] rounded-full animate-bounce [animation-delay:-0.3s]"></div>
+          <div className="h-3 w-3 bg-[#26a641] rounded-full animate-bounce [animation-delay:-0.15s]"></div>
+          <div className="h-3 w-3 bg-[#39d353] rounded-full animate-bounce"></div>
         </div>
       </div>
     ),
@@ -40,8 +40,6 @@ const AboutSection = () => {
 
   return (
     <Section id="about" className="bg-transparent pt-12">
-
-
       {/* Hero Intro Grid */}
       <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-12 lg:gap-16 items-center mb-20">
         <div className="flex flex-col items-start text-left">
@@ -170,7 +168,7 @@ const AboutSection = () => {
       {/* GitHub Contributions Activity */}
       <div id="github-activity" className="mt-20 mb-12 text-center">
         <h3 className="font-heading text-3xl font-bold tracking-tight text-white">
-          Proof of <span className="text-[#00E5FF]">Work</span>
+          Proof of <span className="text-[#3fb950]">Work</span>
         </h3>
         <p className="mt-2 text-sm text-text-secondary max-w-md mx-auto leading-relaxed font-body">
           Live commit activity and repository contributions on GitHub.
@@ -181,7 +179,7 @@ const AboutSection = () => {
         <div className="glass-panel rounded-2xl p-6 sm:p-8 relative overflow-hidden border border-white/10 bg-[#101010]/90">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
             <div className="flex items-center gap-3">
-              <div className="p-3 rounded-xl bg-[#7C3AED]/20 text-[#00E5FF]">
+              <div className="p-3 rounded-xl bg-[#238636]/20 text-[#3fb950]">
                 <AppleCode className="w-5 h-5" />
               </div>
               <div className="text-left">
@@ -216,7 +214,7 @@ const AboutSection = () => {
                 key={year}
                 onClick={() => setSelectedYear(year)}
                 className={`px-3 py-1 rounded-md font-mono text-[10px] font-bold uppercase tracking-wider transition-all cursor-pointer ${selectedYear === year
-                  ? 'bg-[#7C3AED] text-white'
+                  ? 'bg-[#238636] text-white border border-[#3fb950]/40'
                   : 'bg-white/5 border border-white/10 text-text-secondary hover:text-white'
                   }`}
               >
@@ -232,7 +230,7 @@ const AboutSection = () => {
                 year={selectedYear}
                 colorScheme="dark"
                 theme={{
-                  dark: ['#161b22', '#1e1b4b', '#4338ca', '#6d28d9', '#00e5ff'],
+                  dark: ['#161b22', '#0e4429', '#006d32', '#26a641', '#39d353'],
                 }}
               />
             </div>

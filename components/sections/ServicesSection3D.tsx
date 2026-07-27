@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { services } from "@/data/services";
-import { AppleCpu, AppleSparkles, AppleServerIcon, AppleDevice, AppleCode, AppleZap, AppleLayers } from "@/components/ui/AppleIcons";
+import { AppleCpu, AppleSparkles, AppleServerIcon, AppleDevice, AppleCode, AppleZap, AppleLayers, AppleMessage } from "@/components/ui/AppleIcons";
 import Modal from "@/components/ui/Modal";
 import RadialGlowButton from "@/components/ui/RadialGlowButton";
 import type { Service } from "@/types/service";
@@ -14,7 +14,8 @@ const CUBE_SERVICES = [
   { id: "cloud-infra", title: "Cloud Infrastructure", icon: AppleServerIcon, color: "#3B82F6", desc: "Scalable Docker containerization, AWS microservices, and server deployment." },
   { id: "api-dev", title: "API Development", icon: AppleCode, color: "#10B981", desc: "Restful & GraphQL backend APIs with JWT auth, rate-limiting & caching." },
   { id: "automation", title: "Automation", icon: AppleZap, color: "#F59E0B", desc: "Web scraping pipelines, CI/CD GitHub Actions & Playwright test suites." },
-  { id: "admin-dashboards", title: "Admin Dashboards", icon: AppleLayers, color: "#EC4899", desc: "Data visualization dashboards with live charts & role-based access control." },
+  { id: "admin-dashboards", title: "Dashboards", icon: AppleLayers, color: "#EC4899", desc: "Data visualization dashboards with live charts & role-based access control." },
+  { id: "ai-agents", title: "AI Agents & Chatbots", icon: AppleMessage, color: "#6366F1", desc: "Autonomous AI agents, conversational chatbots, RAG knowledge bases & LLM integrations." },
 ];
 
 export default function ServicesSection3D() {
@@ -27,7 +28,7 @@ export default function ServicesSection3D() {
   };
 
   return (
-    <section id="services" className="py-20 relative bg-transparent border-t border-white/10">
+    <section id="services" className="py-4 relative bg-transparent border-t border-white/10">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <span className="font-mono text-xs font-bold uppercase tracking-[0.25em] text-[#00E5FF]">
