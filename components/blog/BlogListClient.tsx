@@ -89,22 +89,19 @@ const BlogListClient = () => {
 
           {/* Header Section */}
           <header className="text-center md:text-left mt-0 mb-5 relative">
-            <span className="font-mono text-xs font-semibold uppercase tracking-[0.24em] text-accent-700 bg-accent-50/70 border border-accent-100/50 px-3.5 py-1.5 rounded-full backdrop-blur-md">
+            <span className="font-mono text-xs font-bold uppercase tracking-[0.24em] text-(--color-rose-deep) bg-rose/15 border border-rose/30 px-3.5 py-1.5 rounded-full backdrop-blur-md">
               Engineering Logs
             </span>
-            <h1 className="mt-5 font-heading text-4xl font-extrabold tracking-tight sm:text-6xl bg-gradient-to-r from-text-primary via-text-primary to-text-secondary bg-clip-text text-transparent">
+            <h1 className="mt-5 font-heading text-4xl font-extrabold tracking-tight sm:text-6xl text-text-primary">
               The Developer Log
             </h1>
-            <p className="mt-4 max-w-2xl font-body text-base md:text-lg text-text-secondary leading-relaxed">
+            <p className="mt-4 max-w-2xl font-body text-base md:text-lg text-text-secondary leading-relaxed font-medium">
               Deep-dives, tutorials, and career insights. Exploring high-scale architectures, artificial intelligence, and developer culture.
             </p>
           </header>
 
           {/* Search and Category Filters */}
-          <section aria-label="Search and filter articles" className="mb-12 flex flex-col gap-2 bg-bg-surface/30 backdrop-blur-xl border border-border-default/55 p-6 rounded-[28px] shadow-2xl relative overflow-hidden group">
-            {/* Ambient border gradient highlight */}
-            <div className="absolute inset-0 bg-gradient-to-r from-accent-600/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-
+          <section aria-label="Search and filter articles" className="mb-12 flex flex-col gap-4 bg-cream/85 backdrop-blur-xl border border-beige p-6 rounded-[28px] shadow-sm relative overflow-hidden group">
             {/* Search Input */}
             <div className="relative w-full">
               <input
@@ -112,9 +109,9 @@ const BlogListClient = () => {
                 placeholder="Search insights by title, tags, description, or content..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-12 pr-5 py-4 text-sm rounded-[18px] border border-border-default bg-bg-page/40 text-text-primary placeholder-text-muted/60 focus:outline-none focus:ring-2 focus:ring-accent-600/50 focus:border-accent-600 transition-all duration-300 backdrop-blur-md"
+                className="w-full pl-12 pr-5 py-4 text-sm rounded-[18px] border border-beige bg-cream/70 text-text-primary placeholder:text-text-secondary/70 focus:outline-none focus:ring-2 focus:ring-rose focus:border-rose transition-all duration-300 backdrop-blur-md font-body"
               />
-              <div className="absolute left-4 top-1/2 -translate-y-1/2 text-text-muted">
+              <div className="absolute left-4 top-1/2 -translate-y-1/2 text-(--color-rose-deep)">
                 <AppleSearch className="w-4 h-4" />
               </div>
             </div>
@@ -126,8 +123,8 @@ const BlogListClient = () => {
                   key={category}
                   onClick={() => setSelectedCategory(category)}
                   className={`px-3 py-1.5 rounded-[10px] text-[11px] font-mono transition-all duration-300 cursor-pointer border ${selectedCategory === category
-                    ? "bg-accent-600 text-text-primary shadow-lg shadow-accent-600/25 font-semibold border-accent-500"
-                    : "bg-bg-page/30 border-border-default/80 text-text-secondary hover:bg-bg-surface-hover hover:border-border-hover hover:text-text-primary"
+                    ? "bg-rose/30 text-text-primary shadow-sm font-bold border-rose/60"
+                    : "bg-cream/60 border-beige text-text-primary hover:bg-rose/15 hover:border-rose/40 hover:text-(--color-rose-deep) font-medium"
                     }`}
                 >
                   {category}
@@ -138,14 +135,14 @@ const BlogListClient = () => {
 
           {/* No Results Fallback */}
           {filteredPosts.length === 0 && (
-            <div className="text-center py-20 bg-bg-surface/40 border border-border-default/60 rounded-[28px] backdrop-blur-xl">
-              <p className="font-body text-text-secondary text-base">No articles found matching your filters.</p>
+            <div className="text-center py-20 bg-cream/80 border border-beige rounded-[28px] backdrop-blur-xl">
+              <p className="font-body text-text-primary text-base font-semibold">No articles found matching your filters.</p>
               <button
                 onClick={() => {
                   setSearchQuery("");
                   setSelectedCategory("All");
                 }}
-                className="mt-4 inline-flex items-center gap-2 text-xs font-medium text-accent-700 hover:text-accent-800 transition-colors duration-200 cursor-pointer"
+                className="mt-4 inline-flex items-center gap-2 text-xs font-bold text-(--color-rose-deep) hover:underline transition-all duration-200 cursor-pointer"
               >
                 Clear all filters
               </button>
@@ -155,11 +152,8 @@ const BlogListClient = () => {
           {/* Featured Spotlight Card */}
           {featuredPost && (
             <section aria-label="Featured article" className="mb-14 relative">
-              {/* Card shadow glow */}
-              <div className="absolute -inset-1.5 rounded-[30px] bg-gradient-to-r from-accent-600/30 to-beige/40 opacity-30 blur-xl group-hover:opacity-100 transition duration-1000 pointer-events-none" />
-
               <Link href={`/blog/${featuredPost.slug}`} className="group block relative">
-                <article className="grid grid-cols-1 md:grid-cols-12 overflow-hidden rounded-[28px] border border-border-default bg-bg-surface/40 backdrop-blur-xl shadow-2xl transition-all duration-300 hover:border-border-hover">
+                <article className="grid grid-cols-1 md:grid-cols-12 overflow-hidden rounded-[28px] border border-beige bg-cream/85 backdrop-blur-xl shadow-md transition-all duration-300 hover:border-rose/60 hover:shadow-xl">
                   {/* Decorative Gradient Cover */}
                   <div
                     className="md:col-span-5 h-56 md:h-full min-h-[300px] relative overflow-hidden"
@@ -194,50 +188,50 @@ const BlogListClient = () => {
                   <div className="md:col-span-7 p-8 flex flex-col justify-between">
                     <div>
                       {/* Meta info */}
-                      <div className="flex flex-wrap items-center gap-4 text-xs font-mono text-text-muted mb-4">
-                        <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-md bg-accent-50 text-accent-700 font-semibold text-[10px] uppercase border border-accent-100/50">
+                      <div className="flex flex-wrap items-center gap-4 text-xs font-mono text-text-secondary font-semibold mb-4">
+                        <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-md bg-rose/15 text-(--color-rose-deep) font-bold text-[10px] uppercase border border-rose/30">
                           {featuredPost.category}
                         </span>
                         <span className="inline-flex items-center gap-1">
-                          <AppleCalendar className="w-3 h-3" />
+                          <AppleCalendar className="w-3.5 h-3.5 text-(--color-rose-deep)" />
                           {featuredPost.publishedAt}
                         </span>
                         <span className="inline-flex items-center gap-1">
-                          <AppleClock className="w-3 h-3" />
+                          <AppleClock className="w-3.5 h-3.5 text-(--color-rose-deep)" />
                           {featuredPost.readTime}
                         </span>
                       </div>
 
                       {/* Title */}
-                      <h2 className="font-heading text-2xl md:text-3xl font-extrabold text-text-primary tracking-tight group-hover:text-accent-600 transition-colors duration-200">
+                      <h2 className="font-heading text-2xl md:text-3xl font-extrabold text-text-primary tracking-tight group-hover:text-(--color-rose-deep) transition-colors duration-200">
                         {featuredPost.title}
                       </h2>
 
                       {/* Excerpt */}
-                      <p className="mt-4 font-body text-sm md:text-base text-text-secondary leading-relaxed line-clamp-3">
+                      <p className="mt-4 font-body text-sm md:text-base text-text-secondary leading-relaxed line-clamp-3 font-medium">
                         {featuredPost.excerpt}
                       </p>
                     </div>
 
-                    <div className="mt-8 pt-6 border-t border-border-default flex flex-wrap gap-4 items-center justify-between">
+                    <div className="mt-8 pt-6 border-t border-beige flex flex-wrap gap-4 items-center justify-between">
                       {/* Author Bio */}
                       <div className="flex items-center gap-3">
-                        <span className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-accent-600 text-text-primary font-mono text-sm font-semibold shadow-md">
+                        <span className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-rose/30 text-(--color-rose-deep) font-mono text-xs font-bold border border-rose/50">
                           {featuredPost.author.avatar}
                         </span>
                         <div className="flex flex-col">
-                          <span className="text-xs font-semibold text-text-primary leading-none">
+                          <span className="text-xs font-bold text-text-primary leading-none">
                             {featuredPost.author.name}
                           </span>
-                          <span className="text-[10px] text-text-muted mt-1">
+                          <span className="text-[10px] text-text-secondary font-medium mt-1">
                             {featuredPost.author.role}
                           </span>
                         </div>
                       </div>
 
                       {/* CTA */}
-                      <span className="inline-flex items-center gap-1 text-sm font-semibold text-accent-700 group-hover:text-accent-800 group-hover:translate-x-1.5 transition-all duration-300">
-                        Read Post <AppleArrowRight className="w-3 h-3 transition-transform duration-300" />
+                      <span className="inline-flex items-center gap-1 text-sm font-bold text-(--color-rose-deep) group-hover:translate-x-1.5 transition-all duration-300">
+                        Read Post <AppleArrowRight className="w-4 h-4 transition-transform duration-300" />
                       </span>
                     </div>
                   </div>
@@ -249,11 +243,11 @@ const BlogListClient = () => {
           {/* Grid of Other Posts */}
           {otherPosts.length > 0 && (
             <section aria-label="Other articles list">
-              <div className="flex items-center justify-between mb-8 pl-1 border-l-4 border-accent-600">
-                <h2 className="font-heading text-2xl font-bold text-text-primary ml-2">
+              <div className="flex items-center justify-between mb-8 pl-2 border-l-4 border-(--color-rose-deep)">
+                <h2 className="font-heading text-2xl font-extrabold text-text-primary ml-2">
                   All Publications
                 </h2>
-                <span className="text-xs font-mono text-text-muted">
+                <span className="text-xs font-mono text-text-secondary font-semibold">
                   Showing {filteredPosts.length} article{filteredPosts.length > 1 ? "s" : ""}
                 </span>
               </div>
@@ -261,7 +255,7 @@ const BlogListClient = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {otherPosts.map((post) => (
                   <Link key={post.slug} href={`/blog/${post.slug}`} className="group block h-full">
-                    <article className="h-full flex flex-col justify-between overflow-hidden rounded-[24px] border border-border-default bg-bg-surface/30 backdrop-blur-xl shadow-lg transition-all duration-300 hover:border-border-hover hover:-translate-y-1">
+                    <article className="h-full flex flex-col justify-between overflow-hidden rounded-[24px] border border-beige bg-cream/85 backdrop-blur-xl shadow-sm transition-all duration-300 hover:border-rose/60 hover:-translate-y-1 hover:shadow-md">
                       {/* Gradient Header */}
                       <div
                         className="h-44 w-full relative overflow-hidden"
@@ -271,7 +265,7 @@ const BlogListClient = () => {
 
                         <div className="absolute top-4 right-4">
                           {absoluteLatestPost && post.slug === absoluteLatestPost.slug && (
-                            <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-cream/85 backdrop-blur-md text-(--color-rose-deep) font-mono text-[8px] font-bold uppercase tracking-wider border border-beige/70">
+                            <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-cream/90 backdrop-blur-md text-(--color-rose-deep) font-mono text-[8px] font-bold uppercase tracking-wider border border-beige">
                               LATEST
                             </span>
                           )}
@@ -286,33 +280,33 @@ const BlogListClient = () => {
                       <div className="p-6 flex-grow flex flex-col justify-between">
                         <div>
                           {/* Meta */}
-                          <div className="flex flex-wrap items-center gap-3 text-[11px] font-mono text-text-muted mb-3">
+                          <div className="flex flex-wrap items-center gap-3 text-[11px] font-mono text-text-secondary font-semibold mb-3">
                             <span className="inline-flex items-center gap-1">
-                              <AppleCalendar className="w-3 h-3" />
+                              <AppleCalendar className="w-3.5 h-3.5 text-(--color-rose-deep)" />
                               {post.publishedAt}
                             </span>
                             <span className="inline-flex items-center gap-1">
-                              <AppleClock className="w-3 h-3" />
+                              <AppleClock className="w-3.5 h-3.5 text-(--color-rose-deep)" />
                               {post.readTime}
                             </span>
                           </div>
 
                           {/* Title */}
-                          <h3 className="font-heading text-lg font-bold text-text-primary group-hover:text-accent-600 transition-colors duration-200 leading-snug line-clamp-2">
+                          <h3 className="font-heading text-lg font-bold text-text-primary group-hover:text-(--color-rose-deep) transition-colors duration-200 leading-snug line-clamp-2">
                             {post.title}
                           </h3>
 
                           {/* Excerpt */}
-                          <p className="mt-3 font-body text-xs md:text-sm text-text-secondary leading-relaxed line-clamp-3">
+                          <p className="mt-3 font-body text-xs md:text-sm text-text-secondary leading-relaxed line-clamp-3 font-medium">
                             {post.excerpt}
                           </p>
                         </div>
 
-                        <div className="mt-6 pt-5 border-t border-border-default/50 flex flex-col gap-4">
+                        <div className="mt-6 pt-5 border-t border-beige flex flex-col gap-4">
                           {/* Tags - Enforcing the Tag Capping Rule (Limit to 4 visible tags, truncate as +X more) */}
                           <div className="flex flex-wrap gap-1">
                             {post.tags.slice(0, 4).map((tag) => (
-                              <span key={tag} className="px-2 py-0.5 rounded-[6px] text-[10px] font-mono bg-accent-50 text-accent-700 border border-accent-100/50">
+                              <span key={tag} className="px-2 py-0.5 rounded-[6px] text-[10px] font-mono bg-rose/15 text-(--color-rose-deep) border border-rose/30 font-semibold">
                                 {tag}
                               </span>
                             ))}
@@ -323,20 +317,20 @@ const BlogListClient = () => {
                             )}
                           </div>
 
-                          <div className="flex items-center justify-between pt-1">
+                          <div className="flex items-center justify-between pt-1 border-t border-beige/40">
                             {/* Author Info */}
                             <div className="flex items-center gap-2">
-                              <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-accent-600/90 text-text-primary font-mono text-[9px] font-semibold">
+                              <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-rose/30 text-(--color-rose-deep) font-mono text-[9px] font-bold border border-rose/50">
                                 {post.author.avatar}
                               </span>
-                              <span className="text-[11px] font-semibold text-text-secondary">
+                              <span className="text-[11px] font-semibold text-text-primary">
                                 {post.author.name}
                               </span>
                             </div>
 
                             {/* Read more */}
-                            <span className="inline-flex items-center gap-1 text-xs font-semibold text-accent-700 group-hover:text-accent-800 group-hover:translate-x-1 transition-all duration-200">
-                              Read <AppleArrowRight className="w-3 h-3" />
+                            <span className="inline-flex items-center gap-1 text-xs font-bold text-(--color-rose-deep) group-hover:translate-x-1 transition-all duration-200">
+                              Read <AppleArrowRight className="w-3.5 h-3.5" />
                             </span>
                           </div>
                         </div>

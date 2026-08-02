@@ -51,12 +51,12 @@ const Modal = ({ isOpen, onClose, title, children }: ModalProps) => {
       <div className="flex min-h-full items-center justify-center p-4 text-center">
         {/* Modal Container */}
         <div
-          className="relative w-full max-w-lg rounded-[24px] glass-panel p-6 sm:p-8 shadow-2xl border border-beige/60 text-left overflow-hidden animate-fade-in-up my-8"
+          className="relative w-full max-w-lg rounded-[24px] liquid-glass-modal p-6 sm:p-8 shadow-2xl text-left overflow-hidden animate-fade-in-up my-8"
           role="dialog"
           aria-modal="true"
         >
           {/* Decorative Top Accent Light */}
-          <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-accent-600/50 to-transparent" />
+          <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-transparent via-(--color-rose) to-transparent" />
 
           {/* Header */}
           <div className="flex items-center justify-between gap-4 mb-6">
@@ -65,7 +65,7 @@ const Modal = ({ isOpen, onClose, title, children }: ModalProps) => {
             </h3>
             <button
               onClick={onClose}
-              className="inline-flex h-9 w-9 items-center justify-center rounded-full glass-button-secondary text-text-secondary hover:text-text-primary transition-colors focus:outline-none focus:ring-2 focus:ring-accent-600 cursor-pointer"
+              className="inline-flex h-9 w-9 items-center justify-center rounded-full glass-button-secondary text-text-primary hover:text-(--color-rose-deep) transition-colors focus:outline-none focus:ring-2 focus:ring-rose cursor-pointer font-bold"
               aria-label="Close modal"
             >
               <AppleX className={ICON_CLASS.action} />
@@ -73,7 +73,7 @@ const Modal = ({ isOpen, onClose, title, children }: ModalProps) => {
           </div>
 
           {/* Content */}
-          <div className="font-body text-text-secondary text-[15px] leading-relaxed">
+          <div className="font-body text-text-primary font-medium text-[15px] leading-relaxed">
             {children}
           </div>
         </div>

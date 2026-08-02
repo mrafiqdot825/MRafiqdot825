@@ -7,14 +7,15 @@ type ButtonProps = {
   href?: string;
   download?: AnchorHTMLAttributes<HTMLAnchorElement>["download"];
   className?: string;
-  variant?: "primary" | "secondary" | "metal";
+  variant?: "primary" | "secondary" | "metal" | "liquid";
   type?: ButtonHTMLAttributes<HTMLButtonElement>["type"];
   onClick?: ButtonHTMLAttributes<HTMLButtonElement>["onClick"];
   disabled?: boolean;
   target?: AnchorHTMLAttributes<HTMLAnchorElement>["target"];
   rel?: AnchorHTMLAttributes<HTMLAnchorElement>["rel"];
-  // Props for the metal variant:
+  // Props for the metal/liquid variant:
   icon?: ReactNode;
+  iconRight?: ReactNode;
   borderWidth?: number;
   metalConfig?: Omit<LiquidMetalProps, "className" | "style">;
   size?: "sm" | "md" | "lg";
@@ -33,6 +34,7 @@ const Button = ({
   target,
   rel,
   icon,
+  iconRight,
   borderWidth,
   metalConfig,
   size,
@@ -63,24 +65,32 @@ const Button = ({
   }
 
   const baseClass = cn(
-    "inline-flex items-center justify-center font-body text-sm font-medium transition-all duration-200 ease-out focus:outline-none focus:ring-2 focus:ring-accent-600 focus:ring-offset-2",
-    variant === "primary"
-      ? "bg-accent-600 text-text-primary rounded-[12px] px-6 py-3 hover:bg-accent-700 active:bg-accent-800 disabled:bg-accent-100 disabled:text-text-muted disabled:cursor-not-allowed"
-      : "glass-button-secondary text-text-primary rounded-[12px] px-6 py-3 disabled:opacity-50 disabled:cursor-not-allowed",
+    "inline-flex items-center justify-center font-body text-sm font-medium transition-all duration-200 ease-out focus:outline-none focus:ring-2 focus:ring-accent-600 focus:ring-offset-2 cursor-pointer select-none",
+    variant === "liquid"
+      ? "liquid-glass-accent-button text-text-primary rounded-xl px-5 py-3 font-semibold"
+      : variant === "primary"
+      ? "liquid-glass-accent-button text-text-primary rounded-xl px-6 py-3 font-semibold"
+      : "glass-button-secondary text-text-primary rounded-xl px-6 py-3 disabled:opacity-50 disabled:cursor-not-allowed",
+    size === "sm" && "px-4 py-2 text-xs rounded-lg",
+    size === "lg" && "px-8 py-4 text-base rounded-2xl",
     className,
   );
 
   if (href) {
     return (
       <a href={href} download={download} target={target} rel={rel || (target === "_blank" ? "noopener noreferrer" : undefined)} className={baseClass}>
+        {icon && <span className="mr-2 inline-flex items-center shrink-0">{icon}</span>}
         {children}
+        {iconRight && <span className="ml-2 inline-flex items-center shrink-0">{iconRight}</span>}
       </a>
     );
   }
 
   return (
     <button type={type} onClick={onClick} disabled={disabled} className={baseClass}>
+      {icon && <span className="mr-2 inline-flex items-center shrink-0">{icon}</span>}
       {children}
+      {iconRight && <span className="ml-2 inline-flex items-center shrink-0">{iconRight}</span>}
     </button>
   );
 };

@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/AppleIcons";
 import Section from "@/components/layout/Section";
 import Modal from "@/components/ui/Modal";
-import RadialGlowButton from "@/components/ui/RadialGlowButton";
+import Button from "@/components/ui/Button";
 import GenerateButton from "@/components/ui/GenerateButton";
 import { projects } from "@/data/projects";
 import type { Project } from "@/types/project";
@@ -108,7 +108,7 @@ const ProjectsSection = () => {
               viewport={{ once: true }}
               className="snap-start shrink-0 w-[88vw] sm:w-[400px] md:w-[440px] flex flex-col"
             >
-              <article className="glass-panel glass-panel-hover flex-1 flex flex-col justify-between rounded-2xl overflow-hidden group border border-beige bg-cream/85">
+              <article className="liquid-glass-card liquid-glass-card-hover flex-1 flex flex-col justify-between rounded-2xl overflow-hidden group">
                 <div className="flex flex-col flex-1">
                   {/* 3D Device Frame Preview */}
                   {project.thumbnail && (
@@ -141,7 +141,7 @@ const ProjectsSection = () => {
                         </div>
                       </div>
 
-                      <p className="font-body text-xs text-text-secondary leading-relaxed mb-4">
+                      <p className="font-body text-xs text-text-primary font-medium leading-relaxed mb-4">
                         {project.summary}
                       </p>
 
@@ -150,13 +150,13 @@ const ProjectsSection = () => {
                         {visibleTech.map((item) => (
                           <span
                             key={item}
-                            className="font-mono text-[10px] bg-rose/15 text-(--color-rose-deep) px-2.5 py-1 rounded-md border border-rose/30"
+                            className="font-mono text-[10px] font-bold bg-rose/20 text-(--color-rose-deep) px-2.5 py-1 rounded-md border border-rose/40"
                           >
                             {item}
                           </span>
                         ))}
                         {remainingTagsCount > 0 && (
-                          <span className="font-mono text-[10px] bg-beige/40 text-text-muted px-2 py-1 rounded-md border border-beige">
+                          <span className="font-mono text-[10px] bg-cream text-text-primary font-semibold px-2 py-1 rounded-md border border-beige">
                             +{remainingTagsCount} more
                           </span>
                         )}
@@ -165,47 +165,55 @@ const ProjectsSection = () => {
                   </div>
                 </div>
 
-                {/* Magnetic Action Buttons */}
-                <div className="px-6 pb-6 flex gap-2 pt-4 border-t border-beige bg-cream/60">
+                {/* Liquid Glass Action Buttons */}
+                <div className="px-6 pb-6 flex items-center gap-2 pt-4 border-t border-beige bg-cream/60">
                   {project.status === "APK Available" ? (
-                    <RadialGlowButton
+                    <Button
                       onClick={() => setSelectedProjectForApk(project)}
-                      containerClassName="flex-1 flex"
+                      variant="liquid"
+                      size="sm"
+                      className="flex-1 text-xs font-semibold"
+                      icon={<AppleDevice className="w-4 h-4" />}
                     >
-                      <AppleDevice className="w-4 h-4" />
-                      <span>Get APK</span>
-                    </RadialGlowButton>
+                      Get APK
+                    </Button>
                   ) : project.status === "Open Source" ? (
-                    <RadialGlowButton
+                    <Button
                       href={project.liveUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      containerClassName="flex-1 flex"
+                      variant="liquid"
+                      size="sm"
+                      className="flex-1 text-xs font-semibold"
+                      icon={<AppleGithub className="w-4 h-4" />}
                     >
-                      <AppleGithub className="w-4 h-4" />
-                      <span>GitHub Repo</span>
-                    </RadialGlowButton>
+                      GitHub Repo
+                    </Button>
                   ) : (
-                    <RadialGlowButton
+                    <Button
                       href={project.liveUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      containerClassName="flex-1 flex"
+                      variant="liquid"
+                      size="sm"
+                      className="flex-1 text-xs font-semibold"
+                      icon={<AppleExternalLink className="w-4 h-4" />}
                     >
-                      <AppleExternalLink className="w-4 h-4" />
-                      <span>Live Demo</span>
-                    </RadialGlowButton>
+                      Live Demo
+                    </Button>
                   )}
                   {project.detailsUrl && (
-                    <a
+                    <Button
                       href={project.detailsUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center justify-center gap-1.5 font-body text-xs font-medium bg-beige/40 border border-beige text-text-primary rounded-xl px-3.5 py-2 hover:bg-beige/70 transition-colors"
+                      variant="liquid"
+                      size="sm"
+                      className="text-xs px-3.5 font-semibold"
+                      icon={<AppleGithub className="w-4 h-4" />}
                     >
-                      <AppleGithub className="w-4 h-4 text-text-secondary" />
-                      <span>Code</span>
-                    </a>
+                      Code
+                    </Button>
                   )}
                 </div>
               </article>
@@ -219,7 +227,7 @@ const ProjectsSection = () => {
         <button
           onClick={() => handleScroll("left")}
           disabled={isAtStart}
-          className="inline-flex items-center justify-center w-10 h-10 rounded-full border border-beige bg-cream text-text-primary transition-all disabled:opacity-30 hover:border-rose cursor-pointer"
+          className="liquid-glass-accent-button inline-flex items-center justify-center w-10 h-10 rounded-full text-text-primary transition-all disabled:opacity-30 cursor-pointer shadow-sm"
           aria-label="Previous"
         >
           <AppleArrowLeft className="w-5 h-5" />
@@ -235,7 +243,7 @@ const ProjectsSection = () => {
         <button
           onClick={() => handleScroll("right")}
           disabled={isAtEnd}
-          className="inline-flex items-center justify-center w-10 h-10 rounded-full border border-beige bg-cream text-text-primary transition-all disabled:opacity-30 hover:border-rose cursor-pointer"
+          className="liquid-glass-accent-button inline-flex items-center justify-center w-10 h-10 rounded-full text-text-primary transition-all disabled:opacity-30 cursor-pointer shadow-sm"
           aria-label="Next"
         >
           <AppleArrowRight className="w-5 h-5" />
@@ -243,11 +251,11 @@ const ProjectsSection = () => {
       </div>
 
       {/* GitHub Callout */}
-      <div className="mt-12 rounded-2xl glass-panel p-6 text-center border border-beige bg-cream/75">
+      <div className="mt-12 rounded-2xl liquid-glass-card p-6 text-center">
         <div className="flex flex-col items-center justify-center gap-4">
           <div className="flex items-center gap-2">
             <AppleTrendingUp className="w-5 h-5 text-(--color-rose-deep)" />
-            <p className="text-sm font-medium text-text-secondary">
+            <p className="text-sm font-bold text-text-primary">
               Continuously building open source software and AI agent frameworks on GitHub.
             </p>
           </div>
@@ -288,13 +296,15 @@ const ProjectsSection = () => {
             </p>
 
             <div className="flex gap-3 pt-2">
-              <RadialGlowButton
+              <Button
                 href={`mailto:mrafiqdot825@gmail.com?subject=APK%20Request:%20${encodeURIComponent(selectedProjectForApk.title)}`}
-                containerClassName="flex-1 flex"
+                variant="liquid"
+                size="sm"
+                className="w-full text-xs"
+                icon={<AppleMail className="w-4 h-4" />}
               >
-                <AppleMail className="w-4 h-4" />
-                <span>Email Request</span>
-              </RadialGlowButton>
+                Email Request
+              </Button>
             </div>
           </div>
         )}

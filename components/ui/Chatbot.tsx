@@ -122,7 +122,7 @@ const Chatbot = () => {
   };
 
   return (
-    <Card className="relative overflow-hidden p-0 flex flex-col justify-between">
+    <Card className="liquid-glass-card relative overflow-hidden p-0 flex flex-col justify-between shadow-2xl">
       <div className="relative flex h-full min-h-[500px] flex-col">
         {/* Header */}
         <div className="flex items-center justify-between border-b border-border-default bg-cream/40 backdrop-blur-sm px-4 py-3">

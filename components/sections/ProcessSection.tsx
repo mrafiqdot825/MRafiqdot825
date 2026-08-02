@@ -33,7 +33,7 @@ export default function ProcessSection() {
             return (
               <div
                 key={p.step}
-                className="glass-panel rounded-2xl p-5 flex flex-col justify-between border border-beige hover:border-rose/40 hover:-translate-y-2 transition-all duration-300 bg-cream/85 relative group"
+                className="liquid-glass-card liquid-glass-card-hover rounded-2xl p-5 flex flex-col justify-between relative group"
               >
                 {/* Connecting Line (desktop) */}
                 {idx < PROCESS_STEPS.length - 1 && (
@@ -59,12 +59,12 @@ export default function ProcessSection() {
                   <h3 className="font-heading text-base font-bold text-text-primary mt-1 group-hover:text-(--color-rose-deep) transition-colors">
                     {p.title}
                   </h3>
-                  <p className="mt-2 text-xs text-text-secondary leading-relaxed font-body">
+                  <p className="mt-2 text-xs text-text-primary font-medium leading-relaxed font-body">
                     {p.desc}
                   </p>
                 </div>
 
-                <div className="mt-4 pt-3 border-t border-beige/60 flex items-center justify-between font-mono text-[10px] text-text-muted">
+                <div className="mt-4 pt-3 border-t border-beige/60 flex items-center justify-between font-mono text-[10px] text-text-primary font-bold">
                   <span>PHASE {p.step}</span>
                   <span className="text-(--color-rose-deep)">READY</span>
                 </div>

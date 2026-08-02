@@ -88,7 +88,7 @@ const AboutSection = () => {
         <h3 className="font-heading text-3xl font-bold tracking-tight text-text-primary">
           Academic <span className="text-(--color-rose-deep)">Foundation</span>
         </h3>
-        <span className="font-mono text-xs tracking-widest text-text-muted uppercase">
+        <span className="font-mono text-xs tracking-widest text-text-secondary font-bold uppercase">
           Qualifications & Degree
         </span>
       </div>
@@ -97,7 +97,7 @@ const AboutSection = () => {
         {education.map((item) => (
           <div
             key={item.id}
-            className="glass-panel rounded-2xl p-6 sm:p-8 relative overflow-hidden group border border-beige bg-cream/85"
+            className="liquid-glass-card liquid-glass-card-hover rounded-2xl p-6 sm:p-8 relative overflow-hidden group"
           >
             <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-6 pb-6 border-b border-beige">
               <div className="space-y-3">
@@ -107,7 +107,7 @@ const AboutSection = () => {
                 <h4 className="font-heading text-2xl font-bold text-text-primary">
                   {item.institution}
                 </h4>
-                <div className="flex flex-wrap items-center gap-4 text-xs text-text-secondary font-mono">
+                <div className="flex flex-wrap items-center gap-4 text-xs text-text-primary font-bold font-mono">
                   <span className="flex items-center gap-1.5">
                     <AppleMapPin className="h-4 w-4 text-(--color-rose-deep)" />
                     {item.location}
@@ -123,7 +123,7 @@ const AboutSection = () => {
                 <span className="text-3xl font-extrabold leading-none text-(--color-rose-deep) font-heading">
                   {item.endYear}
                 </span>
-                <span className="mt-1 text-[9px] font-mono uppercase tracking-widest text-text-muted">
+                <span className="mt-1 text-[9px] font-mono uppercase tracking-widest text-text-secondary font-bold">
                   Graduated
                 </span>
               </div>
@@ -137,7 +137,7 @@ const AboutSection = () => {
                     Highlights
                   </h5>
                 </div>
-                <ul className="space-y-2 text-xs leading-relaxed text-text-secondary font-body">
+                <ul className="space-y-2 text-xs leading-relaxed text-text-primary font-medium font-body">
                   {item.highlights.map((point) => (
                     <li key={point} className="flex items-start gap-2">
                       <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-(--color-rose-active)" />
@@ -158,7 +158,7 @@ const AboutSection = () => {
                   {item.courses.map((course) => (
                     <span
                       key={course}
-                      className="font-mono text-[10px] uppercase bg-beige/40 border border-beige px-2.5 py-1 rounded-md text-text-secondary"
+                      className="font-mono text-[10px] uppercase bg-cream border border-beige px-2.5 py-1 rounded-md text-text-primary font-semibold"
                     >
                       {course}
                     </span>
@@ -175,13 +175,13 @@ const AboutSection = () => {
         <h3 className="font-heading text-3xl font-bold tracking-tight text-text-primary">
           Proof of <span className="text-(--color-rose-deep)">Work</span>
         </h3>
-        <p className="mt-2 text-sm text-text-secondary max-w-md mx-auto leading-relaxed font-body">
+        <p className="mt-2 text-sm text-text-secondary max-w-md mx-auto leading-relaxed font-body font-medium">
           Live commit activity and repository contributions on GitHub.
         </p>
       </div>
 
       <div className="max-w-5xl mx-auto py-4">
-        <div className="glass-panel rounded-2xl p-6 sm:p-8 relative overflow-hidden border border-beige bg-cream/85">
+        <div className="liquid-glass-card rounded-2xl p-6 sm:p-8 relative overflow-hidden">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
             <div className="flex items-center gap-3">
               <div className="p-3 rounded-xl bg-rose/20 text-(--color-rose-deep)">
@@ -191,7 +191,7 @@ const AboutSection = () => {
                 <h4 className="font-heading text-lg font-bold text-text-primary">
                   mrafiqdot825
                 </h4>
-                <span className="font-mono text-[10px] uppercase tracking-widest text-text-muted">
+                <span className="font-mono text-[10px] uppercase tracking-widest text-text-secondary font-semibold">
                   GitHub Profile
                 </span>
               </div>
@@ -199,8 +199,7 @@ const AboutSection = () => {
 
             <Button
               href="https://github.com/mrafiqdot825"
-              variant="metal"
-              dark
+              variant="liquid"
               size="sm"
               icon={<AppleZap className="h-4 w-4" />}
               target="_blank"
@@ -211,7 +210,7 @@ const AboutSection = () => {
           </div>
 
           <div className="flex flex-wrap gap-2 mb-6 border-b border-beige pb-4 justify-start items-center">
-            <span className="text-[10px] font-bold uppercase tracking-widest text-text-muted mr-2 font-mono">
+            <span className="text-[10px] font-bold uppercase tracking-widest text-text-primary mr-2 font-mono">
               Year:
             </span>
             {(["last", 2026, 2025, 2024, 2023] as const).map((year) => (
@@ -221,7 +220,7 @@ const AboutSection = () => {
                 className={`px-3 py-1 rounded-md font-mono text-[10px] font-bold uppercase tracking-wider transition-all cursor-pointer ${
                   selectedYear === year
                     ? "liquid-glass-active-item text-text-primary"
-                    : "bg-beige/40 border border-beige text-text-secondary hover:text-text-primary"
+                    : "bg-cream border border-beige text-text-primary hover:text-(--color-rose-deep) hover:border-rose"
                 }`}
               >
                 {year === "last" ? "Last Year" : year}
@@ -237,11 +236,11 @@ const AboutSection = () => {
                 colorScheme="light"
                 theme={{
                   light: [
-                    "#edeee9",
-                    "#e3d5ca",
-                    "#d7bdb0",
-                    "#c9a999",
-                    "#b8907d",
+                    "#ebedf0",
+                    "#9be9a8",
+                    "#40c463",
+                    "#30a14e",
+                    "#216e39",
                   ],
                 }}
               />

@@ -13,8 +13,7 @@ import {
 } from "@/components/ui/AppleIcons";
 import Section from "@/components/layout/Section";
 import Badge from "@/components/ui/Badge";
-import AnimatedButton from "@/components/ui/AnimatedButton";
-import RadialGlowButton from "@/components/ui/RadialGlowButton";
+import Button from "@/components/ui/Button";
 import Modal from "@/components/ui/Modal";
 import HeroScene3D from "@/components/sections/HeroScene3D";
 import { site } from "@/data/site";
@@ -101,13 +100,13 @@ const HeroSection = () => {
 
           {/* Capped Tech Stack Badges */}
           <div className="mt-8 flex flex-wrap items-center gap-2">
-            <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-text-muted mr-1.5">
+            <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-text-primary mr-1.5">
               Core Stack:
             </span>
             {topSkills.map((skill) => (
               <span
                 key={skill}
-                className="inline-flex items-center font-mono text-[11px] bg-cream text-(--color-rose-deep) px-2.5 py-1 rounded-[8px] border border-beige font-medium"
+                className="inline-flex items-center font-mono text-[11px] bg-cream text-text-primary px-2.5 py-1 rounded-[8px] border border-beige font-semibold"
               >
                 {skill}
               </span>
@@ -115,7 +114,7 @@ const HeroSection = () => {
             {remainingCount > 0 && (
               <a
                 href="#tech-stack"
-                className="inline-flex items-center font-mono text-[11px] bg-rose/15 text-text-primary hover:bg-rose/30 px-2.5 py-1 rounded-[8px] border border-rose/40 transition-colors font-medium hover:border-rose/60"
+                className="inline-flex items-center font-mono text-[11px] bg-rose/20 text-(--color-rose-deep) hover:bg-rose/35 px-2.5 py-1 rounded-[8px] border border-rose/40 transition-colors font-bold"
               >
                 +{remainingCount} more
               </a>
@@ -124,34 +123,35 @@ const HeroSection = () => {
 
           {/* CTAs matching IMPLEMENTATION.md */}
           <div className="mt-10 flex flex-wrap gap-4 items-center">
-            <RadialGlowButton
+            <Button
               href="#projects"
-              className="py-3.5 px-6 rounded-xl font-semibold text-sm tracking-wide bg-gradient-to-r from-(--color-rose-active) to-(--color-rose-hover) text-offwhite shadow-[0_0_20px_rgba(215,189,176,0.4)]"
+              variant="liquid"
+              size="md"
+              iconRight={<AppleArrowRight className="h-4.5 w-4.5" />}
             >
-              <span>View Projects</span>
-              <AppleArrowRight className="h-4.5 w-4.5 ml-1.5" />
-            </RadialGlowButton>
+              View Projects
+            </Button>
 
-            <AnimatedButton
-              as="a"
+            <Button
               href="#contact"
-              dark
-              className="group py-3.5 px-6 rounded-xl font-semibold text-sm transition-all duration-300 border border-text-primary bg-text-primary hover:bg-[#3d322e] text-offwhite hover:border-rose/40"
+              variant="liquid"
+              size="md"
+              icon={<AppleMessage className="h-4 w-4" />}
             >
-              <AppleMessage className="mr-2 h-4 w-4 text-rose" />
-              <span>Book a Call</span>
-            </AnimatedButton>
+              Book a Call
+            </Button>
 
-            <AnimatedButton
-              as="a"
+            <Button
               href={site.cvUrl}
               target="_blank"
-              dark
-              className="group py-3.5 px-6 rounded-xl font-semibold text-sm transition-all duration-300 border border-text-primary bg-text-primary hover:bg-[#3d322e] text-offwhite"
+              rel="noopener noreferrer"
+              download
+              variant="liquid"
+              size="md"
+              icon={<AppleDownload className="h-4 w-4" />}
             >
-              <AppleDownload className="mr-2 h-4 w-4 transition-transform duration-200 group-hover:translate-y-0.5" />
-              <span>Download Resume</span>
-            </AnimatedButton>
+              Download Resume
+            </Button>
           </div>
         </div>
 
@@ -161,49 +161,49 @@ const HeroSection = () => {
           <div className="absolute -inset-4 rounded-[2rem] bg-rose/20 blur-3xl pointer-events-none" />
 
           {/* IDE Terminal Window */}
-          <div className="relative w-full overflow-hidden rounded-[1.5rem] border border-beige bg-cream/80 backdrop-blur-xl shadow-2xl">
+          <div className="relative w-full overflow-hidden rounded-[1.5rem] liquid-glass-card shadow-2xl">
             <div className="flex items-center justify-between border-b border-beige bg-beige/40 px-4 py-3 select-none">
               <div className="flex items-center gap-1.5">
                 <span className="h-3 w-3 rounded-full bg-[#e0a89c]" />
                 <span className="h-3 w-3 rounded-full bg-rose" />
                 <span className="h-3 w-3 rounded-full bg-greige" />
               </div>
-              <span className="font-mono text-xs text-text-secondary">
+              <span className="font-mono text-xs text-text-primary font-semibold">
                 mrafiqdot825.ts
               </span>
               <span className="w-12" />
             </div>
 
-            <div className="p-5 font-mono text-[12px] sm:text-[13px] leading-relaxed text-text-secondary select-none overflow-x-auto no-scrollbar">
+            <div className="p-5 font-mono text-[12px] sm:text-[13px] leading-relaxed text-text-primary font-medium select-none overflow-x-auto no-scrollbar">
               <div>
                 <span className="code-keyword">const</span>{" "}
-                <span className="text-(--color-rose-deep)">engineer</span> = &#123;
+                <span className="text-(--color-rose-deep) font-bold">engineer</span> = &#123;
               </div>
               <div className="pl-4">
-                name: <span className="code-string">"{site.name}"</span>,
+                name: <span className="code-string font-semibold">"{site.name}"</span>,
               </div>
               <div className="pl-4">
-                role: <span className="code-string">"Full Stack Engineer | AI/ML Enthusiast"</span>,
+                role: <span className="code-string font-semibold">"Full Stack Engineer | AI/ML Enthusiast"</span>,
               </div>
               <div className="pl-4">
-                passions: <span className="text-text-primary">[</span>
-                <span className="code-string">"AI Agents"</span>,{" "}
-                <span className="code-string">"Web/Mobile"</span>,{" "}
-                <span className="code-string">"DevOps"</span>
-                <span className="text-text-primary">]</span>,
+                passions: <span className="text-text-primary font-bold">[</span>
+                <span className="code-string font-semibold">"AI Agents"</span>,{" "}
+                <span className="code-string font-semibold">"Web/Mobile"</span>,{" "}
+                <span className="code-string font-semibold">"DevOps"</span>
+                <span className="text-text-primary font-bold">]</span>,
               </div>
               <div className="pl-4">
-                status: <span className="code-string">"{site.availability}"</span>
+                status: <span className="code-string font-semibold">"{site.availability}"</span>
               </div>
               <div>&#125;;</div>
 
               <div className="mt-3">
-                <span className="code-comment">// Ready to build scalable systems</span>
+                <span className="code-comment font-normal">// Ready to build scalable systems</span>
               </div>
               <div>
                 <span className="code-keyword">if</span> (project.isAmbitious) &#123;
               </div>
-              <div className="pl-4 text-(--color-rose-deep)">
+              <div className="pl-4 text-(--color-rose-deep) font-bold">
                 engineer.collaborate(project);
               </div>
               <div>&#125;</div>
@@ -213,7 +213,7 @@ const HeroSection = () => {
           {/* Profile Card with Glass Emergence Effect */}
           <div
             onClick={() => setIsImageOpen(true)}
-            className="relative rounded-[1.75rem] glass-panel bg-cream/85 p-5 flex items-center gap-5 cursor-pointer group border border-beige hover:border-rose/50 hover:shadow-[0_0_30px_rgba(215,189,176,0.3)] transition-all duration-500"
+            className="relative rounded-[1.75rem] liquid-glass-card liquid-glass-card-hover p-5 flex items-center gap-5 cursor-pointer group shadow-xl"
           >
 
             <div className="flex-1">
@@ -223,7 +223,7 @@ const HeroSection = () => {
               <h3 className="font-heading text-xl font-bold text-text-primary mt-0.5">
                 Muhammad Rafiq
               </h3>
-              <p className="text-xs text-text-secondary leading-relaxed mt-1">
+              <p className="text-xs text-text-primary leading-relaxed mt-1 font-medium">
                 Engineering intelligent AI agent architectures and responsive mobile & web interfaces.
               </p>
             </div>
@@ -238,7 +238,7 @@ const HeroSection = () => {
           return (
             <div
               key={stat.label}
-              className="glass-panel rounded-[1.25rem] p-5 hover:-translate-y-1 hover:border-rose/50 transition-all duration-300 select-none group bg-cream/85"
+              className="liquid-glass-card liquid-glass-card-hover rounded-[1.25rem] p-5 select-none group"
             >
               <div className="flex items-center justify-between">
                 <span className="font-heading text-2xl sm:text-3xl font-extrabold text-(--color-rose-deep) group-hover:text-text-primary transition-colors">
@@ -246,7 +246,7 @@ const HeroSection = () => {
                 </span>
                 <Icon className="h-5 w-5 text-(--color-rose-deep) group-hover:scale-110 transition-transform" />
               </div>
-              <p className="mt-2.5 text-[11px] font-mono uppercase tracking-wider text-text-secondary leading-tight">
+              <p className="mt-2.5 text-[11px] font-mono uppercase tracking-wider text-text-primary font-bold leading-tight">
                 {stat.label}
               </p>
             </div>

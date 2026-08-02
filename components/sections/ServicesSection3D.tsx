@@ -37,7 +37,7 @@ export default function ServicesSection3D() {
           <h2 className="font-heading text-3xl sm:text-5xl font-extrabold text-text-primary mt-3 tracking-tight">
             Interactive <span className="bg-gradient-to-r from-(--color-rose-active) via-rose to-(--color-rose-deep) bg-clip-text text-transparent">Service Cubes</span>
           </h2>
-          <p className="mt-4 text-sm sm:text-base text-text-secondary leading-relaxed font-body">
+          <p className="mt-4 text-sm sm:text-base text-text-primary leading-relaxed font-body font-medium">
             Click any service cube to expand complete specifications, performance metrics, and technical architecture.
           </p>
         </div>
@@ -59,7 +59,7 @@ export default function ServicesSection3D() {
                 />
 
                 {/* 3D Glass Card Container */}
-                <div className="relative glass-panel rounded-2xl p-6 h-full flex flex-col justify-between border border-beige group-hover:border-rose/50 group-hover:-translate-y-2 transition-all duration-300 bg-cream/85">
+                <div className="relative liquid-glass-card liquid-glass-card-hover rounded-2xl p-6 h-full flex flex-col justify-between">
                   <div>
                     {/* Floating Cube Header Icon */}
                     <div
@@ -72,7 +72,7 @@ export default function ServicesSection3D() {
                     <h3 className="font-heading text-xl font-bold text-text-primary group-hover:text-(--color-rose-deep) transition-colors">
                       {cube.title}
                     </h3>
-                    <p className="mt-2.5 text-xs text-text-secondary leading-relaxed font-body">
+                    <p className="mt-2.5 text-xs text-text-primary leading-relaxed font-body font-medium">
                       {cube.desc}
                     </p>
                   </div>
@@ -100,7 +100,7 @@ export default function ServicesSection3D() {
               <span className="font-mono text-xs font-bold text-(--color-rose-deep) uppercase tracking-widest">
                 {selectedService.subtitle}
               </span>
-              <p className="mt-2 text-sm text-text-secondary leading-relaxed font-body">
+              <p className="mt-2 text-sm text-text-primary leading-relaxed font-body font-medium">
                 {selectedService.description}
               </p>
             </div>
@@ -109,11 +109,11 @@ export default function ServicesSection3D() {
             {selectedService.metrics && selectedService.metrics.length > 0 && (
               <div className="grid grid-cols-2 gap-3">
                 {selectedService.metrics.map((m) => (
-                  <div key={m.label} className="glass-panel p-3.5 rounded-xl border border-beige bg-cream">
-                    <span className="font-heading text-2xl font-extrabold text-(--color-rose-active)">
+                  <div key={m.label} className="liquid-glass-card p-3.5 rounded-xl">
+                    <span className="font-heading text-2xl font-extrabold text-(--color-rose-deep)">
                       {m.value}
                     </span>
-                    <p className="text-[11px] font-mono text-text-muted mt-1 uppercase leading-tight">
+                    <p className="text-[11px] font-mono text-text-primary font-bold mt-1 uppercase leading-tight">
                       {m.label}
                     </p>
                   </div>
@@ -126,7 +126,7 @@ export default function ServicesSection3D() {
               <h4 className="font-mono text-xs font-bold uppercase tracking-wider text-text-primary mb-2">
                 Key Benefits
               </h4>
-              <ul className="space-y-2 text-xs text-text-secondary">
+              <ul className="space-y-2 text-xs text-text-primary font-medium">
                 {selectedService.benefits.map((b) => (
                   <li key={b} className="flex items-start gap-2">
                     <span className="h-1.5 w-1.5 rounded-full bg-(--color-rose-deep) mt-1.5 shrink-0" />

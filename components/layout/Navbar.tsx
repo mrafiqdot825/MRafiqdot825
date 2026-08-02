@@ -116,7 +116,7 @@ const Navbar = () => {
         aria-label="Main navigation"
       >
         <div className="liquid-glass-cursor-glow" aria-hidden="true" />
-        
+
         {/* Left: Brand / Logo */}
         <div className="flex items-center justify-start md:flex-1">
           <a
@@ -125,17 +125,9 @@ const Navbar = () => {
             className="relative inline-flex items-center gap-1.5 sm:gap-2 rounded-full p-1 sm:pr-3 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-accent-600"
             aria-label="Go to home"
           >
-            <span className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-border-default/50 bg-cream/50 shadow-[inset_0_1px_0_0_rgba(245,235,225,0.4)] overflow-hidden">
-              <Image
-                src="/logo.png"
-                alt="Muhammad Rafiq Logo"
-                width={36}
-                height={36}
-                className="h-full w-full object-cover scale-[1.35]"
-              />
-            </span>
+
             <span className="hidden sm:inline text-base font-bold tracking-tight text-text-primary font-heading">
-              Rafiq
+              mrafiqdot825
             </span>
           </a>
         </div>
@@ -244,8 +236,8 @@ const Navbar = () => {
                     aria-label={item.label}
                     aria-current={activeHref === item.href ? "page" : undefined}
                     className={`inline-flex items-center justify-center rounded-full p-2.5 md:px-5 md:py-2 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-accent-600 focus:ring-offset-2 ${activeHref === item.href
-                      ? "liquid-glass-active-item text-accent-700 font-semibold shadow-sm"
-                      : "text-text-secondary hover:bg-beige/50 hover:text-text-primary"
+                      ? "liquid-glass-active-item text-text-primary font-bold shadow-sm"
+                      : "text-text-primary font-medium hover:bg-rose/15 hover:text-(--color-rose-deep)"
                       }`}
                   >
                     <motion.div
@@ -270,7 +262,7 @@ const Navbar = () => {
         <div className="hidden items-center justify-end md:flex md:flex-1">
           <a
             href={isHomePage ? "#contact" : "/#contact"}
-            className="relative inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition focus:outline-none focus:ring-2 focus:ring-accent-600 focus:ring-offset-2 liquid-glass-accent-button text-text-primary"
+            className="relative inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-bold transition focus:outline-none focus:ring-2 focus:ring-accent-600 focus:ring-offset-2 liquid-glass-accent-button text-text-primary"
           >
             <AppleMessage className={ICON_CLASS.action} />
             Let's Talk

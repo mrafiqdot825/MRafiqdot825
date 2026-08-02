@@ -32,7 +32,7 @@ const Section = ({
               </h2>
             )}
             {description && (
-              <p className="mt-3 max-w-2xl font-body text-body text-text-secondary leading-relaxed">
+              <p className="mt-3 max-w-2xl font-body text-body text-text-primary font-medium leading-relaxed">
                 {description}
               </p>
             )}

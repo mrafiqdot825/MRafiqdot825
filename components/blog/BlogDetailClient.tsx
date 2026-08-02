@@ -166,21 +166,20 @@ const BlogDetailClient = ({ slug }: BlogDetailClientProps) => {
       <main className="page-shell min-h-screen bg-transparent text-text-primary pt-2 pb-25 px-4 md:px-8 relative z-10">
         <div className="max-w-6xl mx-auto mt-8">
           {/* Breadcrumb Navigation - Semantic HTML & Microdata */}
-          <nav aria-label="Breadcrumb" className="mb-6 flex flex-wrap items-center gap-1.5 text-xs font-mono text-text-muted">
-            <Link href="/" className="hover:text-accent-600 transition-colors">Home</Link>
-            <span>&gt;</span>
-            <Link href="/blog" className="hover:text-accent-600 transition-colors">Blog</Link>
-            <span>&gt;</span>
-            <span className="text-text-secondary">{post.category}</span>
-            <span>&gt;</span>
-            <span className="text-text-primary font-semibold truncate max-w-[200px] md:max-w-xs">{post.title}</span>
+          <nav aria-label="Breadcrumb" className="mb-6 flex flex-wrap items-center gap-1.5 text-xs font-mono text-text-secondary font-medium">
+            <Link href="/" className="hover:text-(--color-rose-deep) transition-colors">Home</Link>
+            <span className="text-text-muted">&gt;</span>
+            <Link href="/blog" className="hover:text-(--color-rose-deep) transition-colors">Blog</Link>
+            <span className="text-text-muted">&gt;</span>
+            <span className="text-text-secondary font-semibold">{post.category}</span>
+            <span className="text-text-muted">&gt;</span>
+            <span className="text-text-primary font-bold truncate max-w-[200px] md:max-w-xs">{post.title}</span>
           </nav>
           {/* Back button */}
           <div className="mb-4">
             <Button
               href="/blog"
-              variant="metal"
-              dark
+              variant="liquid"
               icon={<AppleArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform duration-200" />}
               size="sm"
             >
@@ -193,7 +192,7 @@ const BlogDetailClient = ({ slug }: BlogDetailClientProps) => {
 
             {/* Left Column: Article Body wrapper */}
             <div className="lg:col-span-9">
-              <article className="overflow-hidden rounded-[24px] border border-border-default bg-bg-surface shadow-sm mb-8 glass-panel">
+              <article className="overflow-hidden rounded-[24px] border border-beige bg-cream/85 shadow-sm mb-8 glass-panel">
 
                 {/* Visual Cover Gradient (Hero image representation) */}
                 <header
@@ -211,61 +210,68 @@ const BlogDetailClient = ({ slug }: BlogDetailClientProps) => {
                   </div>
                 </header>
                 {/* Author Info, Publish Date, and Reading Time bar */}
-                <section aria-label="Article details" className="px-6 md:px-8 py-4 border-b border-border-default/40 bg-bg-surface-hover/30 flex flex-wrap items-center justify-between gap-4">
-                  <div className="flex flex-wrap items-center gap-4 text-xs font-mono text-text-muted">
-                    <span className="inline-flex items-center gap-1">
-                      <span className="inline-block w-4 h-4 rounded-full bg-accent-600 text-text-primary text-[8px] font-bold text-center leading-4">
+                <section aria-label="Article details" className="px-6 md:px-8 py-4 border-b border-beige bg-cream/40 flex flex-wrap items-center justify-between gap-4">
+                  <div className="flex flex-wrap items-center gap-4 text-xs font-mono text-text-primary font-medium">
+                    <span className="inline-flex items-center gap-1.5">
+                      <span className="inline-block w-5 h-5 rounded-full bg-rose/30 text-(--color-rose-deep) text-[10px] font-bold text-center leading-5 border border-rose/50">
                         {post.author.avatar}
                       </span>
-                      <span>By {post.author.name}</span>
+                      <span className="font-semibold">{post.author.name}</span>
                     </span>
-                    <span className="inline-flex items-center gap-1">
-                      <AppleCalendar className="w-3 h-3" />
-                      <span>Published: {post.publishedAt}</span>
+                    <span className="inline-flex items-center gap-1.5 text-text-secondary">
+                      <AppleCalendar className="w-3.5 h-3.5 text-(--color-rose-deep)" />
+                      <span>{post.publishedAt}</span>
                     </span>
                     {post.lastUpdated && post.lastUpdated !== post.publishedAt && (
-                      <span className="inline-flex items-center gap-1 text-accent-700">
+                      <span className="inline-flex items-center gap-1 text-(--color-rose-deep) font-semibold">
                         <span>(Updated: {post.lastUpdated})</span>
                       </span>
                     )}
-                    <span className="inline-flex items-center gap-1">
-                      <AppleClock className="w-3 h-3" />
-                      <span>Calculated Time: {computedReadTime}</span>
+                    <span className="inline-flex items-center gap-1.5 text-text-secondary">
+                      <AppleClock className="w-3.5 h-3.5 text-(--color-rose-deep)" />
+                      <span>{computedReadTime}</span>
                     </span>
                   </div>
                   {/* Share button */}
                   <button
                     onClick={handleShare}
-                    className="inline-flex items-center gap-1.5 text-[11px] font-mono font-medium text-text-secondary hover:text-accent-600 bg-bg-surface border border-border-default/80 hover:border-accent-100 rounded-lg py-1 px-2.5 transition-all duration-200 cursor-pointer"
+                    className="inline-flex items-center gap-1.5 text-[11px] font-mono font-semibold text-text-primary hover:text-(--color-rose-deep) bg-cream/80 border border-beige hover:border-rose rounded-lg py-1 px-3 transition-all duration-200 cursor-pointer shadow-xs"
                   >
-                    <AppleShare className="w-3 h-3" />
+                    <AppleShare className="w-3 h-3 text-(--color-rose-deep)" />
                     {isCopied ? "Link Copied!" : "Share Post"}
                   </button>
                 </section>
                 {/* Mobile Expandable Table of Contents */}
                 <div className="lg:hidden px-6 md:px-8 pt-6">
-                  <div className="border border-border-default bg-bg-surface-hover/20 rounded-xl p-4 glass-panel">
+                  <div className="border border-beige bg-cream/90 rounded-2xl p-4 glass-panel shadow-sm">
                     <button
                       onClick={() => setMobileTocOpen(!mobileTocOpen)}
-                      className="w-full flex items-center justify-between font-heading text-[13px] font-bold text-text-primary"
+                      className="w-full flex items-center justify-between font-heading text-xs font-bold text-text-primary uppercase tracking-wider"
                     >
-                      <span>Table of Contents</span>
-                      <span className="transform transition-transform duration-200 text-[10px]" style={{ transform: mobileTocOpen ? "rotate(180deg)" : "rotate(0)" }}>
+                      <span className="flex items-center gap-2">
+                        <span>Table of Contents</span>
+                        <span className="font-mono text-[10px] text-text-secondary bg-rose/15 px-2 py-0.5 rounded-full border border-rose/30 lowercase">
+                          {headings.length} sections
+                        </span>
+                      </span>
+                      <span className="transform transition-transform duration-200 text-[10px] text-text-secondary" style={{ transform: mobileTocOpen ? "rotate(180deg)" : "rotate(0)" }}>
                         ▼
                       </span>
                     </button>
                     {mobileTocOpen && (
-                      <nav className="mt-3 flex flex-col gap-1.5 border-t border-border-default/50 pt-3">
+                      <nav className="mt-3 flex flex-col gap-1 border-t border-beige pt-3">
                         {headings.map((h) => (
                           <a
                             key={h.id}
                             href={`#${h.id}`}
                             onClick={() => setMobileTocOpen(false)}
-                            className={`text-xs py-1.5 px-3 rounded-lg font-body transition-all duration-200 border-l-2 leading-snug ${h.depth === 3 ? "ml-4 text-text-muted" : "text-text-secondary"
-                              } ${activeId === h.id
-                                ? "border-accent-600 bg-accent-50 text-accent-700 font-semibold"
-                                : "border-transparent hover:text-text-primary hover:bg-bg-surface-hover/50"
-                              }`}
+                            className={`text-xs py-1.5 px-3 rounded-lg font-body transition-all duration-200 border-l-2 leading-snug ${
+                              h.depth === 3 ? "ml-3 text-text-secondary" : "text-text-primary font-medium"
+                            } ${
+                              activeId === h.id
+                                ? "border-(--color-rose-deep) bg-rose/20 text-(--color-rose-deep) font-bold shadow-xs"
+                                : "border-transparent hover:text-text-primary hover:bg-rose/10"
+                            }`}
                           >
                             {h.text}
                           </a>
@@ -278,49 +284,49 @@ const BlogDetailClient = ({ slug }: BlogDetailClientProps) => {
                 <div className="px-6 md:px-8 py-6 border-b border-border-default/40">
 
                   {/* Quick Answer Section (AEO optimized summary for answer engines) */}
-                  <section aria-label="Quick Answer Summary" className="mb-8 p-6 rounded-[20px] border border-accent-600/35 bg-accent-50/15 backdrop-blur-md relative overflow-hidden group">
-                    <div className="absolute top-0 right-0 bg-accent-600 text-text-primary font-mono text-[8px] font-bold uppercase tracking-wider px-3 py-1 rounded-bl-lg shadow-sm">
+                  <section aria-label="Quick Answer Summary" className="mb-8 p-6 rounded-[20px] border border-rose/40 bg-rose/10 backdrop-blur-md relative overflow-hidden group">
+                    <div className="absolute top-0 right-0 bg-(--color-rose-deep) text-offwhite font-mono text-[9px] font-bold uppercase tracking-wider px-3 py-1 rounded-bl-lg shadow-sm">
                       AI Insight / Quick Answer
                     </div>
                     <h2 className="font-heading text-base font-extrabold text-text-primary mb-3 flex items-center gap-2">
-                      <span className="text-accent-700 text-lg">✦</span> Quick Answer
+                      <span className="text-(--color-rose-deep) text-lg">✦</span> Quick Answer
                     </h2>
-                    <p className="font-body text-sm text-text-primary leading-relaxed">
+                    <p className="font-body text-sm text-text-primary font-medium leading-relaxed">
                       {post.quickAnswer}
                     </p>
                   </section>
                   {/* TL;DR Section */}
-                  <section aria-label="TL;DR Key Points" className="mb-10 p-6 rounded-[20px] border border-border-default bg-bg-surface-hover/20 backdrop-blur-md relative overflow-hidden group glass-panel-inset">
-                    <h2 className="font-heading text-base font-extrabold text-text-primary mb-4 flex items-center gap-2 border-b border-border-default/50 pb-2">
+                  <section aria-label="TL;DR Key Points" className="mb-10 p-6 rounded-[20px] border border-beige bg-cream/80 backdrop-blur-md relative overflow-hidden group glass-panel-inset">
+                    <h2 className="font-heading text-base font-extrabold text-text-primary mb-4 flex items-center gap-2 border-b border-beige pb-2">
                       TL;DR Summary
                     </h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div>
-                        <h3 className="text-xs font-mono text-accent-700 font-semibold uppercase tracking-wider mb-2">What You'll Build</h3>
-                        <p className="text-xs font-body text-text-secondary leading-relaxed">{post.tldr.build}</p>
+                        <h3 className="text-xs font-mono text-(--color-rose-deep) font-bold uppercase tracking-wider mb-2">What You'll Build</h3>
+                        <p className="text-xs font-body text-text-primary leading-relaxed">{post.tldr.build}</p>
                       </div>
                       <div>
-                        <h3 className="text-xs font-mono text-accent-700 font-semibold uppercase tracking-wider mb-2">Technologies Used</h3>
+                        <h3 className="text-xs font-mono text-(--color-rose-deep) font-bold uppercase tracking-wider mb-2">Technologies Used</h3>
                         <div className="flex flex-wrap gap-1.5 mt-1">
                           {post.tldr.technologies.map(tech => (
-                            <span key={tech} className="px-2 py-0.5 rounded-[6px] text-[10px] font-mono bg-bg-page/55 text-text-secondary border border-border-default/80">
+                            <span key={tech} className="px-2.5 py-1 rounded-md text-[10px] font-mono bg-cream text-text-primary border border-beige font-semibold">
                               {tech}
                             </span>
                           ))}
                         </div>
                       </div>
                     </div>
-                    <div className="mt-6 pt-4 border-t border-border-default/50">
-                      <h3 className="text-xs font-mono text-accent-700 font-semibold uppercase tracking-wider mb-2">Key Learning Outcomes</h3>
-                      <ul className="list-disc pl-5 text-xs font-body text-text-secondary space-y-1.5">
+                    <div className="mt-6 pt-4 border-t border-beige">
+                      <h3 className="text-xs font-mono text-(--color-rose-deep) font-bold uppercase tracking-wider mb-2">Key Learning Outcomes</h3>
+                      <ul className="list-disc pl-5 text-xs font-body text-text-primary space-y-1.5">
                         {post.tldr.learnings.map((learning, idx) => (
                           <li key={idx}>{learning}</li>
                         ))}
                       </ul>
                     </div>
-                    <div className="mt-4 text-[10px] font-mono text-text-muted flex items-center gap-1.5">
+                    <div className="mt-4 text-[10px] font-mono text-text-secondary font-medium flex items-center gap-1.5">
                       <span>Calculated Reading Time:</span>
-                      <span className="text-accent-700 font-semibold">{post.tldr.readTime || computedReadTime}</span>
+                      <span className="text-(--color-rose-deep) font-bold">{post.tldr.readTime || computedReadTime}</span>
                     </div>
                   </section>
                   {/* Main Article Content */}
@@ -332,17 +338,17 @@ const BlogDetailClient = ({ slug }: BlogDetailClientProps) => {
                 </div>
                 {/* FAQ Section */}
                 {post.faqs && post.faqs.length > 0 && (
-                  <section aria-label="Frequently Asked Questions" className="px-6 md:px-8 py-8 border-b border-border-default/40 bg-bg-surface-hover/10">
-                    <h2 id="frequently-asked-questions" className="font-heading text-2xl font-bold text-text-primary mb-6 pl-1 border-l-4 border-accent-600">
+                  <section aria-label="Frequently Asked Questions" className="px-6 md:px-8 py-8 border-b border-beige bg-cream/40">
+                    <h2 id="frequently-asked-questions" className="font-heading text-2xl font-bold text-text-primary mb-6 pl-2 border-l-4 border-(--color-rose-deep)">
                       Frequently Asked Questions
                     </h2>
                     <div className="space-y-6">
                       {post.faqs.map((faq, idx) => (
-                        <div key={idx} className="border-b border-border-default/30 pb-4 last:border-b-0 last:pb-0">
-                          <h3 className="font-heading text-base font-semibold text-text-primary mb-2">
+                        <div key={idx} className="border-b border-beige/60 pb-4 last:border-b-0 last:pb-0">
+                          <h3 className="font-heading text-base font-bold text-text-primary mb-2">
                             {faq.question}
                           </h3>
-                          <p className="font-body text-xs md:text-sm text-text-secondary leading-relaxed">
+                          <p className="font-body text-xs md:text-sm text-text-secondary leading-relaxed font-medium">
                             {faq.answer}
                           </p>
                         </div>
@@ -352,21 +358,21 @@ const BlogDetailClient = ({ slug }: BlogDetailClientProps) => {
                 )}
                 {/* References Section */}
                 {post.references && post.references.length > 0 && (
-                  <section aria-label="Sources and references" className="px-6 md:px-8 py-6 border-b border-border-default/40 bg-bg-surface/50">
-                    <h2 id="references" className="font-heading text-xs font-bold uppercase tracking-wider text-text-muted mb-4 pl-1">
+                  <section aria-label="Sources and references" className="px-6 md:px-8 py-6 border-b border-beige bg-cream/60">
+                    <h2 id="references" className="font-heading text-xs font-bold uppercase tracking-wider text-text-primary mb-4 pl-2 border-l-3 border-(--color-rose-deep)">
                       Official Documentation & References
                     </h2>
-                    <ul className="list-disc pl-5 text-xs font-body text-text-secondary space-y-2">
+                    <ul className="list-disc pl-5 text-xs font-body text-text-primary space-y-2.5">
                       {post.references.map((ref, idx) => (
                         <li key={idx}>
                           <a
                             href={ref.url}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-accent-700 hover:text-accent-800 transition-colors inline-flex items-center gap-1"
+                            className="text-text-primary font-semibold underline underline-offset-2 hover:text-(--color-rose-deep) transition-colors inline-flex items-center gap-1"
                           >
                             {ref.title}
-                            <span className="text-[10px]">↗</span>
+                            <span className="text-[10px] text-(--color-rose-deep) font-bold">↗</span>
                           </a>
                         </li>
                       ))}
@@ -375,7 +381,7 @@ const BlogDetailClient = ({ slug }: BlogDetailClientProps) => {
                 )}
                 {/* Call To Action Block */}
                 {post.cta && (
-                  <section aria-label="Engagement call to action" className="px-6 md:px-8 py-8 bg-gradient-to-r from-accent-600/10 to-beige/25 rounded-b-[24px]">
+                  <section aria-label="Engagement call to action" className="px-6 md:px-8 py-8 bg-gradient-to-r from-rose/20 via-beige/30 to-cream/40 rounded-b-[24px]">
                     <div className="max-w-2xl">
                       <h3 className="font-heading text-lg font-bold text-text-primary mb-2">
                         {post.cta.title}
@@ -383,21 +389,22 @@ const BlogDetailClient = ({ slug }: BlogDetailClientProps) => {
                       <p className="font-body text-xs md:text-sm text-text-secondary leading-relaxed mb-4">
                         {post.cta.description}
                       </p>
-                      <a
+                      <Button
                         href={post.cta.linkUrl}
-                        className="inline-flex items-center gap-2 px-4 py-2 rounded-[10px] bg-accent-600 text-text-primary font-mono text-[11px] font-semibold hover:bg-accent-700 transition-all duration-300 shadow-md shadow-accent-600/20"
+                        variant="liquid"
+                        size="sm"
+                        iconRight={<span>→</span>}
                       >
                         {post.cta.linkText}
-                        <span className="text-[11px]">→</span>
-                      </a>
+                      </Button>
                     </div>
                   </section>
                 )}
 
               </article>
               {/* Author Box with EEAT signals */}
-              <section aria-label="Author Profile" className="p-6 md:p-8 rounded-[24px] border border-border-default bg-bg-surface shadow-sm glass-panel flex flex-col sm:flex-row gap-6 items-center sm:items-start mb-12">
-                <span className="inline-flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-accent-600 text-text-primary font-mono text-2xl font-bold border border-accent-100 shadow-sm shadow-accent-600/10">
+              <section aria-label="Author Profile" className="p-6 md:p-8 rounded-[24px] border border-beige bg-cream/85 shadow-sm glass-panel flex flex-col sm:flex-row gap-6 items-center sm:items-start mb-12">
+                <span className="inline-flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-rose/30 text-(--color-rose-deep) font-mono text-2xl font-bold border border-rose/50 shadow-sm">
                   {post.author.avatar}
                 </span>
                 <div className="text-center sm:text-left w-full">
@@ -406,7 +413,7 @@ const BlogDetailClient = ({ slug }: BlogDetailClientProps) => {
                       <h4 className="font-heading text-lg font-bold text-text-primary">
                         {post.author.name}
                       </h4>
-                      <p className="text-xs font-mono text-accent-700 font-semibold">
+                      <p className="text-xs font-mono text-(--color-rose-deep) font-bold">
                         {post.author.role}
                       </p>
                     </div>
@@ -415,7 +422,7 @@ const BlogDetailClient = ({ slug }: BlogDetailClientProps) => {
                         href="https://github.com/mrafiq825"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-text-secondary hover:text-accent-600 transition-colors cursor-pointer"
+                        className="text-text-primary hover:text-(--color-rose-deep) transition-colors cursor-pointer"
                         aria-label="GitHub Profile"
                         title="GitHub"
                       >
@@ -425,7 +432,7 @@ const BlogDetailClient = ({ slug }: BlogDetailClientProps) => {
                         href="https://linkedin.com/in/mrafiq825"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-text-secondary hover:text-accent-600 transition-colors cursor-pointer"
+                        className="text-text-primary hover:text-(--color-rose-deep) transition-colors cursor-pointer"
                         aria-label="LinkedIn Profile"
                         title="LinkedIn"
                       >
@@ -438,7 +445,7 @@ const BlogDetailClient = ({ slug }: BlogDetailClientProps) => {
                   </p>
                   <div className="flex flex-wrap gap-1.5 justify-center sm:justify-start">
                     {["Next.js", "React 19", "FastAPI", "LangGraph", "Docker", "Kubernetes", "PostgreSQL", "AEO"].map((skill) => (
-                      <span key={skill} className="px-2 py-0.5 rounded-[6px] text-[9px] font-mono bg-bg-page/55 text-text-muted border border-border-default/80">
+                      <span key={skill} className="px-2.5 py-1 rounded-md text-[10px] font-mono bg-cream text-text-primary border border-beige font-semibold">
                         {skill}
                       </span>
                     ))}
@@ -447,56 +454,65 @@ const BlogDetailClient = ({ slug }: BlogDetailClientProps) => {
               </section>
             </div>
             {/* Right Column: Sticky Table of Contents (TOC) for Desktop */}
-            <aside className="lg:col-span-3 hidden lg:block sticky top-24 max-h-[calc(100vh-120px)] overflow-y-auto pr-2">
-              <h2 className="font-heading text-xs font-bold uppercase tracking-wider text-text-muted mb-4 pl-1">
-                Table of Contents
-              </h2>
-              <nav aria-label="Table of contents navigation" className="flex flex-col gap-1.5">
-                {headings.map((h) => (
-                  <a
-                    key={h.id}
-                    href={`#${h.id}`}
-                    className={`text-xs py-1.5 px-3 rounded-lg font-body transition-all duration-200 border-l-2 leading-snug ${h.depth === 3 ? "ml-4 text-text-muted" : "text-text-secondary"
-                      } ${activeId === h.id
-                        ? "border-accent-600 bg-accent-50 text-accent-700 font-semibold"
-                        : "border-transparent hover:text-text-primary hover:bg-bg-surface-hover/50"
+            <aside className="lg:col-span-3 hidden lg:block sticky top-24 max-h-[calc(100vh-120px)] overflow-y-auto">
+              <div className="glass-panel rounded-2xl p-4.5 border border-beige bg-cream/90 shadow-sm">
+                <div className="flex items-center justify-between pb-3 mb-3 border-b border-beige">
+                  <h2 className="font-heading text-xs font-bold uppercase tracking-wider text-text-primary">
+                    Table of Contents
+                  </h2>
+                  <span className="font-mono text-[10px] text-text-secondary font-semibold bg-rose/15 px-2 py-0.5 rounded-full border border-rose/30">
+                    {headings.length} sections
+                  </span>
+                </div>
+                <nav aria-label="Table of contents navigation" className="flex flex-col gap-1">
+                  {headings.map((h) => (
+                    <a
+                      key={h.id}
+                      href={`#${h.id}`}
+                      className={`text-xs py-1.5 px-2.5 rounded-lg font-body transition-all duration-200 border-l-2 leading-snug ${
+                        h.depth === 3 ? "ml-3 text-text-secondary" : "text-text-primary font-medium"
+                      } ${
+                        activeId === h.id
+                          ? "border-(--color-rose-deep) bg-rose/20 text-(--color-rose-deep) font-bold shadow-xs"
+                          : "border-transparent hover:text-text-primary hover:bg-rose/10"
                       }`}
-                  >
-                    {h.text}
-                  </a>
-                ))}
-              </nav>
+                    >
+                      {h.text}
+                    </a>
+                  ))}
+                </nav>
+              </div>
             </aside>
           </div>
           {/* Related Articles Section (Displaying 3 related posts, enforcing the Tag Capping Rule) */}
           {relatedPosts.length > 0 && (
-            <section aria-label="Related Publications" className="mt-12 border-t border-border-default/50 pt-10">
-              <h3 className="font-heading text-xl font-bold mb-6 text-text-primary pl-1 border-l-4 border-accent-600">
+            <section aria-label="Related Publications" className="mt-12 border-t border-beige pt-10">
+              <h3 className="font-heading text-xl font-bold mb-6 text-text-primary pl-2 border-l-4 border-(--color-rose-deep)">
                 Related Articles
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {relatedPosts.map((rPost) => (
                   <Link key={rPost.slug} href={`/blog/${rPost.slug}`} className="group block">
-                    <article className="h-full flex flex-col justify-between overflow-hidden rounded-[16px] border border-border-default bg-bg-surface shadow-sm glass-panel glass-panel-hover">
+                    <article className="h-full flex flex-col justify-between overflow-hidden rounded-[16px] border border-beige bg-cream/85 shadow-sm glass-panel glass-panel-hover">
                       <div className="p-5 flex-grow flex flex-col justify-between">
                         <div>
-                          <div className="flex items-center gap-3 text-[10px] font-mono text-text-muted mb-2">
+                          <div className="flex items-center gap-3 text-[10px] font-mono text-text-secondary font-semibold mb-2">
                             <span>{rPost.publishedAt}</span>
                             <span>•</span>
                             <span>{rPost.readTime}</span>
                           </div>
-                          <h4 className="font-heading text-base font-bold text-text-primary group-hover:text-accent-600 transition-colors duration-200 leading-snug line-clamp-2">
+                          <h4 className="font-heading text-base font-bold text-text-primary group-hover:text-(--color-rose-deep) transition-colors duration-200 leading-snug line-clamp-2">
                             {rPost.title}
                           </h4>
                           <p className="mt-2 font-body text-xs text-text-secondary leading-relaxed line-clamp-2">
                             {rPost.excerpt}
                           </p>
                         </div>
-                        <div className="mt-4 pt-3 border-t border-border-default/30 flex flex-col gap-2">
+                        <div className="mt-4 pt-3 border-t border-beige flex flex-col gap-2">
                           {/* Tags - Enforcing the Tag Capping Rule on related cards too */}
                           <div className="flex flex-wrap gap-1">
                             {rPost.tags.slice(0, 4).map((tag) => (
-                              <span key={tag} className="px-2 py-0.5 rounded-[6px] text-[8px] font-mono bg-accent-50 text-accent-700 border border-accent-100/50">
+                              <span key={tag} className="px-2 py-0.5 rounded-[6px] text-[8px] font-mono bg-rose/15 text-(--color-rose-deep) border border-rose/30 font-semibold">
                                 {tag}
                               </span>
                             ))}
@@ -506,11 +522,11 @@ const BlogDetailClient = ({ slug }: BlogDetailClientProps) => {
                               </span>
                             )}
                           </div>
-                          <div className="flex items-center justify-between pt-1 border-t border-border-default/10">
-                            <span className="text-[10px] font-mono text-accent-700 bg-accent-50 px-2 py-0.5 rounded border border-accent-100">
+                          <div className="flex items-center justify-between pt-1 border-t border-beige/40">
+                            <span className="text-[10px] font-mono text-(--color-rose-deep) bg-rose/15 px-2 py-0.5 rounded border border-rose/30 font-semibold">
                               {rPost.category}
                             </span>
-                            <span className="inline-flex items-center gap-0.5 text-xs font-semibold text-accent-700 group-hover:translate-x-0.5 transition-transform duration-200">
+                            <span className="inline-flex items-center gap-0.5 text-xs font-bold text-(--color-rose-deep) group-hover:translate-x-0.5 transition-transform duration-200">
                               Read <AppleArrowRight className="w-3 h-3" />
                             </span>
                           </div>

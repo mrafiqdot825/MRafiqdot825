@@ -124,28 +124,28 @@ export default function TechStackOrbit3D() {
         {/* Active Tech Hover Modal Card */}
         {activeTech && (
           <div className="absolute bottom-6 z-30 max-w-sm w-full px-4">
-            <div className="glass-panel rounded-2xl p-5 border border-rose/40 bg-cream/95 shadow-[0_0_30px_rgba(215,189,176,0.35)]">
+            <div className="liquid-glass-modal rounded-2xl p-5 shadow-2xl">
               <div className="flex items-center justify-between border-b border-beige pb-3 mb-3">
                 <div>
                   <h4 className="font-heading text-lg font-bold text-text-primary">
                     {activeTech.name}
                   </h4>
-                  <span className="font-mono text-[10px] text-(--color-rose-deep) uppercase tracking-wider">
+                  <span className="font-mono text-[10px] text-(--color-rose-deep) font-bold uppercase tracking-wider">
                     {activeTech.category}
                   </span>
                 </div>
                 <div className="text-right">
-                  <span className="inline-block font-mono text-xs font-bold bg-rose/20 text-(--color-rose-active) px-2 py-0.5 rounded-md border border-rose/30">
+                  <span className="inline-block font-mono text-xs font-bold bg-rose/20 text-(--color-rose-deep) px-2 py-0.5 rounded-md border border-rose/30">
                     {activeTech.years}
                   </span>
                 </div>
               </div>
-              <p className="text-xs text-text-secondary leading-relaxed font-body">
+              <p className="text-xs text-text-primary font-medium leading-relaxed font-body">
                 {activeTech.description}
               </p>
-              <div className="mt-3 pt-2 border-t border-beige/60 flex items-center justify-between text-[11px] font-mono text-text-muted">
+              <div className="mt-3 pt-2 border-t border-beige/60 flex items-center justify-between text-[11px] font-mono text-text-primary font-semibold">
                 <span>Projects Delivered:</span>
-                <span className="text-text-primary font-bold">{activeTech.projectsCount}</span>
+                <span className="text-(--color-rose-deep) font-bold">{activeTech.projectsCount}</span>
               </div>
             </div>
           </div>

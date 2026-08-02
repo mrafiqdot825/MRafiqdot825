@@ -97,7 +97,7 @@ const ContactSection = () => {
     >
       <div className="grid gap-6 lg:grid-cols-[1.05fr_0.95fr]">
         {/* Futuristic Floating Holographic Panel */}
-        <Card className="relative flex flex-col justify-between border border-beige bg-cream/85 shadow-[0_0_35px_rgba(184,144,125,0.2)]">
+        <Card className="liquid-glass-card relative flex flex-col justify-between border border-beige shadow-2xl">
           <div className="relative z-10">
             <div className="mb-6 flex items-center justify-between border-b border-beige pb-4">
               <div className="flex items-center gap-3">
@@ -108,17 +108,17 @@ const ContactSection = () => {
                   <p className="font-mono text-xs font-bold uppercase tracking-[0.2em] text-(--color-rose-deep)">
                     CONTROL TERMINAL
                   </p>
-                  <p className="text-xs text-text-secondary">
+                  <p className="text-xs text-text-primary font-medium">
                     Direct Holographic Transmission
                   </p>
                 </div>
               </div>
-              <span className="inline-flex items-center font-mono text-[10px] text-(--color-rose-active) bg-rose/20 border border-rose/30 px-2.5 py-1 rounded-full animate-pulse">
+              <span className="inline-flex items-center font-mono text-[10px] text-(--color-rose-active) bg-rose/20 border border-rose/30 px-2.5 py-1 rounded-full animate-pulse font-bold">
                 SYS_ONLINE
               </span>
             </div>
 
-            <p className="font-mono text-xs font-semibold uppercase tracking-[0.16em] text-text-primary mb-6">
+            <p className="font-mono text-xs font-bold uppercase tracking-[0.16em] text-text-primary mb-6">
               STATUS: <span className="text-(--color-rose-deep)">{site.availability}</span>
             </p>
 
@@ -130,7 +130,7 @@ const ContactSection = () => {
               >
                 <AppleCheckCircle className="h-6 w-6 text-(--color-rose-deep) mx-auto mb-2" />
                 <h4 className="text-sm font-bold text-text-primary">Transmission Received!</h4>
-                <p className="text-xs text-text-secondary mt-1">
+                <p className="text-xs text-text-primary font-medium mt-1">
                   Thank you for reaching out. Muhammad will respond within 24 hours.
                 </p>
               </motion.div>
@@ -143,7 +143,7 @@ const ContactSection = () => {
             >
               <div className="grid gap-4 sm:grid-cols-2">
                 <label className="space-y-1.5 block">
-                  <span className="text-xs font-mono font-semibold uppercase text-text-secondary">
+                  <span className="text-xs font-mono font-bold uppercase text-text-primary">
                     Your Name
                   </span>
                   <input
@@ -151,12 +151,12 @@ const ContactSection = () => {
                     name="name"
                     placeholder="Muhammad Rafiq"
                     required
-                    className="w-full glass-input rounded-xl py-2.5 px-3.5 text-xs text-text-primary placeholder:text-text-muted"
+                    className="w-full glass-input rounded-xl py-2.5 px-3.5 text-xs text-text-primary font-medium placeholder:text-text-secondary/70"
                   />
                 </label>
 
                 <label className="space-y-1.5 block">
-                  <span className="text-xs font-mono font-semibold uppercase text-text-secondary">
+                  <span className="text-xs font-mono font-bold uppercase text-text-primary">
                     Email Address
                   </span>
                   <input
@@ -164,25 +164,25 @@ const ContactSection = () => {
                     name="email"
                     placeholder="you@example.com"
                     required
-                    className="w-full glass-input rounded-xl py-2.5 px-3.5 text-xs text-text-primary placeholder:text-text-muted"
+                    className="w-full glass-input rounded-xl py-2.5 px-3.5 text-xs text-text-primary font-medium placeholder:text-text-secondary/70"
                   />
                 </label>
               </div>
 
               <label className="space-y-1.5 block">
-                <span className="text-xs font-mono font-semibold uppercase text-text-secondary">
+                <span className="text-xs font-mono font-bold uppercase text-text-primary">
                   Subject
                 </span>
                 <input
                   type="text"
                   name="subject"
                   placeholder="AI Agent Architecture / Next.js Redesign"
-                  className="w-full glass-input rounded-xl py-2.5 px-3.5 text-xs text-text-primary placeholder:text-text-muted"
+                  className="w-full glass-input rounded-xl py-2.5 px-3.5 text-xs text-text-primary font-medium placeholder:text-text-secondary/70"
                 />
               </label>
 
               <label className="space-y-1.5 block">
-                <span className="text-xs font-mono font-semibold uppercase text-text-secondary">
+                <span className="text-xs font-mono font-bold uppercase text-text-primary">
                   Transmission Message
                 </span>
                 <textarea
@@ -190,12 +190,12 @@ const ContactSection = () => {
                   placeholder="Outline project goals, scope, and timeline..."
                   rows={5}
                   required
-                  className="w-full resize-none glass-input rounded-xl py-2.5 px-3.5 text-xs text-text-primary placeholder:text-text-muted"
+                  className="w-full resize-none glass-input rounded-xl py-2.5 px-3.5 text-xs text-text-primary font-medium placeholder:text-text-secondary/70"
                 />
               </label>
 
               {error && (
-                <div className="rounded-xl border border-rose/40 bg-rose/15 p-3 text-xs text-(--color-rose-deep) flex items-center gap-2">
+                <div className="rounded-xl border border-rose/40 bg-rose/15 p-3 text-xs text-(--color-rose-deep) font-semibold flex items-center gap-2">
                   <AppleWarning className="h-4 w-4" />
                   <span>{error}</span>
                 </div>
@@ -205,10 +205,9 @@ const ContactSection = () => {
                 <Button
                   type="submit"
                   disabled={submitting}
-                  variant="metal"
+                  variant="liquid"
                   size="sm"
-                  dark
-                  icon={submitting ? null : <AppleMail className="h-4 w-4 text-(--color-rose-deep)" />}
+                  icon={submitting ? null : <AppleMail className="h-4 w-4" />}
                 >
                   {submitting ? "Transmitting..." : "Send Transmission"}
                 </Button>
@@ -216,9 +215,9 @@ const ContactSection = () => {
             </form>
 
             <div className="mt-6 border-t border-beige pt-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-              <p className="text-xs font-mono text-text-secondary shrink-0">
+              <p className="text-xs font-mono text-text-primary font-semibold shrink-0">
                 Direct:{" "}
-                <a href={`mailto:${site.email}`} className="text-(--color-rose-deep) font-bold">
+                <a href={`mailto:${site.email}`} className="text-(--color-rose-deep) font-bold hover:underline">
                   {site.email}
                 </a>
               </p>

@@ -5,7 +5,7 @@ import Link from "next/link";
 import Navbar from "@/components/layout/Navbar";
 import CustomCursor from "@/components/ui/CustomCursor";
 import MouseBackgroundGlow from "@/components/ui/MouseBackgroundGlow";
-import RadialGlowButton from "@/components/ui/RadialGlowButton";
+import Button from "@/components/ui/Button";
 import { prompts, type Prompt, type PromptCategory } from "@/data/prompts";
 import {
   AppleCopy,
@@ -337,34 +337,21 @@ export default function PromptsClient() {
 
                   {/* Actions Footer */}
                   <div className="mt-4 pt-4 border-t border-border-default/30 flex justify-center w-full">
-                    <RadialGlowButton
+                    <Button
                       onClick={() => handleCopy(prompt)}
-                      className="w-full"
-                      containerClassName="w-full"
-                      style={isCopied ? {
-                        "--rg-color-1": "#8a6f62",
-                        "--rg-color-2": "#b8907d",
-                        "--rg-color-3": "#c9a999",
-                        "--rg-color-4": "#d7bdb0",
-                        "--rg-color-5": "#f5ebe1"
-                      } as React.CSSProperties : undefined}
+                      variant="liquid"
+                      size="sm"
+                      className="w-full text-xs font-semibold"
+                      icon={
+                        isCopied ? (
+                          <AppleCheck className="w-4 h-4 animate-bounce" />
+                        ) : (
+                          <AppleCopy className="w-3.5 h-3.5" />
+                        )
+                      }
                     >
-                      {isCopied ? (
-                        <>
-                          <span className="mr-1.5">
-                            <AppleCheck className="w-4 h-4 animate-bounce" />
-                          </span>
-                          <span>Copied to Clipboard!</span>
-                        </>
-                      ) : (
-                        <>
-                          <span className="mr-1.5">
-                            <AppleCopy className="w-3.5 h-3.5" />
-                          </span>
-                          <span>Copy Prompt Template</span>
-                        </>
-                      )}
-                    </RadialGlowButton>
+                      {isCopied ? "Copied to Clipboard!" : "Copy Prompt Template"}
+                    </Button>
                   </div>
                 </article>
               );
@@ -391,12 +378,14 @@ export default function PromptsClient() {
               </p>
 
               <div className="flex justify-center">
-                <RadialGlowButton
+                <Button
                   href="/#contact"
-                  className="px-8"
+                  variant="liquid"
+                  size="md"
+                  className="px-8 font-semibold"
                 >
                   Get in Touch
-                </RadialGlowButton>
+                </Button>
               </div>
             </div>
           </div>
