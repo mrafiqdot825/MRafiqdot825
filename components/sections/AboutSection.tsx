@@ -31,12 +31,13 @@ const GitHubCalendar = dynamic(
         </div>
       </div>
     ),
-  }
+  },
 );
 
-
 const AboutSection = () => {
-  const [selectedYear, setSelectedYear] = React.useState<number | "last">("last");
+  const [selectedYear, setSelectedYear] = React.useState<number | "last">(
+    "last",
+  );
 
   return (
     <Section id="about" className="bg-transparent pt-12">
@@ -47,7 +48,11 @@ const AboutSection = () => {
             ENGINEERING PHILOSOPHY
           </span>
           <h2 className="mt-6 font-heading text-4xl sm:text-5xl font-extrabold tracking-tight text-text-primary leading-[1.1]">
-            Crafting <span className="bg-gradient-to-r from-(--color-rose-active) via-rose to-(--color-rose-deep) bg-clip-text text-transparent">Resilient</span> Digital Ecosystems.
+            Crafting{" "}
+            <span className="bg-gradient-to-r from-(--color-rose-active) via-rose to-(--color-rose-deep) bg-clip-text text-transparent">
+              Resilient
+            </span>{" "}
+            Digital Ecosystems.
           </h2>
           <p className="mt-6 text-base text-text-secondary leading-relaxed font-body">
             {site.intro}
@@ -66,7 +71,7 @@ const AboutSection = () => {
         </div>
 
         {/* Profile Liquid Glass Frame */}
-        <LiquidGlassFrame >
+        <LiquidGlassFrame>
           <Image
             src="/profile.png"
             alt="Muhammad Rafiq"
@@ -209,16 +214,17 @@ const AboutSection = () => {
             <span className="text-[10px] font-bold uppercase tracking-widest text-text-muted mr-2 font-mono">
               Year:
             </span>
-            {(['last', 2026, 2025, 2024, 2023] as const).map((year) => (
+            {(["last", 2026, 2025, 2024, 2023] as const).map((year) => (
               <button
                 key={year}
                 onClick={() => setSelectedYear(year)}
-                className={`px-3 py-1 rounded-md font-mono text-[10px] font-bold uppercase tracking-wider transition-all cursor-pointer ${selectedYear === year
-                  ? 'liquid-glass-active-item text-text-primary'
-                  : 'bg-beige/40 border border-beige text-text-secondary hover:text-text-primary'
-                  }`}
+                className={`px-3 py-1 rounded-md font-mono text-[10px] font-bold uppercase tracking-wider transition-all cursor-pointer ${
+                  selectedYear === year
+                    ? "liquid-glass-active-item text-text-primary"
+                    : "bg-beige/40 border border-beige text-text-secondary hover:text-text-primary"
+                }`}
               >
-                {year === 'last' ? 'Last Year' : year}
+                {year === "last" ? "Last Year" : year}
               </button>
             ))}
           </div>
@@ -230,7 +236,13 @@ const AboutSection = () => {
                 year={selectedYear}
                 colorScheme="light"
                 theme={{
-                  light: ['#edeee9', '#e3d5ca', '#d7bdb0', '#c9a999', '#b8907d'],
+                  light: [
+                    "#edeee9",
+                    "#e3d5ca",
+                    "#d7bdb0",
+                    "#c9a999",
+                    "#b8907d",
+                  ],
                 }}
               />
             </div>
