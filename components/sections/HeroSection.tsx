@@ -168,7 +168,7 @@ const HeroSection = () => {
                 <span className="h-3 w-3 rounded-full bg-rose" />
                 <span className="h-3 w-3 rounded-full bg-greige" />
               </div>
-              <span className="font-mono text-xs text-text-muted">
+              <span className="font-mono text-xs text-text-secondary">
                 mrafiqdot825.ts
               </span>
               <span className="w-12" />
