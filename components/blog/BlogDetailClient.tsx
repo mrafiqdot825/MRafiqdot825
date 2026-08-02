@@ -200,12 +200,12 @@ const BlogDetailClient = ({ slug }: BlogDetailClientProps) => {
                   className="h-44 md:h-60 w-full relative flex flex-col justify-end p-6 md:p-8"
                   style={{ background: post.coverGradient }}
                 >
-                  <div className="absolute inset-0 bg-black/15 backdrop-blur-[2px]" />
+                  <div className="absolute inset-0 bg-text-primary/15 backdrop-blur-[2px]" />
                   <div className="relative z-10">
-                    <span className="inline-block px-3 py-1 text-[10px] font-mono font-bold tracking-widest uppercase text-white bg-black/25 backdrop-blur-md rounded-md mb-3 border border-white/10">
+                    <span className="inline-block px-3 py-1 text-[10px] font-mono font-bold tracking-widest uppercase text-offwhite bg-text-primary/30 backdrop-blur-md rounded-md mb-3 border border-offwhite/10">
                       {post.category}
                     </span>
-                    <h1 className="font-heading text-2xl md:text-4xl font-extrabold text-white tracking-tight leading-tight drop-shadow-md">
+                    <h1 className="font-heading text-2xl md:text-4xl font-extrabold text-offwhite tracking-tight leading-tight drop-shadow-md">
                       {post.title}
                     </h1>
                   </div>
@@ -214,7 +214,7 @@ const BlogDetailClient = ({ slug }: BlogDetailClientProps) => {
                 <section aria-label="Article details" className="px-6 md:px-8 py-4 border-b border-border-default/40 bg-bg-surface-hover/30 flex flex-wrap items-center justify-between gap-4">
                   <div className="flex flex-wrap items-center gap-4 text-xs font-mono text-text-muted">
                     <span className="inline-flex items-center gap-1">
-                      <span className="inline-block w-4 h-4 rounded-full bg-accent-600 text-white text-[8px] font-bold text-center leading-4">
+                      <span className="inline-block w-4 h-4 rounded-full bg-accent-600 text-text-primary text-[8px] font-bold text-center leading-4">
                         {post.author.avatar}
                       </span>
                       <span>By {post.author.name}</span>
@@ -279,7 +279,7 @@ const BlogDetailClient = ({ slug }: BlogDetailClientProps) => {
 
                   {/* Quick Answer Section (AEO optimized summary for answer engines) */}
                   <section aria-label="Quick Answer Summary" className="mb-8 p-6 rounded-[20px] border border-accent-600/35 bg-accent-50/15 backdrop-blur-md relative overflow-hidden group">
-                    <div className="absolute top-0 right-0 bg-accent-600 text-white font-mono text-[8px] font-bold uppercase tracking-wider px-3 py-1 rounded-bl-lg shadow-sm">
+                    <div className="absolute top-0 right-0 bg-accent-600 text-text-primary font-mono text-[8px] font-bold uppercase tracking-wider px-3 py-1 rounded-bl-lg shadow-sm">
                       AI Insight / Quick Answer
                     </div>
                     <h2 className="font-heading text-base font-extrabold text-text-primary mb-3 flex items-center gap-2">
@@ -375,7 +375,7 @@ const BlogDetailClient = ({ slug }: BlogDetailClientProps) => {
                 )}
                 {/* Call To Action Block */}
                 {post.cta && (
-                  <section aria-label="Engagement call to action" className="px-6 md:px-8 py-8 bg-gradient-to-r from-accent-600/10 to-purple-600/10 rounded-b-[24px]">
+                  <section aria-label="Engagement call to action" className="px-6 md:px-8 py-8 bg-gradient-to-r from-accent-600/10 to-beige/25 rounded-b-[24px]">
                     <div className="max-w-2xl">
                       <h3 className="font-heading text-lg font-bold text-text-primary mb-2">
                         {post.cta.title}
@@ -385,7 +385,7 @@ const BlogDetailClient = ({ slug }: BlogDetailClientProps) => {
                       </p>
                       <a
                         href={post.cta.linkUrl}
-                        className="inline-flex items-center gap-2 px-4 py-2 rounded-[10px] bg-accent-600 text-white font-mono text-[11px] font-semibold hover:bg-accent-700 transition-all duration-300 shadow-md shadow-accent-600/20"
+                        className="inline-flex items-center gap-2 px-4 py-2 rounded-[10px] bg-accent-600 text-text-primary font-mono text-[11px] font-semibold hover:bg-accent-700 transition-all duration-300 shadow-md shadow-accent-600/20"
                       >
                         {post.cta.linkText}
                         <span className="text-[11px]">→</span>
@@ -397,7 +397,7 @@ const BlogDetailClient = ({ slug }: BlogDetailClientProps) => {
               </article>
               {/* Author Box with EEAT signals */}
               <section aria-label="Author Profile" className="p-6 md:p-8 rounded-[24px] border border-border-default bg-bg-surface shadow-sm glass-panel flex flex-col sm:flex-row gap-6 items-center sm:items-start mb-12">
-                <span className="inline-flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-accent-600 text-white font-mono text-2xl font-bold border border-accent-100 shadow-sm shadow-accent-600/10">
+                <span className="inline-flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-accent-600 text-text-primary font-mono text-2xl font-bold border border-accent-100 shadow-sm shadow-accent-600/10">
                   {post.author.avatar}
                 </span>
                 <div className="text-center sm:text-left w-full">

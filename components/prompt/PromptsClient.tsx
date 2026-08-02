@@ -32,21 +32,21 @@ const CATEGORIES: ("All" | PromptCategory)[] = [
 const getPlatformColor = (platform: string) => {
   const norm = platform.toLowerCase();
   if (norm.includes("claude")) {
-    return "bg-orange-50/70 dark:bg-orange-950/20 border-orange-200/50 dark:border-orange-900/30 text-orange-700 dark:text-orange-400";
+    return "bg-rose/18 border-rose/35 text-(--color-rose-deep)";
   }
   if (norm.includes("chatgpt")) {
-    return "bg-emerald-50/70 dark:bg-emerald-950/20 border-emerald-200/50 dark:border-emerald-900/30 text-emerald-700 dark:text-emerald-400";
+    return "bg-cream border-beige text-text-primary";
   }
   if (norm.includes("gemini")) {
-    return "bg-blue-50/70 dark:bg-blue-950/20 border-blue-200/50 dark:border-blue-900/30 text-blue-700 dark:text-blue-400";
+    return "bg-beige/50 border-beige text-text-primary";
   }
   if (norm.includes("midjourney")) {
-    return "bg-purple-50/70 dark:bg-purple-950/20 border-purple-200/50 dark:border-purple-900/30 text-purple-700 dark:text-purple-400";
+    return "bg-greige/40 border-greige text-text-secondary";
   }
   if (norm.includes("sora") || norm.includes("runway") || norm.includes("luma")) {
-    return "bg-pink-50/70 dark:bg-pink-950/20 border-pink-200/50 dark:border-pink-900/30 text-pink-700 dark:text-pink-400";
+    return "bg-beige/30 border-rose/25 text-(--color-rose-deep)";
   }
-  return "bg-neutral-50/70 dark:bg-neutral-900/40 border-neutral-200/50 dark:border-neutral-800/40 text-neutral-600 dark:text-neutral-400";
+  return "bg-cream/60 border-beige/60 text-text-secondary";
 };
 
 export default function PromptsClient() {
@@ -125,7 +125,7 @@ export default function PromptsClient() {
       <Navbar />
       <div className="fixed inset-0 pointer-events-none overflow-hidden z-0" aria-hidden="true">
         <div className="absolute top-[20%] left-[10%] w-[350px] h-[350px] rounded-full bg-accent-600/5 blur-[120px]" />
-        <div className="absolute top-[60%] right-[5%] w-[450px] h-[450px] rounded-full bg-indigo-600/5 blur-[140px]" />
+        <div className="absolute top-[60%] right-[5%] w-[450px] h-[450px] rounded-full bg-beige/15 blur-[140px]" />
       </div>
 
       <main className="page-shell min-h-screen bg-transparent text-text-primary pt-2 pb-21 px-4 md:px-8 relative z-10">
@@ -133,7 +133,7 @@ export default function PromptsClient() {
           <div className="mb-2 flex justify-center">
             <Link
               href="/"
-              className="inline-flex items-center gap-2.5 rounded-full px-4 py-2.5 text-xs font-mono font-bold tracking-wider text-text-secondary hover:text-text-primary border border-border-default hover:border-accent-600 bg-white/5 hover:bg-accent-600/10 transition-all duration-300 group shadow-sm hover:shadow-[0_0_15px_rgba(59,130,246,0.15)] cursor-pointer"
+              className="inline-flex items-center gap-2.5 rounded-full px-4 py-2.5 text-xs font-mono font-bold tracking-wider text-text-secondary hover:text-text-primary border border-border-default hover:border-accent-600 bg-cream/40 hover:bg-accent-600/10 transition-all duration-300 group shadow-sm hover:shadow-[0_0_15px_rgba(215,189,176,0.35)] cursor-pointer"
             >
               <AppleArrowLeft className="w-4 h-4 transition-transform duration-200 group-hover:-translate-x-1 text-text-secondary group-hover:text-accent-700" />
               <span>BACK TO PORTFOLIO</span>
@@ -176,7 +176,7 @@ export default function PromptsClient() {
                   key={category}
                   onClick={() => setSelectedCategory(category)}
                   className={`px-4 py-2 rounded-[14px] text-xs font-mono transition-all duration-300 cursor-pointer border ${selectedCategory === category
-                    ? "bg-accent-600 text-white shadow-lg shadow-accent-600/25 font-semibold border-accent-500"
+                    ? "bg-accent-600 text-text-primary shadow-lg shadow-accent-600/25 font-semibold border-accent-500"
                     : "bg-bg-page/30 border-border-default/80 text-text-secondary hover:bg-bg-surface-hover hover:border-border-hover hover:text-text-primary"
                     }`}
                 >
@@ -306,7 +306,7 @@ export default function PromptsClient() {
                       <span className="block font-mono text-[10px] uppercase tracking-wider text-text-muted mb-2 font-semibold">
                         Compiled Output
                       </span>
-                      <div className="glass-panel-inset rounded-2xl p-4 font-mono text-xs text-text-secondary bg-black/5 dark:bg-black/20 overflow-y-auto max-h-[160px] border border-border-default/40 relative">
+                      <div className="glass-panel-inset rounded-2xl p-4 font-mono text-xs text-text-secondary bg-text-primary/5 overflow-y-auto max-h-[160px] border border-border-default/40 relative">
                         <pre className="whitespace-pre-wrap break-all pr-4 select-all leading-relaxed font-mono">
                           {compilePrompt(prompt)}
                         </pre>
@@ -320,7 +320,7 @@ export default function PromptsClient() {
                           onClick={() => toggleTips(prompt.id)}
                           className="flex items-center gap-1.5 text-xs text-text-muted hover:text-text-primary transition-colors duration-200 cursor-pointer font-mono font-semibold"
                         >
-                          <AppleLightbulb className="w-3.5 h-3.5 text-amber-500" />
+                          <AppleLightbulb className="w-3.5 h-3.5 text-(--color-rose-deep)" />
                           <span>Pro Tips for Best Results</span>
                           {tipsExpanded ? <AppleChevronUp className="w-3.5 h-3.5" /> : <AppleChevronDown className="w-3.5 h-3.5" />}
                         </button>
@@ -342,11 +342,11 @@ export default function PromptsClient() {
                       className="w-full"
                       containerClassName="w-full"
                       style={isCopied ? {
-                        "--rg-color-1": "#064e3b",
-                        "--rg-color-2": "#059669",
-                        "--rg-color-3": "#10b981",
-                        "--rg-color-4": "#a7f3d0",
-                        "--rg-color-5": "hsl(160 80% 2.5%)"
+                        "--rg-color-1": "#8a6f62",
+                        "--rg-color-2": "#b8907d",
+                        "--rg-color-3": "#c9a999",
+                        "--rg-color-4": "#d7bdb0",
+                        "--rg-color-5": "#f5ebe1"
                       } as React.CSSProperties : undefined}
                     >
                       {isCopied ? (
@@ -376,7 +376,7 @@ export default function PromptsClient() {
             {/* Background Accent Mesh */}
             <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
               <div className="absolute -top-12 -right-12 w-[180px] h-[180px] rounded-full bg-accent-600/10 blur-[40px]" />
-              <div className="absolute -bottom-12 -left-12 w-[180px] h-[180px] rounded-full bg-indigo-600/10 blur-[40px]" />
+              <div className="absolute -bottom-12 -left-12 w-[180px] h-[180px] rounded-full bg-rose/10 blur-[40px]" />
             </div>
 
             <div className="relative z-10">

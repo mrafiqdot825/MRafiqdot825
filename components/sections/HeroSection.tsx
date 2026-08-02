@@ -50,15 +50,15 @@ const HeroSection = () => {
 
       {/* Ambient Lighting Gradients */}
       <div className="absolute inset-0 pointer-events-none z-0">
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-tr from-[#7C3AED]/20 to-[#00E5FF]/20 rounded-full blur-[140px] opacity-40" />
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-tr from-rose/25 to-beige/25 rounded-full blur-[140px] opacity-50" />
       </div>
 
       {/* Animated Availability Badge */}
       <div className="relative z-10 flex justify-center mb-8">
         <Badge>
           <span className="relative flex h-2 w-2 mr-2.5">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#00E5FF] opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-[#00E5FF]"></span>
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-rose"></span>
           </span>
           {site.availability}
         </Badge>
@@ -66,12 +66,12 @@ const HeroSection = () => {
 
       <div className="relative z-10 grid items-center gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16">
         <div className="flex flex-col items-start text-left">
-          <p className="font-mono text-[13px] font-semibold tracking-[0.25em] text-[#00E5FF] uppercase">
+          <p className="font-mono text-[13px] font-semibold tracking-[0.25em] text-(--color-rose-deep) uppercase">
             {site.greeting}
           </p>
 
-          <h1 className="mt-4 font-heading text-hero font-extrabold leading-[1.05] tracking-tight text-white">
-            MUHAMMAD <span className="bg-gradient-to-r from-[#7C3AED] via-[#8B5CF6] to-[#00E5FF] bg-clip-text text-transparent">RAFIQ</span>
+          <h1 className="mt-4 font-heading text-hero font-extrabold leading-[1.05] tracking-tight text-text-primary">
+            MUHAMMAD <span className="bg-gradient-to-r from-(--color-rose-active) via-rose to-(--color-rose-deep) bg-clip-text text-transparent">RAFIQ</span>
           </h1>
 
           <h2 className="mt-3 font-mono text-sm sm:text-base font-medium tracking-wide text-text-secondary">
@@ -87,9 +87,9 @@ const HeroSection = () => {
                 animate={{ y: 0, opacity: 1 }}
                 exit={{ y: -20, opacity: 0 }}
                 transition={{ duration: 0.4, ease: "easeOut" }}
-                className="inline-flex items-center font-mono text-sm sm:text-base font-bold text-[#00E5FF] bg-[#00E5FF]/10 border border-[#00E5FF]/30 px-3.5 py-1 rounded-lg shadow-[0_0_15px_rgba(0,229,255,0.2)]"
+                className="inline-flex items-center font-mono text-sm sm:text-base font-bold text-(--color-rose-deep) bg-rose/12 border border-rose/35 px-3.5 py-1 rounded-lg shadow-[0_0_15px_rgba(215,189,176,0.25)]"
               >
-                <span className="mr-2 h-1.5 w-1.5 rounded-full bg-[#00E5FF] animate-pulse" />
+                <span className="mr-2 h-1.5 w-1.5 rounded-full bg-rose animate-pulse" />
                 {ROTATING_TEXTS[textIndex]}
               </motion.div>
             </AnimatePresence>
@@ -107,7 +107,7 @@ const HeroSection = () => {
             {topSkills.map((skill) => (
               <span
                 key={skill}
-                className="inline-flex items-center font-mono text-[11px] bg-[#101010] text-[#00E5FF] px-2.5 py-1 rounded-[8px] border border-white/10 font-medium"
+                className="inline-flex items-center font-mono text-[11px] bg-cream text-(--color-rose-deep) px-2.5 py-1 rounded-[8px] border border-beige font-medium"
               >
                 {skill}
               </span>
@@ -115,7 +115,7 @@ const HeroSection = () => {
             {remainingCount > 0 && (
               <a
                 href="#tech-stack"
-                className="inline-flex items-center font-mono text-[11px] bg-[#7C3AED]/15 text-white hover:bg-[#7C3AED]/30 px-2.5 py-1 rounded-[8px] border border-[#7C3AED]/40 transition-colors font-medium hover:border-[#00E5FF]/50"
+                className="inline-flex items-center font-mono text-[11px] bg-rose/15 text-text-primary hover:bg-rose/30 px-2.5 py-1 rounded-[8px] border border-rose/40 transition-colors font-medium hover:border-rose/60"
               >
                 +{remainingCount} more
               </a>
@@ -126,7 +126,7 @@ const HeroSection = () => {
           <div className="mt-10 flex flex-wrap gap-4 items-center">
             <RadialGlowButton
               href="#projects"
-              className="py-3.5 px-6 rounded-[12px] font-semibold text-sm tracking-wide bg-gradient-to-r from-[#7C3AED] to-[#8B5CF6] text-white shadow-[0_0_20px_rgba(124,58,237,0.4)]"
+              className="py-3.5 px-6 rounded-xl font-semibold text-sm tracking-wide bg-gradient-to-r from-(--color-rose-active) to-(--color-rose-hover) text-offwhite shadow-[0_0_20px_rgba(215,189,176,0.4)]"
             >
               <span>View Projects</span>
               <AppleArrowRight className="h-4.5 w-4.5 ml-1.5" />
@@ -136,9 +136,9 @@ const HeroSection = () => {
               as="a"
               href="#contact"
               dark
-              className="group py-3.5 px-6 rounded-[12px] font-semibold text-sm transition-all duration-300 border border-white/10 bg-[#101010] hover:bg-[#181922] text-white hover:border-[#00E5FF]/40"
+              className="group py-3.5 px-6 rounded-xl font-semibold text-sm transition-all duration-300 border border-text-primary bg-text-primary hover:bg-[#3d322e] text-offwhite hover:border-rose/40"
             >
-              <AppleMessage className="mr-2 h-4 w-4 text-[#00E5FF]" />
+              <AppleMessage className="mr-2 h-4 w-4 text-rose" />
               <span>Book a Call</span>
             </AnimatedButton>
 
@@ -147,7 +147,7 @@ const HeroSection = () => {
               href={site.cvUrl}
               target="_blank"
               dark
-              className="group py-3.5 px-6 rounded-[12px] font-semibold text-sm transition-all duration-300 border border-white/10 bg-[#101010] hover:bg-[#181922] text-white"
+              className="group py-3.5 px-6 rounded-xl font-semibold text-sm transition-all duration-300 border border-text-primary bg-text-primary hover:bg-[#3d322e] text-offwhite"
             >
               <AppleDownload className="mr-2 h-4 w-4 transition-transform duration-200 group-hover:translate-y-0.5" />
               <span>Download Resume</span>
@@ -158,15 +158,15 @@ const HeroSection = () => {
         {/* Right Column: Particle Emergence Profile Card & Code IDE */}
         <div className="relative w-full max-w-[480px] lg:max-w-none mx-auto flex flex-col gap-6">
           {/* Subtle accent glow */}
-          <div className="absolute -inset-4 rounded-[2rem] bg-[#7C3AED]/15 blur-3xl pointer-events-none" />
+          <div className="absolute -inset-4 rounded-[2rem] bg-rose/20 blur-3xl pointer-events-none" />
 
           {/* IDE Terminal Window */}
-          <div className="relative w-full overflow-hidden rounded-[1.5rem] border border-white/10 bg-black/60 backdrop-blur-xl shadow-2xl">
-            <div className="flex items-center justify-between border-b border-white/10 bg-black/80 px-4 py-3 select-none">
+          <div className="relative w-full overflow-hidden rounded-[1.5rem] border border-beige bg-cream/80 backdrop-blur-xl shadow-2xl">
+            <div className="flex items-center justify-between border-b border-beige bg-beige/40 px-4 py-3 select-none">
               <div className="flex items-center gap-1.5">
-                <span className="h-3 w-3 rounded-full bg-[#ff5f56]" />
-                <span className="h-3 w-3 rounded-full bg-[#ffbd2e]" />
-                <span className="h-3 w-3 rounded-full bg-[#27c93f]" />
+                <span className="h-3 w-3 rounded-full bg-[#e0a89c]" />
+                <span className="h-3 w-3 rounded-full bg-rose" />
+                <span className="h-3 w-3 rounded-full bg-greige" />
               </div>
               <span className="font-mono text-xs text-text-muted">
                 mrafiqdot825.ts
@@ -177,7 +177,7 @@ const HeroSection = () => {
             <div className="p-5 font-mono text-[12px] sm:text-[13px] leading-relaxed text-text-secondary select-none overflow-x-auto no-scrollbar">
               <div>
                 <span className="code-keyword">const</span>{" "}
-                <span className="text-[#00E5FF]">engineer</span> = &#123;
+                <span className="text-(--color-rose-deep)">engineer</span> = &#123;
               </div>
               <div className="pl-4">
                 name: <span className="code-string">"{site.name}"</span>,
@@ -186,11 +186,11 @@ const HeroSection = () => {
                 role: <span className="code-string">"Full Stack Engineer | AI/ML Enthusiast"</span>,
               </div>
               <div className="pl-4">
-                passions: <span className="text-[#7C3AED]">[</span>
+                passions: <span className="text-text-primary">[</span>
                 <span className="code-string">"AI Agents"</span>,{" "}
                 <span className="code-string">"Web/Mobile"</span>,{" "}
                 <span className="code-string">"DevOps"</span>
-                <span className="text-[#7C3AED]">]</span>,
+                <span className="text-text-primary">]</span>,
               </div>
               <div className="pl-4">
                 status: <span className="code-string">"{site.availability}"</span>
@@ -203,7 +203,7 @@ const HeroSection = () => {
               <div>
                 <span className="code-keyword">if</span> (project.isAmbitious) &#123;
               </div>
-              <div className="pl-4 text-[#00E5FF]">
+              <div className="pl-4 text-(--color-rose-deep)">
                 engineer.collaborate(project);
               </div>
               <div>&#125;</div>
@@ -213,14 +213,14 @@ const HeroSection = () => {
           {/* Profile Card with Glass Emergence Effect */}
           <div
             onClick={() => setIsImageOpen(true)}
-            className="relative rounded-[1.75rem] glass-panel bg-[#101010]/80 p-5 flex items-center gap-5 cursor-pointer group border border-white/10 hover:border-[#00E5FF]/40 hover:shadow-[0_0_30px_rgba(0,229,255,0.25)] transition-all duration-500"
+            className="relative rounded-[1.75rem] glass-panel bg-cream/85 p-5 flex items-center gap-5 cursor-pointer group border border-beige hover:border-rose/50 hover:shadow-[0_0_30px_rgba(215,189,176,0.3)] transition-all duration-500"
           >
 
             <div className="flex-1">
-              <span className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-[#00E5FF]">
+              <span className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-(--color-rose-deep)">
                 mrafiqdot825
               </span>
-              <h3 className="font-heading text-xl font-bold text-white mt-0.5">
+              <h3 className="font-heading text-xl font-bold text-text-primary mt-0.5">
                 Muhammad Rafiq
               </h3>
               <p className="text-xs text-text-secondary leading-relaxed mt-1">
@@ -238,13 +238,13 @@ const HeroSection = () => {
           return (
             <div
               key={stat.label}
-              className="glass-panel rounded-[1.25rem] p-5 hover:-translate-y-1 hover:border-[#7C3AED]/50 transition-all duration-300 select-none group bg-[#101010]/80"
+              className="glass-panel rounded-[1.25rem] p-5 hover:-translate-y-1 hover:border-rose/50 transition-all duration-300 select-none group bg-cream/85"
             >
               <div className="flex items-center justify-between">
-                <span className="font-heading text-2xl sm:text-3xl font-extrabold text-[#00E5FF] group-hover:text-white transition-colors">
+                <span className="font-heading text-2xl sm:text-3xl font-extrabold text-(--color-rose-deep) group-hover:text-text-primary transition-colors">
                   {stat.value}
                 </span>
-                <Icon className="h-5 w-5 text-[#7C3AED] group-hover:scale-110 transition-transform" />
+                <Icon className="h-5 w-5 text-(--color-rose-deep) group-hover:scale-110 transition-transform" />
               </div>
               <p className="mt-2.5 text-[11px] font-mono uppercase tracking-wider text-text-secondary leading-tight">
                 {stat.label}
@@ -260,7 +260,7 @@ const HeroSection = () => {
         onClose={() => setIsImageOpen(false)}
         title="Muhammad Rafiq"
       >
-        <div className="relative overflow-hidden rounded-[16px] bg-[#050505] border border-white/10 w-full max-w-sm sm:max-w-md mx-auto shadow-2xl p-2 flex items-center justify-center">
+        <div className="relative overflow-hidden rounded-[16px] bg-cream border border-beige w-full max-w-sm sm:max-w-md mx-auto shadow-2xl p-2 flex items-center justify-center">
           <Image
             src="/profile.png"
             alt={site.name}

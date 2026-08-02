@@ -17,7 +17,7 @@ export const fullstackPosts: BlogPost[] = [
     publishedAt: "April 18, 2026",
     readTime: "7 min read",
     tags: ["Auth", "Security", "JWT", "OAuth"],
-    coverGradient: "linear-gradient(135deg, #10B981 0%, #3B82F6 100%)",
+    coverGradient: "linear-gradient(135deg, #D7BDB0 0%, #B8907D 100%)",
     author: defaultAuthor,
     content: `
       <h2>Introduction</h2>
@@ -62,7 +62,7 @@ export const fullstackPosts: BlogPost[] = [
     publishedAt: "May 03, 2026",
     readTime: "8 min read",
     tags: ["SaaS", "Architecture", "PostgreSQL", "Scaling"],
-    coverGradient: "linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%)",
+    coverGradient: "linear-gradient(135deg, #E3D5CA 0%, #C9A999 100%)",
     author: defaultAuthor,
     content: `
       <h2>Introduction</h2>
@@ -111,7 +111,7 @@ export const fullstackPosts: BlogPost[] = [
     publishedAt: "May 20, 2026",
     readTime: "6 min read",
     tags: ["Supabase", "React", "PostgreSQL", "Serverless"],
-    coverGradient: "linear-gradient(135deg, #10B981 0%, #059669 100%)",
+    coverGradient: "linear-gradient(135deg, #D6CCC2 0%, #8A6F62 100%)",
     author: defaultAuthor,
     content: `
       <h2>Introduction</h2>
@@ -150,7 +150,7 @@ export const fullstackPosts: BlogPost[] = [
     publishedAt: "June 04, 2026",
     readTime: "7 min read",
     tags: ["FastAPI", "Python", "Docker", "Async"],
-    coverGradient: "linear-gradient(135deg, #1E40AF 0%, #10B981 100%)",
+    coverGradient: "linear-gradient(135deg, #F5EBE1 0%, #D7BDB0 100%)",
     author: defaultAuthor,
     content: `
       <h2>Introduction</h2>
@@ -194,7 +194,7 @@ export const fullstackPosts: BlogPost[] = [
     publishedAt: "June 18, 2026",
     readTime: "7 min read",
     tags: ["React", "Next.js", "Performance", "RSC"],
-    coverGradient: "linear-gradient(135deg, #1F1D1A 0%, #52525B 100%)",
+    coverGradient: "linear-gradient(135deg, #C9A999 0%, #4A1B0C 100%)",
     author: defaultAuthor,
     content: `
       <h2>Introduction</h2>

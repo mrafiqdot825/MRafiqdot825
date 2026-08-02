@@ -2,6 +2,8 @@ import type { Metadata, Viewport } from "next";
 import { Playfair_Display, Inter, JetBrains_Mono } from "next/font/google";
 import Script from "next/script";
 import GlassDistortion from "@/components/GlassDistortion";
+import { ThemeProvider } from "@/components/theme/ThemeProvider";
+import ColorPickerWidget from "@/components/theme/ColorPickerWidget";
 import { site } from "@/data/site";
 import "./globals.css";
 
@@ -105,7 +107,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#FAFAF9",
+  themeColor: "#EDEEE9",
   width: "device-width",
   initialScale: 1,
 };
@@ -121,11 +123,30 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${playfairDisplay.variable} ${inter.variable} ${jetbrainsMono.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
-      <body className="min-h-full bg-bg-page text-text-primary selection:bg-accent-600/30 selection:text-white">
+      <head>
+        {/* Prevent flash of default accent color for returning visitors */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  var saved = localStorage.getItem('accentColor');
+                  if (saved) {
+                    var root = document.documentElement;
+                    root.style.setProperty('--color-rose', saved);
+                  }
+                } catch (e) {}
+              })();
+            `,
+          }}
+        />
+      </head>
+      <body className="min-h-full bg-bg-page text-text-primary selection:bg-accent-600/40 selection:text-text-primary">
         <a
           href="#main-content"
-          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-accent-600 focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-white"
+          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-accent-600 focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-text-primary"
         >
           Skip to content
         </a>
@@ -142,8 +163,11 @@ export default function RootLayout({
             gtag('config', '${gaId}');
           `}
         </Script>
-        <GlassDistortion />
-        <div id="main-content">{children}</div>
+        <ThemeProvider>
+          <GlassDistortion />
+          <div id="main-content">{children}</div>
+          <ColorPickerWidget />
+        </ThemeProvider>
       </body>
     </html>
   );

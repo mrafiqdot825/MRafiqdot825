@@ -17,7 +17,7 @@ export const systemDesignPosts: BlogPost[] = [
     publishedAt: "May 10, 2026",
     readTime: "9 min read",
     tags: ["SystemDesign", "Scale", "AI-Workflows", "Architecture"],
-    coverGradient: "linear-gradient(135deg, #1E40AF 0%, #10B981 100%)",
+    coverGradient: "linear-gradient(135deg, #D7BDB0 0%, #B8907D 100%)",
     author: defaultAuthor,
     content: `
       <h2>Introduction</h2>
@@ -60,7 +60,7 @@ export const systemDesignPosts: BlogPost[] = [
     publishedAt: "May 18, 2026",
     readTime: "7 min read",
     tags: ["Architecture", "SystemDesign", "Microservices", "Monolith"],
-    coverGradient: "linear-gradient(135deg, #10B981 0%, #3B82F6 100%)",
+    coverGradient: "linear-gradient(135deg, #E3D5CA 0%, #C9A999 100%)",
     author: defaultAuthor,
     content: `
       <h2>Introduction</h2>
@@ -131,7 +131,7 @@ export const systemDesignPosts: BlogPost[] = [
     publishedAt: "May 28, 2026",
     readTime: "8 min read",
     tags: ["EDA", "Kafka", "RabbitMQ", "SystemDesign"],
-    coverGradient: "linear-gradient(135deg, #7C3AED 0%, #2563EB 100%)",
+    coverGradient: "linear-gradient(135deg, #D6CCC2 0%, #8A6F62 100%)",
     author: defaultAuthor,
     content: `
       <h2>Introduction</h2>
@@ -174,7 +174,7 @@ export const systemDesignPosts: BlogPost[] = [
     publishedAt: "June 08, 2026",
     readTime: "7 min read",
     tags: ["Databases", "SQL", "SaaS", "PostgreSQL"],
-    coverGradient: "linear-gradient(135deg, #10B981 0%, #1E40AF 100%)",
+    coverGradient: "linear-gradient(135deg, #F5EBE1 0%, #D7BDB0 100%)",
     author: defaultAuthor,
     content: `
       <h2>Introduction</h2>
@@ -217,7 +217,7 @@ export const systemDesignPosts: BlogPost[] = [
     publishedAt: "June 12, 2026",
     readTime: "7 min read",
     tags: ["Caching", "Redis", "CDN", "Performance"],
-    coverGradient: "linear-gradient(135deg, #EF4444 0%, #F59E0B 100%)",
+    coverGradient: "linear-gradient(135deg, #C9A999 0%, #4A1B0C 100%)",
     author: defaultAuthor,
     content: `
       <h2>Introduction</h2>

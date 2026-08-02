@@ -19,7 +19,7 @@ export const aiMlPosts: BlogPost[] = [
     publishedAt: "May 12, 2026",
     readTime: "8 min read",
     tags: ["AI", "RAG", "Embeddings", "LLMs"],
-    coverGradient: "linear-gradient(135deg, #1E40AF 0%, #3B82F6 100%)",
+    coverGradient: "linear-gradient(135deg, #D7BDB0 0%, #B8907D 100%)",
     author: defaultAuthor,
     content: `
       <h2>Introduction</h2>
@@ -68,7 +68,7 @@ export const aiMlPosts: BlogPost[] = [
     publishedAt: "May 25, 2026",
     readTime: "7 min read",
     tags: ["VectorDB", "Embeddings", "Pinecone", "Weaviate"],
-    coverGradient: "linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%)",
+    coverGradient: "linear-gradient(135deg, #E3D5CA 0%, #C9A999 100%)",
     author: defaultAuthor,
     content: `
       <h2>Introduction</h2>
@@ -144,7 +144,7 @@ export const aiMlPosts: BlogPost[] = [
     publishedAt: "June 02, 2026",
     readTime: "7 min read",
     tags: ["LLMs", "OpenAI", "Claude", "Gemini"],
-    coverGradient: "linear-gradient(135deg, #10B981 0%, #059669 100%)",
+    coverGradient: "linear-gradient(135deg, #D6CCC2 0%, #8A6F62 100%)",
     author: defaultAuthor,
     content: `
       <h2>Introduction</h2>
@@ -217,7 +217,7 @@ export const aiMlPosts: BlogPost[] = [
     publishedAt: "June 10, 2026",
     readTime: "9 min read",
     tags: ["Agents", "AI", "ToolCalling", "LangChain"],
-    coverGradient: "linear-gradient(135deg, #7C3AED 0%, #9333EA 100%)",
+    coverGradient: "linear-gradient(135deg, #F5EBE1 0%, #D7BDB0 100%)",
     author: defaultAuthor,
     content: `
       <h2>Introduction</h2>
@@ -264,7 +264,7 @@ export const aiMlPosts: BlogPost[] = [
     publishedAt: "June 14, 2026",
     readTime: "6 min read",
     tags: ["LLMs", "FineTuning", "PromptEngineering", "AI-Strategy"],
-    coverGradient: "linear-gradient(135deg, #EF4444 0%, #B91C1C 100%)",
+    coverGradient: "linear-gradient(135deg, #C9A999 0%, #4A1B0C 100%)",
     author: defaultAuthor,
     content: `
       <h2>Introduction</h2>
@@ -338,7 +338,7 @@ export const aiMlPosts: BlogPost[] = [
     publishedAt: "July 13, 2026",
     readTime: "8 min read",
     tags: ["AI Agents", "LLMs", "Automation", "Architecture"],
-    coverGradient: "linear-gradient(135deg, #3B82F6 0%, #7C3AED 100%)",
+    coverGradient: "linear-gradient(135deg, #E3D5CA 0%, #8A6F62 100%)",
     author: defaultAuthor,
     content: `
       <h2>Introduction</h2>
@@ -445,7 +445,7 @@ export const aiMlPosts: BlogPost[] = [
     publishedAt: "July 18, 2026",
     readTime: "6 min read",
     tags: ["Prompt Engineering", "AI", "LLMs", "Best Practices"],
-    coverGradient: "linear-gradient(135deg, #1E3A8A 0%, #3B82F6 100%)",
+    coverGradient: "linear-gradient(135deg, #D7BDB0 0%, #B8907D 100%)",
     author: defaultAuthor,
     content: `
       <h2>Introduction</h2>
@@ -520,8 +520,8 @@ export const aiMlPosts: BlogPost[] = [
       
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
         <div class="bg-bg-surface border border-border-default/50 rounded-xl p-5">
-          <h4 class="text-lg font-semibold mb-2 text-red-500">Weak Prompt</h4>
-          <blockquote class="border-l-4 border-red-500/50 pl-4 italic mb-4 text-text-secondary">
+          <h4 class="text-lg font-semibold mb-2 text-text-secondary">Weak Prompt</h4>
+          <blockquote class="border-l-4 border-text-secondary/50 pl-4 italic mb-4 text-text-secondary">
             "Create a login page."
           </blockquote>
           <p class="text-sm text-text-muted"><strong>Result:</strong> A basic HTML/CSS form with no state validation, accessibility layers, or responsive safety guidelines.</p>

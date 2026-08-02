@@ -102,29 +102,29 @@ export default function CustomCursor() {
           height: hoverState === "interactive" ? 56 : hoverState === "text" ? 24 : 32,
           backgroundColor:
             hoverState === "interactive"
-              ? "rgba(0, 225, 255, 0.15)"
+              ? "rgba(215, 189, 176, 0.22)"
               : hoverState === "text"
-              ? "rgba(124, 58, 237, 0.2)"
-              : "rgba(124, 58, 237, 0.12)",
+              ? "rgba(227, 213, 202, 0.28)"
+              : "rgba(215, 189, 176, 0.15)",
           borderColor:
             hoverState === "interactive"
-              ? "rgba(0, 225, 255, 0.8)"
+              ? "rgba(138, 111, 98, 0.85)"
               : hoverState === "text"
-              ? "rgba(139, 92, 246, 0.6)"
-              : "rgba(124, 58, 237, 0.5)",
+              ? "rgba(201, 169, 153, 0.7)"
+              : "rgba(215, 189, 176, 0.6)",
           borderWidth: hoverState === "interactive" ? "2px" : "1.5px",
           opacity: isVisible ? 1 : 0,
           boxShadow:
             hoverState === "interactive"
-              ? "0 0 25px rgba(0, 229, 255, 0.5), inset 0 0 12px rgba(0, 229, 255, 0.3)"
-              : "0 0 15px rgba(124, 58, 237, 0.4)",
+              ? "0 0 25px rgba(215, 189, 176, 0.45), inset 0 0 12px rgba(215, 189, 176, 0.25)"
+              : "0 0 15px rgba(215, 189, 176, 0.3)",
         }}
         transition={{ duration: 0.18, ease: "easeOut" }}
       >
         {/* Center Glowing Dot */}
         <div
           className={`absolute top-1/2 left-1/2 h-1.5 w-1.5 -translate-x-1/2 -translate-y-1/2 rounded-full transition-all duration-200 ${
-            hoverState === "interactive" ? "bg-[#00E5FF] scale-150 shadow-[0_0_8px_#00E5FF]" : "bg-[#7C3AED]"
+            hoverState === "interactive" ? "bg-(--color-rose-deep) scale-150 shadow-[0_0_8px_#8A6F62]" : "bg-rose"
           }`}
         />
       </motion.div>

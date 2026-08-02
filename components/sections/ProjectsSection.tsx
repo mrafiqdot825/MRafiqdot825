@@ -22,11 +22,11 @@ import type { Project } from "@/types/project";
 import { motion } from "framer-motion";
 
 const STATUS_CONFIG: Record<string, { color: string; bg: string; border: string }> = {
-  Live: { color: "text-[#00E5FF]", bg: "bg-[#00E5FF]/10", border: "border-[#00E5FF]/30" },
-  "In Progress": { color: "text-amber-400", bg: "bg-amber-950/30", border: "border-amber-800/40" },
-  Archived: { color: "text-neutral-400", bg: "bg-neutral-900/30", border: "border-neutral-800/40" },
-  "APK Available": { color: "text-blue-400", bg: "bg-blue-950/30", border: "border-blue-800/40" },
-  "Open Source": { color: "text-[#7C3AED]", bg: "bg-[#7C3AED]/10", border: "border-[#7C3AED]/30" },
+  Live: { color: "text-(--color-rose-deep)", bg: "bg-rose/10", border: "border-rose/30" },
+  "In Progress": { color: "text-(--color-rose-active)", bg: "bg-rose/15", border: "border-rose/35" },
+  Archived: { color: "text-text-secondary", bg: "bg-beige/40", border: "border-greige" },
+  "APK Available": { color: "text-(--color-rose-hover)", bg: "bg-rose/12", border: "border-rose/30" },
+  "Open Source": { color: "text-(--color-rose-active)", bg: "bg-rose/10", border: "border-rose/30" },
 };
 
 const getStatusConfig = (status: string) => STATUS_CONFIG[status] || STATUS_CONFIG["Live"];
@@ -70,14 +70,14 @@ const ProjectsSection = () => {
   };
 
   return (
-    <Section id="projects" className="border-t border-white/10 bg-transparent pt-12">
+    <Section id="projects" className="border-t border-beige bg-transparent pt-12">
       {/* Section Header */}
       <div className="mb-10 max-w-3xl">
-        <span className="font-mono text-xs font-bold uppercase tracking-[0.25em] text-[#00E5FF]">
+        <span className="font-mono text-xs font-bold uppercase tracking-[0.25em] text-(--color-rose-deep)">
           SHOWCASES
         </span>
-        <h2 className="flex items-center gap-3 font-heading text-3xl sm:text-5xl font-extrabold tracking-tight text-white mt-2">
-          Project <span className="bg-gradient-to-r from-[#7C3AED] via-[#8B5CF6] to-[#00E5FF] bg-clip-text text-transparent">Worlds</span>
+        <h2 className="flex items-center gap-3 font-heading text-3xl sm:text-5xl font-extrabold tracking-tight text-text-primary mt-2">
+          Project <span className="bg-gradient-to-r from-(--color-rose-active) via-rose to-(--color-rose-deep) bg-clip-text text-transparent">Worlds</span>
         </h2>
         <p className="mt-3 max-w-2xl font-body text-sm sm:text-base text-text-secondary leading-relaxed">
           Every project is an immersive digital world with device mockups (Laptop, Phone, Tablet), animated screenshots, and tilt interactions.
@@ -108,11 +108,11 @@ const ProjectsSection = () => {
               viewport={{ once: true }}
               className="snap-start shrink-0 w-[88vw] sm:w-[400px] md:w-[440px] flex flex-col"
             >
-              <article className="glass-panel glass-panel-hover flex-1 flex flex-col justify-between rounded-2xl overflow-hidden group border border-white/10 bg-[#101010]/90">
+              <article className="glass-panel glass-panel-hover flex-1 flex flex-col justify-between rounded-2xl overflow-hidden group border border-beige bg-cream/85">
                 <div className="flex flex-col flex-1">
                   {/* 3D Device Frame Preview */}
                   {project.thumbnail && (
-                    <div className="overflow-hidden border-b border-white/10 aspect-video relative bg-black/80 shrink-0 group-hover:shadow-[0_0_30px_rgba(124,58,237,0.3)] transition-all duration-500">
+                    <div className="overflow-hidden border-b border-beige aspect-video relative bg-cream/80 shrink-0 group-hover:shadow-[0_0_30px_rgba(184,144,125,0.3)] transition-all duration-500">
 
                       <Image
                         src={project.thumbnail}
@@ -122,7 +122,7 @@ const ProjectsSection = () => {
                         className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
                         loading="lazy"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#101010] via-transparent to-transparent pointer-events-none" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-cream via-transparent to-transparent pointer-events-none" />
                     </div>
                   )}
 
@@ -130,7 +130,7 @@ const ProjectsSection = () => {
                   <div className="p-6 flex-1 flex flex-col justify-between">
                     <div>
                       <div className="flex items-start justify-between gap-3 mb-3">
-                        <h3 className="font-heading text-xl font-bold text-white group-hover:text-[#00E5FF] transition-colors">
+                        <h3 className="font-heading text-xl font-bold text-text-primary group-hover:text-(--color-rose-deep) transition-colors">
                           {project.title}
                         </h3>
                         <div
@@ -150,13 +150,13 @@ const ProjectsSection = () => {
                         {visibleTech.map((item) => (
                           <span
                             key={item}
-                            className="font-mono text-[10px] bg-[#7C3AED]/15 text-[#00E5FF] px-2.5 py-1 rounded-md border border-[#7C3AED]/30"
+                            className="font-mono text-[10px] bg-rose/15 text-(--color-rose-deep) px-2.5 py-1 rounded-md border border-rose/30"
                           >
                             {item}
                           </span>
                         ))}
                         {remainingTagsCount > 0 && (
-                          <span className="font-mono text-[10px] bg-white/5 text-text-muted px-2 py-1 rounded-md border border-white/10">
+                          <span className="font-mono text-[10px] bg-beige/40 text-text-muted px-2 py-1 rounded-md border border-beige">
                             +{remainingTagsCount} more
                           </span>
                         )}
@@ -166,7 +166,7 @@ const ProjectsSection = () => {
                 </div>
 
                 {/* Magnetic Action Buttons */}
-                <div className="px-6 pb-6 flex gap-2 pt-4 border-t border-white/10 bg-black/40">
+                <div className="px-6 pb-6 flex gap-2 pt-4 border-t border-beige bg-cream/60">
                   {project.status === "APK Available" ? (
                     <RadialGlowButton
                       onClick={() => setSelectedProjectForApk(project)}
@@ -201,7 +201,7 @@ const ProjectsSection = () => {
                       href={project.detailsUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center justify-center gap-1.5 font-body text-xs font-medium bg-white/5 border border-white/10 text-white rounded-xl px-3.5 py-2 hover:bg-white/10 transition-colors"
+                      className="inline-flex items-center justify-center gap-1.5 font-body text-xs font-medium bg-beige/40 border border-beige text-text-primary rounded-xl px-3.5 py-2 hover:bg-beige/70 transition-colors"
                     >
                       <AppleGithub className="w-4 h-4 text-text-secondary" />
                       <span>Code</span>
@@ -219,15 +219,15 @@ const ProjectsSection = () => {
         <button
           onClick={() => handleScroll("left")}
           disabled={isAtStart}
-          className="inline-flex items-center justify-center w-10 h-10 rounded-full border border-white/10 bg-[#101010] text-white transition-all disabled:opacity-30 hover:border-[#00E5FF] cursor-pointer"
+          className="inline-flex items-center justify-center w-10 h-10 rounded-full border border-beige bg-cream text-text-primary transition-all disabled:opacity-30 hover:border-rose cursor-pointer"
           aria-label="Previous"
         >
           <AppleArrowLeft className="w-5 h-5" />
         </button>
 
-        <div className="h-1.5 w-36 rounded-full bg-white/10 overflow-hidden relative">
+        <div className="h-1.5 w-36 rounded-full bg-beige/60 overflow-hidden relative">
           <div
-            className="absolute top-0 bottom-0 left-0 bg-gradient-to-r from-[#7C3AED] to-[#00E5FF] rounded-full transition-all duration-150"
+            className="absolute top-0 bottom-0 left-0 bg-gradient-to-r from-(--color-rose-active) to-(--color-rose-deep) rounded-full transition-all duration-150"
             style={{ width: `${scrollProgress}%` }}
           />
         </div>
@@ -235,7 +235,7 @@ const ProjectsSection = () => {
         <button
           onClick={() => handleScroll("right")}
           disabled={isAtEnd}
-          className="inline-flex items-center justify-center w-10 h-10 rounded-full border border-white/10 bg-[#101010] text-white transition-all disabled:opacity-30 hover:border-[#00E5FF] cursor-pointer"
+          className="inline-flex items-center justify-center w-10 h-10 rounded-full border border-beige bg-cream text-text-primary transition-all disabled:opacity-30 hover:border-rose cursor-pointer"
           aria-label="Next"
         >
           <AppleArrowRight className="w-5 h-5" />
@@ -243,10 +243,10 @@ const ProjectsSection = () => {
       </div>
 
       {/* GitHub Callout */}
-      <div className="mt-12 rounded-2xl glass-panel p-6 text-center border border-white/10 bg-[#101010]/80">
+      <div className="mt-12 rounded-2xl glass-panel p-6 text-center border border-beige bg-cream/75">
         <div className="flex flex-col items-center justify-center gap-4">
           <div className="flex items-center gap-2">
-            <AppleTrendingUp className="w-5 h-5 text-[#00E5FF]" />
+            <AppleTrendingUp className="w-5 h-5 text-(--color-rose-deep)" />
             <p className="text-sm font-medium text-text-secondary">
               Continuously building open source software and AI agent frameworks on GitHub.
             </p>
@@ -271,10 +271,10 @@ const ProjectsSection = () => {
       >
         {selectedProjectForApk && (
           <div className="space-y-5">
-            <div className="flex items-center gap-4 p-4 rounded-xl bg-[#7C3AED]/20 border border-[#7C3AED]/40">
-              <AppleDevice className="w-8 h-8 text-[#00E5FF]" />
+            <div className="flex items-center gap-4 p-4 rounded-xl bg-rose/20 border border-rose/40">
+              <AppleDevice className="w-8 h-8 text-(--color-rose-deep)" />
               <div>
-                <h4 className="font-heading font-bold text-white text-base">
+                <h4 className="font-heading font-bold text-text-primary text-base">
                   {selectedProjectForApk.title}
                 </h4>
                 <span className="font-mono text-[10px] text-text-muted uppercase">

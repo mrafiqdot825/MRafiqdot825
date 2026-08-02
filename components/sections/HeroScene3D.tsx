@@ -14,7 +14,7 @@ export default function HeroScene3D() {
 
     // 1. Scene, Camera, Renderer Setup
     const scene = new THREE.Scene();
-    scene.fog = new THREE.FogExp2(0x050505, 0.035);
+    scene.fog = new THREE.FogExp2(0xf5ebe1, 0.035);
 
     const camera = new THREE.PerspectiveCamera(
       60,
@@ -30,14 +30,14 @@ export default function HeroScene3D() {
     container.appendChild(renderer.domElement);
 
     // 2. Lighting Setup
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+    const ambientLight = new THREE.AmbientLight(0xfdf9f6, 0.7);
     scene.add(ambientLight);
 
-    const pointLightPurple = new THREE.PointLight(0x7c3aed, 4, 30);
+    const pointLightPurple = new THREE.PointLight(0xd7bdb0, 4, 30);
     pointLightPurple.position.set(5, 5, 5);
     scene.add(pointLightPurple);
 
-    const pointLightCyan = new THREE.PointLight(0x00e5ff, 4, 30);
+    const pointLightCyan = new THREE.PointLight(0xb8907d, 4, 30);
     pointLightCyan.position.set(-5, -5, 5);
     scene.add(pointLightCyan);
 
@@ -49,7 +49,7 @@ export default function HeroScene3D() {
       roughness: 0.1,
       transmission: 0.9,
       thickness: 1.2,
-      color: 0xffffff,
+      color: 0xf5ebe1,
       ior: 1.5,
       clearcoat: 1.0,
       clearcoatRoughness: 0.1,
@@ -75,9 +75,9 @@ export default function HeroScene3D() {
     // 4. Digital Core Planet
     const coreGeo = new THREE.IcosahedronGeometry(2.5, 2);
     const coreMat = new THREE.MeshStandardMaterial({
-      color: 0x7c3aed,
+      color: 0xd7bdb0,
       wireframe: true,
-      emissive: 0x8b5cf6,
+      emissive: 0xc9a999,
       emissiveIntensity: 0.4,
     });
     const coreMesh = new THREE.Mesh(coreGeo, coreMat);
@@ -86,7 +86,7 @@ export default function HeroScene3D() {
     // Inner Glowing Core
     const innerGeo = new THREE.SphereGeometry(1.5, 32, 32);
     const innerMat = new THREE.MeshBasicMaterial({
-      color: 0x00e5ff,
+      color: 0xb8907d,
       wireframe: true,
     });
     const innerMesh = new THREE.Mesh(innerGeo, innerMat);
@@ -109,7 +109,7 @@ export default function HeroScene3D() {
     );
 
     const particleMat = new THREE.PointsMaterial({
-      color: 0x00e5ff,
+      color: 0xd7bdb0,
       size: 0.08,
       transparent: true,
       opacity: 0.7,

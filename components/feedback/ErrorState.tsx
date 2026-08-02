@@ -14,7 +14,7 @@ const ErrorState = ({
   return (
     <main className="page-shell flex min-h-screen items-center justify-center bg-bg-page px-6">
       <section className="w-full max-w-xl rounded-[16px] border border-border-default bg-bg-surface p-6 shadow-sm">
-        <p className="font-mono text-xs font-semibold uppercase tracking-[0.2em] text-rose-700">
+        <p className="font-mono text-xs font-semibold uppercase tracking-[0.2em] text-(--color-rose-deep)">
           Error
         </p>
         <h1 className="mt-2 font-heading text-2xl font-bold text-text-primary">{title}</h1>
@@ -25,7 +25,7 @@ const ErrorState = ({
         <div className="mt-6 flex flex-wrap gap-3">
           <Link
             href="/"
-            className="inline-flex items-center justify-center font-body text-sm font-medium transition-all duration-200 ease-out bg-accent-600 text-white rounded-[12px] px-6 py-3 hover:bg-accent-700 active:bg-accent-800"
+            className="inline-flex items-center justify-center font-body text-sm font-medium transition-all duration-200 ease-out bg-accent-600 text-text-primary rounded-[12px] px-6 py-3 hover:bg-accent-700 active:bg-accent-800"
           >
             Back to Home
           </Link>
@@ -39,7 +39,7 @@ const ErrorState = ({
         </div>
 
         {stack && (
-          <pre className="mt-5 overflow-x-auto rounded-[12px] border border-border-default bg-bg-surface-hover p-3 font-mono text-xs text-rose-800">
+          <pre className="mt-5 overflow-x-auto rounded-[12px] border border-border-default bg-bg-surface-hover p-3 font-mono text-xs text-text-secondary">
             <code>{stack}</code>
           </pre>
         )}

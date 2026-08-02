@@ -61,7 +61,7 @@ export default function LoadingScreen({
         vx: (Math.random() - 0.5) * 2,
         vy: (Math.random() - 0.5) * 2,
         size: Math.random() * 2.5 + 1.5,
-        color: Math.random() > 0.5 ? "#00E5FF" : "#7C3AED",
+        color: Math.random() > 0.5 ? "#D7BDB0" : "#8A6F62",
         alpha: Math.random() * 0.7 + 0.3,
       };
     });
@@ -96,13 +96,13 @@ export default function LoadingScreen({
   }, []);
 
   return (
-    <main className="fixed inset-0 z-50 flex min-h-screen flex-col items-center justify-center bg-[#050505] overflow-hidden">
+    <main className="fixed inset-0 z-50 flex min-h-screen flex-col items-center justify-center bg-offwhite overflow-hidden">
       {/* Particle Canvas Background */}
       <canvas ref={canvasRef} className="absolute inset-0 pointer-events-none" />
 
       <div className="relative z-10 flex flex-col items-center text-center px-6 max-w-md">
         {/* Glowing Logo Icon */}
-        <div className="relative flex h-24 w-24 items-center justify-center rounded-full border border-[#7C3AED]/40 bg-black/60 shadow-[0_0_35px_rgba(124,58,237,0.4)] backdrop-blur-md overflow-hidden mb-6">
+        <div className="relative flex h-24 w-24 items-center justify-center rounded-full border border-rose/40 bg-cream/80 shadow-[0_0_35px_rgba(215,189,176,0.4)] backdrop-blur-md overflow-hidden mb-6">
           <Image
             src="/logo.png"
             alt="Muhammad Rafiq logo"
@@ -113,24 +113,24 @@ export default function LoadingScreen({
         </div>
 
         {/* Title & Brand */}
-        <h1 className="font-heading text-4xl font-extrabold tracking-tight text-white sm:text-5xl">
+        <h1 className="font-heading text-4xl font-extrabold tracking-tight text-text-primary sm:text-5xl">
           {title}
         </h1>
 
-        <p className="mt-3 font-mono text-xs font-semibold uppercase tracking-[0.25em] text-[#00E5FF]">
+        <p className="mt-3 font-mono text-xs font-semibold uppercase tracking-[0.25em] text-(--color-rose-deep)">
           {subtitle}
         </p>
 
         {/* Progress Bar Container */}
         <div className="mt-8 w-full max-w-xs">
-          <div className="h-1.5 w-full overflow-hidden rounded-full bg-[#101010] border border-white/10 p-0.5">
+          <div className="h-1.5 w-full overflow-hidden rounded-full bg-beige border border-beige p-0.5">
             <div
-              className="h-full rounded-full bg-gradient-to-r from-[#7C3AED] via-[#8B5CF6] to-[#00E5FF] transition-all duration-150 ease-out shadow-[0_0_12px_#00E5FF]"
+              className="h-full rounded-full bg-gradient-to-r from-(--color-rose-active) via-rose to-(--color-rose-hover) transition-all duration-150 ease-out shadow-[0_0_12px_rgba(215,189,176,0.6)]"
               style={{ width: `${progress}%` }}
             />
           </div>
           <div className="mt-3 flex items-center justify-between text-[11px] font-mono font-semibold text-text-muted">
-            <span className="uppercase tracking-widest text-[#00E5FF]">INITIALIZING EXPERIENCE</span>
+            <span className="uppercase tracking-widest text-(--color-rose-deep)">INITIALIZING EXPERIENCE</span>
             <span>{progress}%</span>
           </div>
         </div>

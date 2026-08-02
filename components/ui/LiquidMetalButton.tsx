@@ -28,8 +28,8 @@ export interface LiquidMetalProps {
 }
 
 export const LiquidMetal = memo(function LiquidMetal({
-  colorBack = "#888888",
-  colorTint = "#ffffff",
+  colorBack = "#b3a89e",
+  colorTint = "#f5ebe1",
   speed = 0.4,
   repetition = 4,
   distortion = 0.15,
@@ -136,13 +136,13 @@ export const LiquidMetalButton = forwardRef<
 
     const content = (
       <div
-        className="relative rounded-full overflow-hidden shadow-[0_20px_50px_-12px_rgba(0,0,0,0.25)]"
+        className="relative rounded-full overflow-hidden shadow-[0_20px_50px_-12px_rgba(44,44,42,0.18)]"
         style={{ padding: borderWidth }}
       >
         {/* Liquid Metal Border Layer */}
         <LiquidMetal
-          colorBack={metalConfig?.colorBack ?? "#888888"}
-          colorTint={metalConfig?.colorTint ?? "#ffffff"}
+          colorBack={metalConfig?.colorBack ?? "#b3a89e"}
+          colorTint={metalConfig?.colorTint ?? "#f5ebe1"}
           speed={metalConfig?.speed ?? 0.4}
           repetition={metalConfig?.repetition ?? 4}
           distortion={metalConfig?.distortion ?? 0.15}
@@ -155,27 +155,27 @@ export const LiquidMetalButton = forwardRef<
           className={cn(
             "relative z-10 rounded-full flex items-center justify-center transition-colors duration-200",
             dark
-              ? "bg-black group-hover:bg-neutral-900"
-              : "bg-white dark:bg-black group-hover:bg-neutral-50 dark:group-hover:bg-neutral-900",
+              ? "bg-text-primary group-hover:bg-[#3d322e]"
+              : "bg-cream group-hover:bg-beige",
             sizeStyles[size]
           )}
         >
           {icon && (
             <div
               className={cn(
-                "rounded-full flex items-center justify-center flex-shrink-0 shadow-[inset_0_2px_4px_rgba(0,0,0,0.06)]",
+                "rounded-full flex items-center justify-center flex-shrink-0 shadow-[inset_0_2px_4px_rgba(44,44,42,0.1)]",
                 dark
-                  ? "bg-neutral-800"
-                  : "bg-neutral-100 dark:bg-neutral-800",
+                  ? "bg-[#3d322e]"
+                  : "bg-beige",
                 iconSizes[size]
               )}
             >
-              <span className={dark ? "text-neutral-300" : "text-neutral-700 dark:text-neutral-300"}>
+              <span className={dark ? "text-beige" : "text-text-secondary"}>
                 {icon}
               </span>
             </div>
           )}
-          <span className={cn("font-medium tracking-tight", dark ? "text-white" : "text-neutral-900 dark:text-white")}>
+          <span className={cn("font-medium tracking-tight", dark ? "text-offwhite" : "text-text-primary")}>
             {children}
           </span>
         </div>

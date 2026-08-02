@@ -27,7 +27,7 @@ const legacyPosts: BlogPost[] = [
     publishedAt: "June 18, 2026",
     readTime: "6 min read",
     tags: ["Node.js", "Docker", "Architecture", "DevOps"],
-    coverGradient: "linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%)",
+    coverGradient: "linear-gradient(135deg, #D7BDB0 0%, #B8907D 100%)",
     author: defaultAuthor,
     content: `
       <h2>Introduction</h2>
@@ -107,7 +107,7 @@ process.on('SIGTERM', () => {
     publishedAt: "June 15, 2026",
     readTime: "5 min read",
     tags: ["React", "AI", "Gemini", "TypeScript"],
-    coverGradient: "linear-gradient(135deg, #1E40AF 0%, #1D4ED8 100%)",
+    coverGradient: "linear-gradient(135deg, #E3D5CA 0%, #C9A999 100%)",
     author: defaultAuthor,
     content: `
       <h2>Introduction</h2>
@@ -183,7 +183,7 @@ const handleQuery = async (prompt: string) => {
     publishedAt: "June 10, 2026",
     readTime: "7 min read",
     tags: ["SDET", "Testing", "Playwright", "CI/CD"],
-    coverGradient: "linear-gradient(135deg, #10B981 0%, #059669 100%)",
+    coverGradient: "linear-gradient(135deg, #D6CCC2 0%, #8A6F62 100%)",
     author: defaultAuthor,
     content: `
       <h2>Introduction</h2>

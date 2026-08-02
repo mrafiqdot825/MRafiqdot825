@@ -71,7 +71,7 @@ const BlogListClient = () => {
       {/* Dynamic ambient lights in the background for a modern glow effect */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden z-0" aria-hidden="true">
         <div className="absolute top-[20%] left-[10%] w-[350px] h-[350px] rounded-full bg-accent-600/5 blur-[120px]" />
-        <div className="absolute top-[60%] right-[5%] w-[450px] h-[450px] rounded-full bg-purple-600/5 blur-[140px]" />
+        <div className="absolute top-[60%] right-[5%] w-[450px] h-[450px] rounded-full bg-beige/15 blur-[140px]" />
       </div>
 
       <main className="page-shell min-h-screen bg-transparent text-text-primary pt-2 pb-21 px-4 md:px-8 relative z-10">
@@ -80,7 +80,7 @@ const BlogListClient = () => {
           <div className="mb-2 flex justify-center">
             <Link
               href="/"
-              className="inline-flex items-center gap-2.5 rounded-full px-4 py-2.5 text-xs font-mono font-bold tracking-wider text-text-secondary hover:text-text-primary border border-border-default hover:border-accent-600 bg-white/5 hover:bg-accent-600/10 transition-all duration-300 group shadow-sm hover:shadow-[0_0_15px_rgba(59,130,246,0.15)] cursor-pointer"
+              className="inline-flex items-center gap-2.5 rounded-full px-4 py-2.5 text-xs font-mono font-bold tracking-wider text-text-secondary hover:text-text-primary border border-border-default hover:border-accent-600 bg-cream/40 hover:bg-accent-600/10 transition-all duration-300 group shadow-sm hover:shadow-[0_0_15px_rgba(215,189,176,0.25)] cursor-pointer"
             >
               <AppleArrowLeft className="w-4 h-4 transition-transform duration-200 group-hover:-translate-x-1 text-text-secondary group-hover:text-accent-700" />
               <span>BACK TO PORTFOLIO</span>
@@ -92,7 +92,7 @@ const BlogListClient = () => {
             <span className="font-mono text-xs font-semibold uppercase tracking-[0.24em] text-accent-700 bg-accent-50/70 border border-accent-100/50 px-3.5 py-1.5 rounded-full backdrop-blur-md">
               Engineering Logs
             </span>
-            <h1 className="mt-5 font-heading text-4xl font-extrabold tracking-tight sm:text-6xl text-text-primary bg-gradient-to-r from-white via-white to-text-secondary bg-clip-text text-transparent">
+            <h1 className="mt-5 font-heading text-4xl font-extrabold tracking-tight sm:text-6xl bg-gradient-to-r from-text-primary via-text-primary to-text-secondary bg-clip-text text-transparent">
               The Developer Log
             </h1>
             <p className="mt-4 max-w-2xl font-body text-base md:text-lg text-text-secondary leading-relaxed">
@@ -126,7 +126,7 @@ const BlogListClient = () => {
                   key={category}
                   onClick={() => setSelectedCategory(category)}
                   className={`px-3 py-1.5 rounded-[10px] text-[11px] font-mono transition-all duration-300 cursor-pointer border ${selectedCategory === category
-                    ? "bg-accent-600 text-white shadow-lg shadow-accent-600/25 font-semibold border-accent-500"
+                    ? "bg-accent-600 text-text-primary shadow-lg shadow-accent-600/25 font-semibold border-accent-500"
                     : "bg-bg-page/30 border-border-default/80 text-text-secondary hover:bg-bg-surface-hover hover:border-border-hover hover:text-text-primary"
                     }`}
                 >
@@ -156,7 +156,7 @@ const BlogListClient = () => {
           {featuredPost && (
             <section aria-label="Featured article" className="mb-14 relative">
               {/* Card shadow glow */}
-              <div className="absolute -inset-1.5 rounded-[30px] bg-gradient-to-r from-accent-600/30 to-purple-600/30 opacity-30 blur-xl group-hover:opacity-100 transition duration-1000 pointer-events-none" />
+              <div className="absolute -inset-1.5 rounded-[30px] bg-gradient-to-r from-accent-600/30 to-beige/40 opacity-30 blur-xl group-hover:opacity-100 transition duration-1000 pointer-events-none" />
 
               <Link href={`/blog/${featuredPost.slug}`} className="group block relative">
                 <article className="grid grid-cols-1 md:grid-cols-12 overflow-hidden rounded-[28px] border border-border-default bg-bg-surface/40 backdrop-blur-xl shadow-2xl transition-all duration-300 hover:border-border-hover">
@@ -166,24 +166,24 @@ const BlogListClient = () => {
                     style={{ background: featuredPost.coverGradient }}
                   >
                     {/* Glass sheen overlay */}
-                    <div className="absolute inset-0 bg-black/10 backdrop-blur-[1px] transition-opacity duration-300 group-hover:opacity-0" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent" />
+                    <div className="absolute inset-0 bg-text-primary/10 backdrop-blur-[1px] transition-opacity duration-300 group-hover:opacity-0" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-text-primary/45 via-text-primary/10 to-transparent" />
 
                     <div className="absolute inset-0 flex flex-col justify-between p-6">
                       <div className="flex flex-wrap gap-2">
                         {absoluteLatestPost && featuredPost.slug === absoluteLatestPost.slug ? (
-                          <span className="self-start inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/20 backdrop-blur-md text-white font-mono text-[9px] font-bold uppercase tracking-wider border border-white/25 shadow-sm animate-pulse">
-                            <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
+                          <span className="self-start inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-offwhite/25 backdrop-blur-md text-offwhite font-mono text-[9px] font-bold uppercase tracking-wider border border-offwhite/30 shadow-sm animate-pulse">
+                            <span className="h-1.5 w-1.5 rounded-full bg-rose" />
                             NEW RELEASE
                           </span>
                         ) : (
-                          <span className="self-start inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 backdrop-blur-md text-white font-mono text-[9px] font-bold uppercase tracking-wider border border-white/10">
+                          <span className="self-start inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-offwhite/15 backdrop-blur-md text-offwhite font-mono text-[9px] font-bold uppercase tracking-wider border border-offwhite/15">
                             SPOTLIGHT
                           </span>
                         )}
                       </div>
 
-                      <span className="self-center font-heading text-2xl md:text-3xl font-extrabold text-white text-center tracking-wide drop-shadow-md select-none group-hover:scale-105 transition-transform duration-500">
+                      <span className="self-center font-heading text-2xl md:text-3xl font-extrabold text-offwhite text-center tracking-wide drop-shadow-md select-none group-hover:scale-105 transition-transform duration-500">
                         {featuredPost.category}
                       </span>
                       <div />
@@ -222,7 +222,7 @@ const BlogListClient = () => {
                     <div className="mt-8 pt-6 border-t border-border-default flex flex-wrap gap-4 items-center justify-between">
                       {/* Author Bio */}
                       <div className="flex items-center gap-3">
-                        <span className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-accent-600 text-white font-mono text-sm font-semibold shadow-md">
+                        <span className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-accent-600 text-text-primary font-mono text-sm font-semibold shadow-md">
                           {featuredPost.author.avatar}
                         </span>
                         <div className="flex flex-col">
@@ -267,17 +267,17 @@ const BlogListClient = () => {
                         className="h-44 w-full relative overflow-hidden"
                         style={{ background: post.coverGradient }}
                       >
-                        <div className="absolute inset-0 bg-black/10 backdrop-blur-[0.5px] transition-opacity duration-300 group-hover:opacity-0" />
+                        <div className="absolute inset-0 bg-text-primary/10 backdrop-blur-[0.5px] transition-opacity duration-300 group-hover:opacity-0" />
 
                         <div className="absolute top-4 right-4">
                           {absoluteLatestPost && post.slug === absoluteLatestPost.slug && (
-                            <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-emerald-500/20 backdrop-blur-md text-emerald-300 font-mono text-[8px] font-bold uppercase tracking-wider border border-emerald-500/30">
+                            <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-cream/85 backdrop-blur-md text-(--color-rose-deep) font-mono text-[8px] font-bold uppercase tracking-wider border border-beige/70">
                               LATEST
                             </span>
                           )}
                         </div>
 
-                        <span className="absolute bottom-4 left-4 font-mono text-[9px] font-bold tracking-widest uppercase text-white bg-black/30 backdrop-blur-md px-2.5 py-1 rounded-md border border-white/10">
+                        <span className="absolute bottom-4 left-4 font-mono text-[9px] font-bold tracking-widest uppercase text-offwhite bg-text-primary/35 backdrop-blur-md px-2.5 py-1 rounded-md border border-offwhite/15">
                           {post.category}
                         </span>
                       </div>
@@ -326,7 +326,7 @@ const BlogListClient = () => {
                           <div className="flex items-center justify-between pt-1">
                             {/* Author Info */}
                             <div className="flex items-center gap-2">
-                              <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-accent-600/90 text-white font-mono text-[9px] font-semibold">
+                              <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-accent-600/90 text-text-primary font-mono text-[9px] font-semibold">
                                 {post.author.avatar}
                               </span>
                               <span className="text-[11px] font-semibold text-text-secondary">

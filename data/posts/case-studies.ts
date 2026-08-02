@@ -17,7 +17,7 @@ export const caseStudiesPosts: BlogPost[] = [
     publishedAt: "May 01, 2026",
     readTime: "8 min read",
     tags: ["Next.js", "Gemini", "AI-Evaluation", "CaseStudy"],
-    coverGradient: "linear-gradient(135deg, #2563EB 0%, #059669 100%)",
+    coverGradient: "linear-gradient(135deg, #D7BDB0 0%, #B8907D 100%)",
     author: defaultAuthor,
     content: `
       <h2>Introduction</h2>
@@ -60,7 +60,7 @@ export const caseStudiesPosts: BlogPost[] = [
     publishedAt: "May 14, 2026",
     readTime: "9 min read",
     tags: ["Architecture", "SystemDesign", "AI-Agents", "SaaS"],
-    coverGradient: "linear-gradient(135deg, #10B981 0%, #1E40AF 100%)",
+    coverGradient: "linear-gradient(135deg, #E3D5CA 0%, #C9A999 100%)",
     author: defaultAuthor,
     content: `
       <h2>Introduction</h2>
@@ -121,7 +121,7 @@ export const caseStudiesPosts: BlogPost[] = [
     publishedAt: "May 29, 2026",
     readTime: "7 min read",
     tags: ["RAG", "VectorDB", "Gemini", "University-Project"],
-    coverGradient: "linear-gradient(135deg, #7C3AED 0%, #3B82F6 100%)",
+    coverGradient: "linear-gradient(135deg, #D6CCC2 0%, #8A6F62 100%)",
     author: defaultAuthor,
     content: `
       <h2>Introduction</h2>
@@ -164,7 +164,7 @@ export const caseStudiesPosts: BlogPost[] = [
     publishedAt: "June 05, 2026",
     readTime: "8 min read",
     tags: ["React", "AI-Generation", "Vite", "UX-Design"],
-    coverGradient: "linear-gradient(135deg, #10B981 0%, #F59E0B 100%)",
+    coverGradient: "linear-gradient(135deg, #F5EBE1 0%, #D7BDB0 100%)",
     author: defaultAuthor,
     content: `
       <h2>Introduction</h2>
@@ -207,7 +207,7 @@ export const caseStudiesPosts: BlogPost[] = [
     publishedAt: "June 15, 2026",
     readTime: "8 min read",
     tags: ["Databases", "SystemDesign", "SQL", "Security"],
-    coverGradient: "linear-gradient(135deg, #1E40AF 0%, #EF4444 100%)",
+    coverGradient: "linear-gradient(135deg, #C9A999 0%, #4A1B0C 100%)",
     author: defaultAuthor,
     content: `
       <h2>Introduction</h2>

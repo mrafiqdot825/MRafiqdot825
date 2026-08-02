@@ -88,24 +88,24 @@ const ContactSection = () => {
       id="contact"
       title={
         <>
-          <AppleCpu className={`${ICON_CLASS.section} text-[#00E5FF]`} />
+          <AppleCpu className={`${ICON_CLASS.section} text-(--color-rose-deep)`} />
           Futuristic Control Center
         </>
       }
       description="Connect directly via the holographic transmission terminal or query the AI chatbot assistant."
-      className="border-t border-white/10 bg-transparent pt-12 pb-40 md:pb-10 mb-10"
+      className="border-t border-beige bg-transparent pt-12 pb-40 md:pb-10 mb-10"
     >
       <div className="grid gap-6 lg:grid-cols-[1.05fr_0.95fr]">
         {/* Futuristic Floating Holographic Panel */}
-        <Card className="relative flex flex-col justify-between border border-white/10 bg-[#101010]/90 shadow-[0_0_35px_rgba(124,58,237,0.2)]">
+        <Card className="relative flex flex-col justify-between border border-beige bg-cream/85 shadow-[0_0_35px_rgba(184,144,125,0.2)]">
           <div className="relative z-10">
-            <div className="mb-6 flex items-center justify-between border-b border-white/10 pb-4">
+            <div className="mb-6 flex items-center justify-between border-b border-beige pb-4">
               <div className="flex items-center gap-3">
-                <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-[#00E5FF]/40 bg-[#00E5FF]/10 text-[#00E5FF]">
+                <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-rose/40 bg-rose/10 text-(--color-rose-deep)">
                   <AppleMessage className={ICON_CLASS.nav} />
                 </span>
                 <div>
-                  <p className="font-mono text-xs font-bold uppercase tracking-[0.2em] text-[#00E5FF]">
+                  <p className="font-mono text-xs font-bold uppercase tracking-[0.2em] text-(--color-rose-deep)">
                     CONTROL TERMINAL
                   </p>
                   <p className="text-xs text-text-secondary">
@@ -113,23 +113,23 @@ const ContactSection = () => {
                   </p>
                 </div>
               </div>
-              <span className="inline-flex items-center font-mono text-[10px] text-[#7C3AED] bg-[#7C3AED]/20 border border-[#7C3AED]/30 px-2.5 py-1 rounded-full animate-pulse">
+              <span className="inline-flex items-center font-mono text-[10px] text-(--color-rose-active) bg-rose/20 border border-rose/30 px-2.5 py-1 rounded-full animate-pulse">
                 SYS_ONLINE
               </span>
             </div>
 
-            <p className="font-mono text-xs font-semibold uppercase tracking-[0.16em] text-white mb-6">
-              STATUS: <span className="text-[#00E5FF]">{site.availability}</span>
+            <p className="font-mono text-xs font-semibold uppercase tracking-[0.16em] text-text-primary mb-6">
+              STATUS: <span className="text-(--color-rose-deep)">{site.availability}</span>
             </p>
 
             {succeeded && (
               <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
-                className="mt-4 rounded-xl border border-[#00E5FF]/40 bg-[#00E5FF]/10 p-4 text-center"
+                className="mt-4 rounded-xl border border-rose/40 bg-rose/10 p-4 text-center"
               >
-                <AppleCheckCircle className="h-6 w-6 text-[#00E5FF] mx-auto mb-2" />
-                <h4 className="text-sm font-bold text-white">Transmission Received!</h4>
+                <AppleCheckCircle className="h-6 w-6 text-(--color-rose-deep) mx-auto mb-2" />
+                <h4 className="text-sm font-bold text-text-primary">Transmission Received!</h4>
                 <p className="text-xs text-text-secondary mt-1">
                   Thank you for reaching out. Muhammad will respond within 24 hours.
                 </p>
@@ -151,7 +151,7 @@ const ContactSection = () => {
                     name="name"
                     placeholder="Muhammad Rafiq"
                     required
-                    className="w-full glass-input rounded-xl py-2.5 px-3.5 text-xs text-white placeholder:text-text-muted"
+                    className="w-full glass-input rounded-xl py-2.5 px-3.5 text-xs text-text-primary placeholder:text-text-muted"
                   />
                 </label>
 
@@ -164,7 +164,7 @@ const ContactSection = () => {
                     name="email"
                     placeholder="you@example.com"
                     required
-                    className="w-full glass-input rounded-xl py-2.5 px-3.5 text-xs text-white placeholder:text-text-muted"
+                    className="w-full glass-input rounded-xl py-2.5 px-3.5 text-xs text-text-primary placeholder:text-text-muted"
                   />
                 </label>
               </div>
@@ -177,7 +177,7 @@ const ContactSection = () => {
                   type="text"
                   name="subject"
                   placeholder="AI Agent Architecture / Next.js Redesign"
-                  className="w-full glass-input rounded-xl py-2.5 px-3.5 text-xs text-white placeholder:text-text-muted"
+                  className="w-full glass-input rounded-xl py-2.5 px-3.5 text-xs text-text-primary placeholder:text-text-muted"
                 />
               </label>
 
@@ -190,12 +190,12 @@ const ContactSection = () => {
                   placeholder="Outline project goals, scope, and timeline..."
                   rows={5}
                   required
-                  className="w-full resize-none glass-input rounded-xl py-2.5 px-3.5 text-xs text-white placeholder:text-text-muted"
+                  className="w-full resize-none glass-input rounded-xl py-2.5 px-3.5 text-xs text-text-primary placeholder:text-text-muted"
                 />
               </label>
 
               {error && (
-                <div className="rounded-xl border border-rose-800/40 bg-rose-950/30 p-3 text-xs text-rose-400 flex items-center gap-2">
+                <div className="rounded-xl border border-rose/40 bg-rose/15 p-3 text-xs text-(--color-rose-deep) flex items-center gap-2">
                   <AppleWarning className="h-4 w-4" />
                   <span>{error}</span>
                 </div>
@@ -208,17 +208,17 @@ const ContactSection = () => {
                   variant="metal"
                   size="sm"
                   dark
-                  icon={submitting ? null : <AppleMail className="h-4 w-4 text-[#00E5FF]" />}
+                  icon={submitting ? null : <AppleMail className="h-4 w-4 text-(--color-rose-deep)" />}
                 >
                   {submitting ? "Transmitting..." : "Send Transmission"}
                 </Button>
               </div>
             </form>
 
-            <div className="mt-6 border-t border-white/10 pt-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div className="mt-6 border-t border-beige pt-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
               <p className="text-xs font-mono text-text-secondary shrink-0">
                 Direct:{" "}
-                <a href={`mailto:${site.email}`} className="text-[#00E5FF] font-bold">
+                <a href={`mailto:${site.email}`} className="text-(--color-rose-deep) font-bold">
                   {site.email}
                 </a>
               </p>
@@ -231,7 +231,7 @@ const ContactSection = () => {
                     rel="noopener noreferrer"
                     aria-label={social.label}
                     title={social.label}
-                    className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white hover:border-[#00E5FF] hover:text-[#00E5FF] hover:bg-[#00E5FF]/10 transition-all"
+                    className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-beige bg-beige/40 text-text-primary hover:border-rose hover:text-(--color-rose-deep) hover:bg-rose/10 transition-all"
                   >
                     {social.icon ? (
                       (() => {

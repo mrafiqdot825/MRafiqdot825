@@ -1,387 +1,356 @@
-# Agent & Developer Guidelines (AGENTS.md)
+# Adjustable Button Color Feature — Implementation Guide
 
-This file contains the core guidelines, technical constraints, design patterns, and codebase rules for any developer or AI coding agent working in this repository. Follow these specifications exactly to maintain codebase integrity and design consistency.
-
----
-
-## 1. Project Technology Stack & Architecture
-
-- **Next.js 16 & React 19 (App Router)**: The project is built using Next.js 16 and React 19 with App Router configuration.
-- **Client/Server Split**: Frontend components execute client-side. Sensitive API endpoints (such as the Gemini Chatbot) run server-side via Next.js Route Handlers (`app/api/chat/route.ts`) to avoid exposing keys to the browser.
-- **TypeScript**: Strictly typed development. Run verification checks prior to committing changes.
-
-### Build-Time vs. Runtime Environment Variables
-> [!IMPORTANT]
-> - Client-exposed environment variables must start with the `NEXT_PUBLIC_` prefix (e.g. `NEXT_PUBLIC_VAR`).
-> - Server-only environment variables (like `GEMINI_API_KEY`) do not use `NEXT_PUBLIC_` and are accessed strictly in server files (e.g., in Next.js Route Handlers) via `process.env`.
-> - Do not expose raw API keys or credentials in client-side code bundles.
+Visitor-facing accent color picker for the portfolio site. Visitors pick a base color; button, badge, and focus-state shades are derived from it automatically and persisted in `localStorage`.
 
 ---
 
-## 2. Directory Layout & Organization
+## 1. Overview
 
-Place new files in their respective folders. The project structure separates root UI components from routing pages:
-
-```
-components/          # Root-level layout and UI components
-├── feedback/        # Loading states, error indicators, fallbacks
-├── layout/          # Scaffolding containers (Section wrappers, Navbar)
-├── sections/        # Major homepage content sections (Hero, About, Projects, Experience, Contact)
-└── ui/              # Small reusable UI primitives (Buttons, Cards, Modals, AppleIcons, Chatbot)
-
-app/                 # Next.js App Router root
-├── api/             # Next.js Route Handlers (Server API endpoints like /api/chat)
-├── blog/            # Blog pages and static dynamic routes
-├── prompts/         # Prompts layout and client components
-├── data/            # Centralized static data layers serving as our client-side database
-├── hooks/           # Custom hooks (e.g. cursor tracking, scroll physics)
-├── lib/             # Utilities, helper scripts, constant structures
-├── types/           # TypeScript interfaces and definitions
-├── globals.css      # Core global styles & Tailwind theme mappings
-├── layout.tsx       # Root layout configuration
-├── page.tsx         # Homepage entry point
-└── not-found.tsx    # 404 fallback page layout
-```
-
-### Import Aliasing Conventions
-- Use the `@/components/*` alias to import layout elements from the root `components/` directory (e.g., `@/components/ui/Button`).
-- Use the `~/` alias to import directories under `app/` (e.g., `~/data/projects`, `~/lib/utils`, `~/hooks/useGlassCursor`).
+| Item             | Detail                                                                |
+| ---------------- | --------------------------------------------------------------------- |
+| Who can adjust   | Any site visitor                                                      |
+| Persistence      | `localStorage` (per-browser, no backend/DB needed)                    |
+| Scope of change  | Accent-driven UI: buttons, active nav item, badges, input focus rings |
+| New dependencies | None — uses native `color-mix()` / manual shade math                  |
 
 ---
 
-## 3. Styling & Design System Tokens
+## 2. Step 1 — Centralize hardcoded colors in `globals.css`
 
-### Style Variables Authority
-> [!WARNING]
-> Do NOT use the beige "Warm Light Mode" variables described in `colors-and-typography.md` (e.g., `#F3F0EA` as background). 
-> The live application is styled strictly in **Dark Mode** (`color-scheme: dark`) using the variables defined in [app/globals.css](file:///Users/muhammadrafiq/Desktop/Self%20Projects/Personal%20Portfolio/app/globals.css).
+Currently `.liquid-glass-accent-button`, `.liquid-glass-active-item`, `.glass-badge`, and `.glass-input:focus` reference hex values directly (`#d7bdb0`, `#c9a999`, `#b8907d`) instead of the existing `--color-rose*` variables. Fix this first so the variables become the single source of truth.
 
-### Color & Token Swatches (Dark Mode SSOT)
-Use the CSS custom variables mapped to Tailwind CSS v4 in `app/globals.css`:
+**Before:**
 
-* **Backgrounds & Canvas**:
-  - Page Canvas: `var(--bg-page)` / `#0B0C10` (mapped to Tailwind `bg-bg-page`)
-  - Surface Containers: `var(--bg-surface)` / `#14161C` (mapped to Tailwind `bg-bg-surface`)
-  - Hover Surfaces: `var(--bg-surface-hover)` / `#1D1F27` (mapped to Tailwind `bg-bg-surface-hover`)
-* **Typography Contrast Tiers**:
-  - Primary Text: `var(--text-primary)` / `#F3F4F6` (mapped to Tailwind `text-text-primary`)
-  - Secondary Text: `var(--text-secondary)` / `#9CA3AF` (mapped to Tailwind `text-text-secondary`)
-  - Muted Labels & Details: `var(--text-muted)` / `#6B7280` (mapped to Tailwind `text-text-muted`)
-* **Action Blue Accent**:
-  - `var(--accent-600)` / `#3B82F6` (mapped to Tailwind `bg-accent-600` or `text-accent-600`)
-  - Interactive Hover Blue: `var(--accent-700)` / `#60A5FA`
-  - Pressed Blue: `var(--accent-800)` / `#93C5FD`
-
-### Glassmorphism Utility Classes
-To maintain consistent glass layouts, leverage the standard utility classes defined in `app/globals.css`. Do not re-create glass styles from scratch:
-- **`.glass-panel`**: Semitransparent background, backdrop filter blur (`16px`), fine white border overlay.
-- **`.glass-panel-hover`**: Adds a transition with subtle hover translation (`translateY(-2px)`) and glows the border blue.
-- **`.glass-panel-inset`**: Used for recessed input sections and code containers.
-- **`.glass-input`**: Standard styled form text areas and text boxes.
-- **`.glass-button-secondary`**: Semi-translucent border action targets.
-
-### Fonts
-- **Serif Heading**: `"Playfair Display", serif` (Tailwind class `font-heading`)
-- **Sans-serif Body**: `"Inter", sans-serif` (Tailwind class `font-sans` or `font-body`)
-- **Monospace Text**: `"JetBrains Mono", monospace` (Tailwind class `font-mono`)
-
----
-
-## 4. Coding & Component Development Rules
-
-- **No Direct DOM Mutations**: Avoid bypassing React's virtual DOM. Do not use direct query selectors (`document.getElementById`, `document.createElement`, `container.querySelectorAll`) inside React lifecycle components to inject HTML or modify DOM hierarchies unless absolutely necessary (e.g. scroll tracking hook).
-- **Tag Capping Rule**:
-  > [!IMPORTANT]
-  > When displaying tags or technology badges (e.g., project card lists, experience listings), always enforce a tag capping mechanism.
-  > - Limit the visible tags to a maximum of **4**.
-  > - Truncate the rest and represent them as `+X more` (e.g., `+2 more`). This ensures visual stability across grids and prevents layout shifts.
-- **Iconography Standard**:
-  - Always use SF Symbol-inspired SVGs exported from [components/ui/AppleIcons.tsx](file:///Users/muhammadrafiq/Desktop/Self%20Projects/Personal%20Portfolio/components/ui/AppleIcons.tsx).
-  - All icons must accept `AppleIconProps` (`React.SVGProps<SVGSVGElement>`) and utilize `strokeWidth="1.9"` and `stroke="currentColor"`.
-
----
-
-## 5. Mock Database & Data Flow Rules
-
-- **Client Data Separation**: Never hardcode arrays of data (projects, experiences, credentials, socials) directly inside UI components. Always store them inside [app/data/](file:///Users/muhammadrafiq/Desktop/Self%20Projects/Personal%20Portfolio/app/data) and import them into components dynamically.
-- **Gemini Chatbot Prompts**:
-  - The AI assistant logic resides on the server in [app/api/chat/route.ts](file:///Users/muhammadrafiq/Desktop/Self%20Projects/Personal%20Portfolio/app/api/chat/route.ts) which uses [app/data/chatbotContext.ts](file:///Users/muhammadrafiq/Desktop/Self%20Projects/Personal%20Portfolio/app/data/chatbotContext.ts).
-  - The chatbot uses keyword relevance scoring to parse context-rich blog articles matching the user query to inject them directly into the instruction set sent to Gemini. Maintain this template format to keep answers accurate.
-
----
-
-## 6. Local Verification Protocols
-
-Before submitting or requesting reviews on code changes, you **must** perform the following local validations:
-
-1. **Type Verification**: Run `npx tsc --noEmit` to confirm there are no TypeScript compiler errors.
-2. **Build Compilation**: Run `npm run build` to confirm the Next.js production build compiles correctly.
-3. **Local Dev Test**: Launch the project using `npm run dev` to verify user interfaces function cleanly.
-
-
-# Send Email with Resend Node.js SDK
-
-**Purpose:** Enforce only the **current** and **correct** instructions for sending emails using the [Resend](https://resend.com/) Node.js SDK.
-**Scope:** All AI-generated advice or code related to sending email with Resend must follow these guardrails.
-
-***
-
-## **1. Official Resend Node.js Setup**
-
-### **Prerequisites**
-
-Human must first create an API key and verify their domain at [https://resend.com/domains](https://resend.com/domains).
-
-The API key must be stored in an environment variable called `RESEND_API_KEY`.
-
-```typescript  theme={"theme":{"light":"github-light","dark":"vesper"}}
-const resend = new Resend('YOUR_RESEND_API_KEY');
-```
-
-The domain should be verified at [https://resend.com/domains](https://resend.com/domains) and added to the `from` address.
-
-### **Install the SDK**
-
-Use the project's existing package manager to install the Resend Node.js SDK.
-
-```bash  theme={"theme":{"light":"github-light","dark":"vesper"}}
-npm install resend
-# or: yarn add resend / pnpm add resend / bun add resend
-```
-
-### **Initialize the Client**
-
-```typescript  theme={"theme":{"light":"github-light","dark":"vesper"}}
-import { Resend } from 'resend';
-
-const resend = new Resend('YOUR_RESEND_API_KEY');
-```
-
-### **Send an Email**
-
-```typescript  theme={"theme":{"light":"github-light","dark":"vesper"}}
-const { data, error } = await resend.emails.send({
-  from: 'Acme <onboarding@resend.dev>',
-  to: ['delivered@resend.dev'],
-  subject: 'Hello World',
-  html: '<strong>It works!</strong>',
-});
-
-if (error) {
-  console.error(error);
-  return;
+```css
+.liquid-glass-accent-button {
+  background: linear-gradient(135deg, #d7bdb0, #c9a999);
+  box-shadow: 0 4px 20px rgba(215, 189, 176, 0.45);
 }
 
-console.log(data); // { id: '49a3999c-...' }
+.liquid-glass-accent-button:hover {
+  box-shadow: 0 8px 28px rgba(184, 144, 125, 0.55);
+}
 ```
 
-### Rate Limiting
+**After:**
 
-The default rate limit is 5 requests per second per team. If you exceed the rate limit, you'll receive a `429` response error code. If needed, you can request a rate increase by [contacting support](https://resend.com/contact).
+```css
+.liquid-glass-accent-button {
+  background: linear-gradient(
+    135deg,
+    var(--color-rose),
+    var(--color-rose-hover)
+  );
+  box-shadow: 0 4px 20px color-mix(in srgb, var(--color-rose) 45%, transparent);
+}
 
-### Idempotency
-
-Best practice: Add an idempotency key to prevent duplicated emails, which is useful for retrying failed emails safely.
-
-* Should be **unique per API request**
-* Idempotency keys expire after **24 hours**
-* Have a maximum length of **256 characters**
-* Pattern: `<event-type>/<entity-id>`
-* Example: `welcome-user/123456789`
-
-```typescript  theme={"theme":{"light":"github-light","dark":"vesper"}}
-const { data, error } = await resend.emails.send({
-  from: 'Acme <onboarding@resend.dev>',
-  to: ['delivered@resend.dev'],
-  subject: 'Hello World',
-  html: '<strong>It works!</strong>',
-  idempotencyKey: 'unique-id',
-});
+.liquid-glass-accent-button:hover {
+  box-shadow: 0 8px 28px
+    color-mix(in srgb, var(--color-rose-active) 55%, transparent);
+}
 ```
 
-***
+Apply the same substitution to:
 
-## **2. Complete `emails.send()` Parameter Reference**
+- `.liquid-glass-active-item` (border/background/box-shadow use `--color-rose`)
+- `.glass-badge` (border/background use `--color-rose`)
+- `.glass-input:focus` (border-color and box-shadow use `--color-rose`)
 
-### **Required Parameters**
+No other files need to change for this step — every button in the app already uses these utility classes.
 
-| Parameter | Type                 | Description                                                                      |
-| --------- | -------------------- | -------------------------------------------------------------------------------- |
-| `from`    | `string`             | Sender email address. Supports friendly name format: `"Name <email@domain.com>"` |
-| `to`      | `string \| string[]` | Recipient email address(es). Maximum 50 addresses.                               |
-| `subject` | `string`             | Email subject line.                                                              |
+---
 
-### **Content Parameters (at least one required)**
+## 3. Step 2 — Color shading helper
 
-| Parameter | Type              | Description                                                |
-| --------- | ----------------- | ---------------------------------------------------------- |
-| `html`    | `string`          | HTML version of the email body.                            |
-| `text`    | `string`          | Plain text version. Auto-generated from `html` if omitted. |
-| `react`   | `React.ReactNode` | React Email component to render the message. Node.js only. |
+Create `lib/color.ts`:
 
-### **Optional Parameters**
+```ts
+// lib/color.ts
 
-| Parameter     | Type                 | Description                                                   |
-| ------------- | -------------------- | ------------------------------------------------------------- |
-| `cc`          | `string \| string[]` | Carbon copy recipients.                                       |
-| `bcc`         | `string \| string[]` | Blind carbon copy recipients.                                 |
-| `replyTo`     | `string \| string[]` | Reply-to address(es).                                         |
-| `scheduledAt` | `string`             | Schedule delivery time. Accepts ISO 8601 or natural language. |
-| `headers`     | `object`             | Custom email headers as key-value pairs.                      |
-| `tags`        | `Tag[]`              | Custom metadata. Name and value: max 256 chars, ASCII only.   |
-| `attachments` | `Attachment[]`       | File attachments. Max 40MB total per email after encoding.    |
+/** Lightens (positive percent) or darkens (negative percent) a hex color. */
+export function shadeColor(hex: string, percent: number): string {
+  const clean = hex.replace("#", "");
+  const num = parseInt(clean, 16);
 
-### **Template Parameters**
+  let r = (num >> 16) + Math.round(2.55 * percent);
+  let g = ((num >> 8) & 0x00ff) + Math.round(2.55 * percent);
+  let b = (num & 0x0000ff) + Math.round(2.55 * percent);
 
-| Parameter            | Type     | Description                                                      |
-| -------------------- | -------- | ---------------------------------------------------------------- |
-| `template.id`        | `string` | Published template identifier.                                   |
-| `template.variables` | `object` | Variable substitutions. Key max 50 chars, value max 2,000 chars. |
+  r = Math.min(255, Math.max(0, r));
+  g = Math.min(255, Math.max(0, g));
+  b = Math.min(255, Math.max(0, b));
 
-If `template` is provided, do not include `html`, `text`, or `react`.
+  return `#${((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1)}`;
+}
 
-### **Response**
+export const ACCENT_PRESETS = [
+  { name: "Rose", base: "#d7bdb0" }, // current default
+  { name: "Sage", base: "#a8b5a0" },
+  { name: "Sky", base: "#a3c1d1" },
+  { name: "Amber", base: "#d9a566" },
+  { name: "Lilac", base: "#b8a5c9" },
+] as const;
 
-A successful call returns:
-
-```typescript  theme={"theme":{"light":"github-light","dark":"vesper"}}
-{ data: { id: string }, error: null }
+export const ACCENT_STORAGE_KEY = "accentColor";
 ```
 
-A failed call returns:
+---
 
-```typescript  theme={"theme":{"light":"github-light","dark":"vesper"}}
-{ data: null, error: { message: string, name: string } }
+## 4. Step 3 — `ThemeProvider`
+
+Create `components/theme/ThemeProvider.tsx`:
+
+```tsx
+"use client";
+
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  useCallback,
+} from "react";
+import { shadeColor, ACCENT_STORAGE_KEY } from "@/lib/color";
+
+interface ThemeContextValue {
+  accent: string;
+  setAccent: (hex: string) => void;
+  resetAccent: () => void;
+}
+
+const DEFAULT_ACCENT = "#d7bdb0";
+
+const ThemeContext = createContext<ThemeContextValue | null>(null);
+
+function applyAccentToDocument(hex: string) {
+  const root = document.documentElement;
+  root.style.setProperty("--color-rose", hex);
+  root.style.setProperty("--color-rose-hover", shadeColor(hex, 15));
+  root.style.setProperty("--color-rose-active", shadeColor(hex, -10));
+  root.style.setProperty("--color-rose-deep", shadeColor(hex, -35));
+}
+
+export function ThemeProvider({ children }: { children: React.ReactNode }) {
+  const [accent, setAccentState] = useState(DEFAULT_ACCENT);
+
+  useEffect(() => {
+    const saved = localStorage.getItem(ACCENT_STORAGE_KEY);
+    if (saved) {
+      applyAccentToDocument(saved);
+      setAccentState(saved);
+    }
+  }, []);
+
+  const setAccent = useCallback((hex: string) => {
+    applyAccentToDocument(hex);
+    setAccentState(hex);
+    localStorage.setItem(ACCENT_STORAGE_KEY, hex);
+  }, []);
+
+  const resetAccent = useCallback(() => {
+    applyAccentToDocument(DEFAULT_ACCENT);
+    setAccentState(DEFAULT_ACCENT);
+    localStorage.removeItem(ACCENT_STORAGE_KEY);
+  }, []);
+
+  return (
+    <ThemeContext.Provider value={{ accent, setAccent, resetAccent }}>
+      {children}
+    </ThemeContext.Provider>
+  );
+}
+
+export function useTheme() {
+  const ctx = useContext(ThemeContext);
+  if (!ctx) throw new Error("useTheme must be used within ThemeProvider");
+  return ctx;
+}
 ```
 
-***
+**Note on flash-of-default-color:** because the saved color is applied in a `useEffect` (client-only), returning visitors may see a brief flash of the default rose before their saved color applies. To eliminate this, add an inline blocking script in `app/layout.tsx` `<head>` (see Step 6) that reads `localStorage` and sets the CSS vars before paint.
 
-## **3. Sending with React Email**
+---
 
-Resend integrates with [React Email](https://react.email) for building emails with React components if you are writing a React project:
+## 5. Step 4 — Color picker widget
 
-```typescript  theme={"theme":{"light":"github-light","dark":"vesper"}}
-import { Resend } from 'resend';
-import { WelcomeEmail } from './emails/welcome';
+Create `components/theme/ColorPickerWidget.tsx`:
 
-const resend = new Resend('YOUR_RESEND_API_KEY');
+```tsx
+"use client";
 
-const { data, error } = await resend.emails.send({
-  from: 'Acme <onboarding@resend.dev>',
-  to: ['delivered@resend.dev'],
-  subject: 'Welcome',
-  react: WelcomeEmail({ name: 'John' }),
-});
+import { useState } from "react";
+import { useTheme } from "./ThemeProvider";
+import { ACCENT_PRESETS } from "@/lib/color";
+
+export default function ColorPickerWidget() {
+  const { accent, setAccent, resetAccent } = useTheme();
+  const [open, setOpen] = useState(false);
+
+  return (
+    <div className="fixed bottom-6 right-6 z-50">
+      {open && (
+        <div className="glass-panel mb-3 rounded-2xl p-4 w-56">
+          <p className="text-caption font-medium text-text-secondary mb-3">
+            Accent color
+          </p>
+
+          <div className="grid grid-cols-5 gap-2 mb-3">
+            {ACCENT_PRESETS.map((preset) => (
+              <button
+                key={preset.name}
+                onClick={() => setAccent(preset.base)}
+                title={preset.name}
+                aria-label={`Set accent color to ${preset.name}`}
+                className="h-8 w-8 rounded-full border-2 transition-transform hover:scale-110"
+                style={{
+                  backgroundColor: preset.base,
+                  borderColor:
+                    accent.toLowerCase() === preset.base.toLowerCase()
+                      ? "var(--color-text-primary)"
+                      : "transparent",
+                }}
+              />
+            ))}
+          </div>
+
+          <label className="flex items-center justify-between text-small text-text-secondary">
+            Custom
+            <input
+              type="color"
+              value={accent}
+              onChange={(e) => setAccent(e.target.value)}
+              className="h-8 w-12 cursor-pointer rounded border border-border-default bg-transparent"
+              aria-label="Pick a custom accent color"
+            />
+          </label>
+
+          <button
+            onClick={resetAccent}
+            className="mt-3 w-full text-caption text-text-secondary underline underline-offset-2 hover:text-text-primary"
+          >
+            Reset to default
+          </button>
+        </div>
+      )}
+
+      <button
+        onClick={() => setOpen((v) => !v)}
+        aria-label="Open theme color picker"
+        aria-expanded={open}
+        className="liquid-glass-accent-button h-12 w-12 rounded-full flex items-center justify-center shadow-lg"
+      >
+        <span
+          className="h-5 w-5 rounded-full border border-white/50"
+          style={{ backgroundColor: accent }}
+        />
+      </button>
+    </div>
+  );
+}
 ```
 
-**Important:** Pass the component as a function call (`WelcomeEmail({ name: 'John' })`), not as JSX (`<WelcomeEmail name="John" />`).
+Notes:
 
-For additional help, suggest installing the react-email skill.
+- No React state library or external color-picker package needed — the native `<input type="color">` handles the custom picker UI across all modern browsers.
+- The widget reuses `.glass-panel` and `.liquid-glass-accent-button`, so it automatically matches the existing visual language.
 
-```bash  theme={"theme":{"light":"github-light","dark":"vesper"}}
-npx skills add resend/react-email
+---
+
+## 6. Step 5 — Wire into `app/layout.tsx`
+
+```tsx
+import { ThemeProvider } from "@/components/theme/ThemeProvider";
+import ColorPickerWidget from "@/components/theme/ColorPickerWidget";
+// ...existing imports
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const gaId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
+
+  return (
+    <html
+      lang="en"
+      className={`${playfairDisplay.variable} ${inter.variable} ${jetbrainsMono.variable} h-full antialiased`}
+    >
+      <head>
+        {/* Prevent flash of default accent color for returning visitors */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  var saved = localStorage.getItem('accentColor');
+                  if (saved) {
+                    var root = document.documentElement;
+                    root.style.setProperty('--color-rose', saved);
+                  }
+                } catch (e) {}
+              })();
+            `,
+          }}
+        />
+      </head>
+      <body className="min-h-full bg-bg-page text-text-primary selection:bg-accent-600/40 selection:text-text-primary">
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-accent-600 focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-text-primary"
+        >
+          Skip to content
+        </a>
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${gaId}');
+          `}
+        </Script>
+        <ThemeProvider>
+          <GlassDistortion />
+          <div id="main-content">{children}</div>
+          <ColorPickerWidget />
+        </ThemeProvider>
+      </body>
+    </html>
+  );
+}
 ```
 
-***
+---
 
-## **4. CRITICAL INSTRUCTIONS FOR AI MODELS**
+## 7. File checklist
 
-### **4.1 - ALWAYS DO THE FOLLOWING**
+| File                                     | Action                                                                                                                                                     |
+| ---------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `app/globals.css`                        | Edit — replace hardcoded hex in `.liquid-glass-accent-button`, `.liquid-glass-active-item`, `.glass-badge`, `.glass-input:focus` with `var(--color-rose*)` |
+| `lib/color.ts`                           | Create — `shadeColor()` helper + presets                                                                                                                   |
+| `components/theme/ThemeProvider.tsx`     | Create — context provider, localStorage sync                                                                                                               |
+| `components/theme/ColorPickerWidget.tsx` | Create — floating swatch/picker UI                                                                                                                         |
+| `app/layout.tsx`                         | Edit — wrap children in `ThemeProvider`, mount `ColorPickerWidget`, add anti-flash inline script                                                           |
 
-1. **Store the API key in an environment variable** (`RESEND_API_KEY`). Never hardcode API keys.
-2. **Import from `resend`** — the package name is `resend`, the class is `Resend`.
-3. **Use `await`** — `resend.emails.send()` returns a Promise. Always use `async/await` or `.then()`.
-4. **Handle both `data` and `error`** — the SDK returns `{ data, error }`. Always check for errors.
-5. **Use a verified domain** in the `from` address for production. `onboarding@resend.dev` is for testing only.
-6. **Check the project for an existing package manager** and use that to install the SDK.
-7. **Use camelCase** for SDK parameters (`replyTo`, `scheduledAt`), not snake\_case.
+---
 
-### **4.2 - NEVER DO THE FOLLOWING**
+## 8. Testing checklist
 
-1. **Do not** hardcode API keys in source code. Always use environment variables.
-2. **Do not** use `try/catch` for error handling with `resend.emails.send()` — the SDK returns `{ data, error }` instead of throwing. Only use `try/catch` if you need to handle network-level failures.
-3. **Do not** use snake\_case parameter names (`reply_to`, `scheduled_at`) — the Node.js SDK uses camelCase (`replyTo`, `scheduledAt`).
-4. **Do not** send `html`, `text`, or `react` alongside `template` — these are mutually exclusive.
-5. **Do not** import from `@resend/node` or any other package name. The correct package is `resend`.
-6. **Do not** use `onboarding@resend.dev` as the `from` address in production code. It is a test-only address.
-7. **Do not** set up testing flows with fake email addresses. Resend provides the following test addresses to help you simulate different email events without damaging your domain reputation:
-   * `delivered@resend.dev`
-   * `bounced@resend.dev`
-   * `complained@resend.dev`
-   * `suppressed@resend.dev`
+- [ ] Default page load shows the original rose accent with no picker interaction
+- [ ] Selecting a preset updates all buttons, active nav item, badges, and input focus rings immediately
+- [ ] Custom color picker (`<input type="color">`) updates the same elements live while dragging
+- [ ] Refreshing the page after selecting a color keeps that color (no flash of default)
+- [ ] "Reset to default" clears `localStorage` and restores the original rose
+- [ ] Contrast: derived hover/active shades remain legible against both light text and dark text used in the design (spot-check Amber and Sky presets, which sit lighter/darker than the default)
+- [ ] Picker widget is keyboard-accessible (tab to toggle button, tab through swatches, `Enter`/`Space` activates)
 
-***
+---
 
-## **5. COMMON PATTERNS**
+## 9. Optional follow-ups (not required for MVP)
 
-### **Attachments**
-
-```typescript  theme={"theme":{"light":"github-light","dark":"vesper"}}
-const { data, error } = await resend.emails.send({
-  from: 'Acme <onboarding@resend.dev>',
-  to: ['delivered@resend.dev'],
-  subject: 'Invoice attached',
-  html: '<p>See attached invoice.</p>',
-  attachments: [
-    {
-      filename: 'invoice.pdf',
-      content: invoiceBuffer,
-    },
-  ],
-});
-```
-
-### **Scheduled Emails**
-
-Send up to 30 days in advance using the `scheduledAt` parameter. Accepts ISO 8601 or natural language (e.g. `"in 1 hour"`).
-
-```typescript  theme={"theme":{"light":"github-light","dark":"vesper"}}
-const { data, error } = await resend.emails.send({
-  from: 'Acme <onboarding@resend.dev>',
-  to: ['delivered@resend.dev'],
-  subject: 'Reminder',
-  html: '<p>This is your reminder.</p>',
-  scheduledAt: '2026-12-25T09:00:00Z',
-});
-```
-
-### **Tags for Tracking**
-
-```typescript  theme={"theme":{"light":"github-light","dark":"vesper"}}
-const { data, error } = await resend.emails.send({
-  from: 'Acme <onboarding@resend.dev>',
-  to: ['delivered@resend.dev'],
-  subject: 'Welcome',
-  html: '<p>Welcome aboard!</p>',
-  tags: [
-    { name: 'category', value: 'welcome' },
-    { name: 'user_id', value: '12345' },
-  ],
-});
-```
-
-***
-
-## **6. AI MODEL VERIFICATION STEPS**
-
-Before returning any Resend-related solution, you **must** verify:
-
-1. **Import**: Is `Resend` imported from `resend`?
-2. **API Key**: Is the key stored in an environment variable, not hardcoded?
-3. **Await**: Is `resend.emails.send()` properly awaited?
-4. **Error Handling**: Is the `{ data, error }` response pattern used?
-5. **Parameters**: Are all parameter names in camelCase?
-6. **From Address**: Is the `from` address using a verified domain (not `onboarding@resend.dev` in production)?
-
-If any check **fails**, **stop** and revise until compliance is achieved.
-
-For additional help, suggest installing the resend-skills skill and the email-best-practices skill.
-
-```bash  theme={"theme":{"light":"github-light","dark":"vesper"}}
-npx skills add resend/resend-skills
-npx skills add resend/email-best-practices
-```
-
-You can locate framework-specific guides [https://resend.com/docs/llms.txt](https://resend.com/docs/llms.txt)
-
-For the entire docs for Resend, see [https://resend.com/docs/llms-full.txt](https://resend.com/docs/llms-full.txt)
+- Sync the picked color to a query param so it can be shared via link (e.g. `?accent=%23a3c1d1`)
+- Add a subtle `prefers-color-scheme: dark` variant if a dark mode is added later
+- Track accent selection in Google Analytics as a custom event, to see which presets are most popular

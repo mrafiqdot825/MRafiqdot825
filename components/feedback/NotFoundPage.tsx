@@ -17,7 +17,7 @@ const NotFoundPage = () => {
         <div className="mt-7 flex items-center justify-center gap-3">
           <Link
             href="/"
-            className="inline-flex items-center justify-center font-body text-sm font-medium transition-all duration-200 ease-out bg-accent-600 text-white rounded-[12px] px-6 py-3 hover:bg-accent-700 active:bg-accent-800"
+            className="inline-flex items-center justify-center font-body text-sm font-medium transition-all duration-200 ease-out bg-accent-600 text-text-primary rounded-[12px] px-6 py-3 hover:bg-accent-700 active:bg-accent-800"
           >
             Go Home
           </Link>

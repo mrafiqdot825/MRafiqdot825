@@ -35,7 +35,7 @@ export default function HomeClient() {
     <LenisProvider>
       <CustomCursor />
       <Navbar />
-      <main className="page-shell bg-[#050505] text-text-primary min-h-screen relative overflow-hidden">
+      <main className="page-shell bg-offwhite text-text-primary min-h-screen relative overflow-hidden">
         <HeroSection />
         <AboutSection />
         <TechStackOrbit3D />

@@ -51,13 +51,13 @@ export async function POST(request: Request) {
       subject: `Portfolio Inquiry: ${subject || "No Subject"}`,
       replyTo: email,
       html: `
-        <div style="font-family: sans-serif; padding: 20px; color: #1f2937; max-width: 600px; margin: 0 auto; border: 1px solid #e5e7eb; border-radius: 8px;">
-          <h2 style="color: #3b82f6; border-bottom: 2px solid #3b82f6; padding-bottom: 8px; margin-bottom: 16px;">New Contact Form Submission</h2>
+        <div style="font-family: sans-serif; padding: 20px; color: #2C2C2A; max-width: 600px; margin: 0 auto; border: 1px solid #E3D5CA; border-radius: 8px; background-color: #EDEEE9;">
+          <h2 style="color: #8A6F62; border-bottom: 2px solid #D7BDB0; padding-bottom: 8px; margin-bottom: 16px;">New Contact Form Submission</h2>
           <p style="margin: 8px 0;"><strong>From:</strong> ${name} (&lt;${email}&gt;)</p>
           <p style="margin: 8px 0;"><strong>Subject:</strong> ${subject || "No Subject"}</p>
-          <div style="margin-top: 20px; padding: 16px; background-color: #f3f4f6; border-left: 4px solid #3b82f6; border-radius: 4px;">
-            <p style="margin: 0 0 8px 0; font-weight: 600; color: #4b5563;">Message:</p>
-            <p style="margin: 0; white-space: pre-wrap; line-height: 1.5; color: #1f2937;">${message}</p>
+          <div style="margin-top: 20px; padding: 16px; background-color: #F5EBE1; border-left: 4px solid #D7BDB0; border-radius: 4px;">
+            <p style="margin: 0 0 8px 0; font-weight: 600; color: #4A1B0C;">Message:</p>
+            <p style="margin: 0; white-space: pre-wrap; line-height: 1.5; color: #2C2C2A;">${message}</p>
           </div>
         </div>
       `,

@@ -42,7 +42,7 @@ const Modal = ({ isOpen, onClose, title, children }: ModalProps) => {
     <div className="fixed inset-0 z-50 overflow-y-auto">
       {/* Backdrop with blur */}
       <div
-        className="fixed inset-0 bg-[#0B0C10]/60 backdrop-blur-md transition-opacity duration-300"
+        className="fixed inset-0 bg-text-primary/50 backdrop-blur-md transition-opacity duration-300"
         onClick={onClose}
         aria-hidden="true"
       />
@@ -51,7 +51,7 @@ const Modal = ({ isOpen, onClose, title, children }: ModalProps) => {
       <div className="flex min-h-full items-center justify-center p-4 text-center">
         {/* Modal Container */}
         <div
-          className="relative w-full max-w-lg rounded-[24px] glass-panel p-6 sm:p-8 shadow-2xl border border-white/10 text-left overflow-hidden animate-fade-in-up my-8"
+          className="relative w-full max-w-lg rounded-[24px] glass-panel p-6 sm:p-8 shadow-2xl border border-beige/60 text-left overflow-hidden animate-fade-in-up my-8"
           role="dialog"
           aria-modal="true"
         >

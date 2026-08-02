@@ -8,14 +8,14 @@ import RadialGlowButton from "@/components/ui/RadialGlowButton";
 import type { Service } from "@/types/service";
 
 const CUBE_SERVICES = [
-  { id: "ai-apps", title: "AI Applications", icon: AppleCpu, color: "#7C3AED", desc: "Agentic systems, Gemini/OpenAI integrations, prompt engineering & RAG pipelines." },
-  { id: "fullstack", title: "Full Stack Development", icon: AppleSparkles, color: "#00E5FF", desc: "High-performance React/Next.js frontends and Node.js/Python server architectures." },
-  { id: "mobile-apps", title: "Mobile Apps", icon: AppleDevice, color: "#8B5CF6", desc: "Cross-platform iOS and Android mobile solutions engineered with React Native & Expo." },
-  { id: "cloud-infra", title: "Cloud Infrastructure", icon: AppleServerIcon, color: "#3B82F6", desc: "Scalable Docker containerization, AWS microservices, and server deployment." },
-  { id: "api-dev", title: "API Development", icon: AppleCode, color: "#10B981", desc: "Restful & GraphQL backend APIs with JWT auth, rate-limiting & caching." },
-  { id: "automation", title: "Automation", icon: AppleZap, color: "#F59E0B", desc: "Web scraping pipelines, CI/CD GitHub Actions & Playwright test suites." },
-  { id: "admin-dashboards", title: "Dashboards", icon: AppleLayers, color: "#EC4899", desc: "Data visualization dashboards with live charts & role-based access control." },
-  { id: "ai-agents", title: "AI Agents & Chatbots", icon: AppleMessage, color: "#6366F1", desc: "Autonomous AI agents, conversational chatbots, RAG knowledge bases & LLM integrations." },
+  { id: "ai-apps", title: "AI Applications", icon: AppleCpu, color: "#b8907d", desc: "Agentic systems, Gemini/OpenAI integrations, prompt engineering & RAG pipelines." },
+  { id: "fullstack", title: "Full Stack Development", icon: AppleSparkles, color: "#8a6f62", desc: "High-performance React/Next.js frontends and Node.js/Python server architectures." },
+  { id: "mobile-apps", title: "Mobile Apps", icon: AppleDevice, color: "#d7bdb0", desc: "Cross-platform iOS and Android mobile solutions engineered with React Native & Expo." },
+  { id: "cloud-infra", title: "Cloud Infrastructure", icon: AppleServerIcon, color: "#c9a999", desc: "Scalable Docker containerization, AWS microservices, and server deployment." },
+  { id: "api-dev", title: "API Development", icon: AppleCode, color: "#4a1b0c", desc: "Restful & GraphQL backend APIs with JWT auth, rate-limiting & caching." },
+  { id: "automation", title: "Automation", icon: AppleZap, color: "#b8907d", desc: "Web scraping pipelines, CI/CD GitHub Actions & Playwright test suites." },
+  { id: "admin-dashboards", title: "Dashboards", icon: AppleLayers, color: "#8a6f62", desc: "Data visualization dashboards with live charts & role-based access control." },
+  { id: "ai-agents", title: "AI Agents & Chatbots", icon: AppleMessage, color: "#d7bdb0", desc: "Autonomous AI agents, conversational chatbots, RAG knowledge bases & LLM integrations." },
 ];
 
 export default function ServicesSection3D() {
@@ -28,14 +28,14 @@ export default function ServicesSection3D() {
   };
 
   return (
-    <section id="services" className="py-4 relative bg-transparent border-t border-white/10">
+    <section id="services" className="py-4 relative bg-transparent border-t border-beige">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <span className="font-mono text-xs font-bold uppercase tracking-[0.25em] text-[#00E5FF]">
+          <span className="font-mono text-xs font-bold uppercase tracking-[0.25em] text-(--color-rose-deep)">
             ENGINEERING OFFERINGS
           </span>
-          <h2 className="font-heading text-3xl sm:text-5xl font-extrabold text-white mt-3 tracking-tight">
-            Interactive <span className="bg-gradient-to-r from-[#7C3AED] via-[#8B5CF6] to-[#00E5FF] bg-clip-text text-transparent">Service Cubes</span>
+          <h2 className="font-heading text-3xl sm:text-5xl font-extrabold text-text-primary mt-3 tracking-tight">
+            Interactive <span className="bg-gradient-to-r from-(--color-rose-active) via-rose to-(--color-rose-deep) bg-clip-text text-transparent">Service Cubes</span>
           </h2>
           <p className="mt-4 text-sm sm:text-base text-text-secondary leading-relaxed font-body">
             Click any service cube to expand complete specifications, performance metrics, and technical architecture.
@@ -59,17 +59,17 @@ export default function ServicesSection3D() {
                 />
 
                 {/* 3D Glass Card Container */}
-                <div className="relative glass-panel rounded-2xl p-6 h-full flex flex-col justify-between border border-white/10 group-hover:border-white/30 group-hover:-translate-y-2 transition-all duration-300 bg-[#101010]/90">
+                <div className="relative glass-panel rounded-2xl p-6 h-full flex flex-col justify-between border border-beige group-hover:border-rose/50 group-hover:-translate-y-2 transition-all duration-300 bg-cream/85">
                   <div>
                     {/* Floating Cube Header Icon */}
                     <div
-                      className="w-14 h-14 rounded-2xl flex items-center justify-center mb-5 border border-white/10 shadow-lg group-hover:scale-110 transition-transform duration-300"
+                      className="w-14 h-14 rounded-2xl flex items-center justify-center mb-5 border border-beige shadow-lg group-hover:scale-110 transition-transform duration-300"
                       style={{ backgroundColor: `${cube.color}20`, color: cube.color }}
                     >
                       <Icon className="w-7 h-7" />
                     </div>
 
-                    <h3 className="font-heading text-xl font-bold text-white group-hover:text-[#00E5FF] transition-colors">
+                    <h3 className="font-heading text-xl font-bold text-text-primary group-hover:text-(--color-rose-deep) transition-colors">
                       {cube.title}
                     </h3>
                     <p className="mt-2.5 text-xs text-text-secondary leading-relaxed font-body">
@@ -77,7 +77,7 @@ export default function ServicesSection3D() {
                     </p>
                   </div>
 
-                  <div className="mt-6 pt-4 border-t border-white/10 flex items-center justify-between font-mono text-[11px] text-[#00E5FF] font-bold">
+                  <div className="mt-6 pt-4 border-t border-beige flex items-center justify-between font-mono text-[11px] text-(--color-rose-deep) font-bold">
                     <span>EXPLORE SPECS</span>
                     <span className="group-hover:translate-x-1 transition-transform">→</span>
                   </div>
@@ -97,7 +97,7 @@ export default function ServicesSection3D() {
         {selectedService && (
           <div className="space-y-6">
             <div>
-              <span className="font-mono text-xs font-bold text-[#00E5FF] uppercase tracking-widest">
+              <span className="font-mono text-xs font-bold text-(--color-rose-deep) uppercase tracking-widest">
                 {selectedService.subtitle}
               </span>
               <p className="mt-2 text-sm text-text-secondary leading-relaxed font-body">
@@ -109,8 +109,8 @@ export default function ServicesSection3D() {
             {selectedService.metrics && selectedService.metrics.length > 0 && (
               <div className="grid grid-cols-2 gap-3">
                 {selectedService.metrics.map((m) => (
-                  <div key={m.label} className="glass-panel p-3.5 rounded-xl border border-white/10 bg-[#101010]">
-                    <span className="font-heading text-2xl font-extrabold text-[#7C3AED]">
+                  <div key={m.label} className="glass-panel p-3.5 rounded-xl border border-beige bg-cream">
+                    <span className="font-heading text-2xl font-extrabold text-(--color-rose-active)">
                       {m.value}
                     </span>
                     <p className="text-[11px] font-mono text-text-muted mt-1 uppercase leading-tight">
@@ -123,13 +123,13 @@ export default function ServicesSection3D() {
 
             {/* Benefits */}
             <div>
-              <h4 className="font-mono text-xs font-bold uppercase tracking-wider text-white mb-2">
+              <h4 className="font-mono text-xs font-bold uppercase tracking-wider text-text-primary mb-2">
                 Key Benefits
               </h4>
               <ul className="space-y-2 text-xs text-text-secondary">
                 {selectedService.benefits.map((b) => (
                   <li key={b} className="flex items-start gap-2">
-                    <span className="h-1.5 w-1.5 rounded-full bg-[#00E5FF] mt-1.5 shrink-0" />
+                    <span className="h-1.5 w-1.5 rounded-full bg-(--color-rose-deep) mt-1.5 shrink-0" />
                     <span>{b}</span>
                   </li>
                 ))}
@@ -138,14 +138,14 @@ export default function ServicesSection3D() {
 
             {/* Tech Stack */}
             <div>
-              <h4 className="font-mono text-xs font-bold uppercase tracking-wider text-white mb-2">
+              <h4 className="font-mono text-xs font-bold uppercase tracking-wider text-text-primary mb-2">
                 Technology Stack
               </h4>
               <div className="flex flex-wrap gap-1.5">
                 {selectedService.techStack.map((tech) => (
                   <span
                     key={tech}
-                    className="font-mono text-[11px] bg-[#7C3AED]/20 text-[#00E5FF] px-2.5 py-1 rounded-md border border-[#7C3AED]/30"
+                    className="font-mono text-[11px] bg-rose/20 text-(--color-rose-deep) px-2.5 py-1 rounded-md border border-rose/30"
                   >
                     {tech}
                   </span>

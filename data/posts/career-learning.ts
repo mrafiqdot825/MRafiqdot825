@@ -17,7 +17,7 @@ export const careerLearningPosts: BlogPost[] = [
     publishedAt: "May 05, 2026",
     readTime: "7 min read",
     tags: ["Career", "FullStack", "Roadmap", "Self-Study"],
-    coverGradient: "linear-gradient(135deg, #1D4ED8 0%, #7C3AED 100%)",
+    coverGradient: "linear-gradient(135deg, #D7BDB0 0%, #B8907D 100%)",
     author: defaultAuthor,
     content: `
       <h2>Introduction</h2>
@@ -62,7 +62,7 @@ export const careerLearningPosts: BlogPost[] = [
     publishedAt: "May 20, 2026",
     readTime: "7 min read",
     tags: ["Career", "AI-Engineer", "Interviews", "StudyGuide"],
-    coverGradient: "linear-gradient(135deg, #1E40AF 0%, #10B981 100%)",
+    coverGradient: "linear-gradient(135deg, #E3D5CA 0%, #C9A999 100%)",
     author: defaultAuthor,
     content: `
       <h2>Introduction</h2>
@@ -107,7 +107,7 @@ export const careerLearningPosts: BlogPost[] = [
     publishedAt: "June 01, 2026",
     readTime: "6 min read",
     tags: ["AI-Engineer", "Roadmap", "Skills", "FutureOfWork"],
-    coverGradient: "linear-gradient(135deg, #7C3AED 0%, #1D4ED8 100%)",
+    coverGradient: "linear-gradient(135deg, #D6CCC2 0%, #8A6F62 100%)",
     author: defaultAuthor,
     content: `
       <h2>Introduction</h2>
@@ -153,7 +153,7 @@ export const careerLearningPosts: BlogPost[] = [
     publishedAt: "June 09, 2026",
     readTime: "7 min read",
     tags: ["Career", "MachineLearning", "Mistakes", "Education"],
-    coverGradient: "linear-gradient(135deg, #EF4444 0%, #3B82F6 100%)",
+    coverGradient: "linear-gradient(135deg, #F5EBE1 0%, #D7BDB0 100%)",
     author: defaultAuthor,
     content: `
       <h2>Introduction</h2>
@@ -201,7 +201,7 @@ export const careerLearningPosts: BlogPost[] = [
     publishedAt: "June 18, 2026",
     readTime: "7 min read",
     tags: ["Career", "Portfolio", "JobSearch", "Marketing"],
-    coverGradient: "linear-gradient(135deg, #10B981 0%, #1D4ED8 100%)",
+    coverGradient: "linear-gradient(135deg, #C9A999 0%, #4A1B0C 100%)",
     author: defaultAuthor,
     content: `
       <h2>Introduction</h2>
@@ -247,7 +247,7 @@ export const careerLearningPosts: BlogPost[] = [
     publishedAt: "June 27, 2026",
     readTime: "6 min read",
     tags: ["AI", "Career", "Software Engineering", "Productivity"],
-    coverGradient: "linear-gradient(135deg, #4F46E5 0%, #06B6D4 100%)",
+    coverGradient: "linear-gradient(135deg, #E3D5CA 0%, #8A6F62 100%)",
     author: defaultAuthor,
     content: `
       <h2>Introduction</h2>

@@ -17,7 +17,7 @@ export const devopsSrePosts: BlogPost[] = [
     publishedAt: "April 28, 2026",
     readTime: "6 min read",
     tags: ["SRE", "Career", "Roadmap", "Cloud"],
-    coverGradient: "linear-gradient(135deg, #1E40AF 0%, #7C3AED 100%)",
+    coverGradient: "linear-gradient(135deg, #D7BDB0 0%, #B8907D 100%)",
     author: defaultAuthor,
     content: `
       <h2>Introduction</h2>
@@ -67,7 +67,7 @@ export const devopsSrePosts: BlogPost[] = [
     publishedAt: "May 15, 2026",
     readTime: "7 min read",
     tags: ["Docker", "Containers", "DevOps", "LocalDev"],
-    coverGradient: "linear-gradient(135deg, #1D4ED8 0%, #10B981 100%)",
+    coverGradient: "linear-gradient(135deg, #E3D5CA 0%, #C9A999 100%)",
     author: defaultAuthor,
     content: `
       <h2>Introduction</h2>
@@ -110,7 +110,7 @@ export const devopsSrePosts: BlogPost[] = [
     publishedAt: "June 03, 2026",
     readTime: "7 min read",
     tags: ["CI-CD", "GitHub", "DevOps", "Automation"],
-    coverGradient: "linear-gradient(135deg, #10B981 0%, #7C3AED 100%)",
+    coverGradient: "linear-gradient(135deg, #D6CCC2 0%, #8A6F62 100%)",
     author: defaultAuthor,
     content: `
       <h2>Introduction</h2>
@@ -153,7 +153,7 @@ export const devopsSrePosts: BlogPost[] = [
     publishedAt: "June 06, 2026",
     readTime: "8 min read",
     tags: ["Kubernetes", "K8s", "DevOps", "Scaling"],
-    coverGradient: "linear-gradient(135deg, #1E40AF 0%, #2563EB 100%)",
+    coverGradient: "linear-gradient(135deg, #F5EBE1 0%, #D7BDB0 100%)",
     author: defaultAuthor,
     content: `
       <h2>Introduction</h2>
@@ -201,7 +201,7 @@ export const devopsSrePosts: BlogPost[] = [
     publishedAt: "June 11, 2026",
     readTime: "7 min read",
     tags: ["Monitoring", "Prometheus", "Grafana", "DevOps"],
-    coverGradient: "linear-gradient(135deg, #EF4444 0%, #1E40AF 100%)",
+    coverGradient: "linear-gradient(135deg, #C9A999 0%, #4A1B0C 100%)",
     author: defaultAuthor,
     content: `
       <h2>Introduction</h2>
