@@ -88,7 +88,7 @@ const ContactSection = () => {
       id="contact"
       title={
         <>
-          <AppleCpu className={`${ICON_CLASS.section} text-(--color-rose-deep)`} />
+          <AppleCpu className={`${ICON_CLASS.section} text-[var(--color-rose-deep)]`} />
           Futuristic Control Center
         </>
       }
@@ -97,29 +97,29 @@ const ContactSection = () => {
     >
       <div className="grid gap-6 lg:grid-cols-[1.05fr_0.95fr]">
         {/* Futuristic Floating Holographic Panel */}
-        <Card className="liquid-glass-card relative flex flex-col justify-between border border-beige shadow-2xl">
+        <Card className="liquid-glass-card relative flex flex-col justify-between border border-border-default shadow-2xl">
           <div className="relative z-10">
-            <div className="mb-6 flex items-center justify-between border-b border-beige pb-4">
+            <div className="mb-6 flex items-center justify-between border-b border-border-default pb-4">
               <div className="flex items-center gap-3">
-                <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-rose/40 bg-rose/10 text-(--color-rose-deep)">
+                <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-rose/40 bg-rose/10 text-[var(--color-rose-deep)]">
                   <AppleMessage className={ICON_CLASS.nav} />
                 </span>
                 <div>
-                  <p className="font-mono text-xs font-bold uppercase tracking-[0.2em] text-(--color-rose-deep)">
+                  <p className="font-mono text-xs font-bold uppercase tracking-[0.2em] text-[var(--color-rose-deep)]">
                     CONTROL TERMINAL
                   </p>
-                  <p className="text-xs text-text-primary font-medium">
+                  <p className="text-xs text-text-primary font-semibold">
                     Direct Holographic Transmission
                   </p>
                 </div>
               </div>
-              <span className="inline-flex items-center font-mono text-[10px] text-(--color-rose-active) bg-rose/20 border border-rose/30 px-2.5 py-1 rounded-full animate-pulse font-bold">
+              <span className="inline-flex items-center font-mono text-[10px] text-[var(--color-rose-deep)] bg-rose/20 border border-rose/35 px-2.5 py-1 rounded-full animate-pulse font-extrabold">
                 SYS_ONLINE
               </span>
             </div>
 
             <p className="font-mono text-xs font-bold uppercase tracking-[0.16em] text-text-primary mb-6">
-              STATUS: <span className="text-(--color-rose-deep)">{site.availability}</span>
+              STATUS: <span className="text-[var(--color-rose-deep)] font-extrabold">{site.availability}</span>
             </p>
 
             {succeeded && (
@@ -128,7 +128,7 @@ const ContactSection = () => {
                 animate={{ opacity: 1, scale: 1 }}
                 className="mt-4 rounded-xl border border-rose/40 bg-rose/10 p-4 text-center"
               >
-                <AppleCheckCircle className="h-6 w-6 text-(--color-rose-deep) mx-auto mb-2" />
+                <AppleCheckCircle className="h-6 w-6 text-[var(--color-rose-deep)] mx-auto mb-2" />
                 <h4 className="text-sm font-bold text-text-primary">Transmission Received!</h4>
                 <p className="text-xs text-text-primary font-medium mt-1">
                   Thank you for reaching out. Muhammad will respond within 24 hours.
@@ -151,7 +151,7 @@ const ContactSection = () => {
                     name="name"
                     placeholder="Muhammad Rafiq"
                     required
-                    className="w-full glass-input rounded-xl py-2.5 px-3.5 text-xs text-text-primary font-medium placeholder:text-text-secondary/70"
+                    className="w-full glass-input rounded-xl py-2.5 px-3.5 text-xs text-text-primary font-medium placeholder:text-text-primary/50"
                   />
                 </label>
 
@@ -164,7 +164,7 @@ const ContactSection = () => {
                     name="email"
                     placeholder="you@example.com"
                     required
-                    className="w-full glass-input rounded-xl py-2.5 px-3.5 text-xs text-text-primary font-medium placeholder:text-text-secondary/70"
+                    className="w-full glass-input rounded-xl py-2.5 px-3.5 text-xs text-text-primary font-medium placeholder:text-text-primary/50"
                   />
                 </label>
               </div>
@@ -177,7 +177,7 @@ const ContactSection = () => {
                   type="text"
                   name="subject"
                   placeholder="AI Agent Architecture / Next.js Redesign"
-                  className="w-full glass-input rounded-xl py-2.5 px-3.5 text-xs text-text-primary font-medium placeholder:text-text-secondary/70"
+                  className="w-full glass-input rounded-xl py-2.5 px-3.5 text-xs text-text-primary font-medium placeholder:text-text-primary/50"
                 />
               </label>
 
@@ -190,13 +190,13 @@ const ContactSection = () => {
                   placeholder="Outline project goals, scope, and timeline..."
                   rows={5}
                   required
-                  className="w-full resize-none glass-input rounded-xl py-2.5 px-3.5 text-xs text-text-primary font-medium placeholder:text-text-secondary/70"
+                  className="w-full resize-none glass-input rounded-xl py-2.5 px-3.5 text-xs text-text-primary font-medium placeholder:text-text-primary/50"
                 />
               </label>
 
               {error && (
-                <div className="rounded-xl border border-rose/40 bg-rose/15 p-3 text-xs text-(--color-rose-deep) font-semibold flex items-center gap-2">
-                  <AppleWarning className="h-4 w-4" />
+                <div className="rounded-xl border border-rose/40 bg-rose/15 p-3 text-xs text-[var(--color-rose-deep)] font-semibold flex items-center gap-2">
+                  <AppleWarning className="h-4 w-4 shrink-0" />
                   <span>{error}</span>
                 </div>
               )}
@@ -214,10 +214,10 @@ const ContactSection = () => {
               </div>
             </form>
 
-            <div className="mt-6 border-t border-beige pt-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div className="mt-6 border-t border-border-default pt-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
               <p className="text-xs font-mono text-text-primary font-semibold shrink-0">
                 Direct:{" "}
-                <a href={`mailto:${site.email}`} className="text-(--color-rose-deep) font-bold hover:underline">
+                <a href={`mailto:${site.email}`} className="text-[var(--color-rose-deep)] font-bold hover:underline">
                   {site.email}
                 </a>
               </p>
@@ -230,7 +230,7 @@ const ContactSection = () => {
                     rel="noopener noreferrer"
                     aria-label={social.label}
                     title={social.label}
-                    className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-beige bg-beige/40 text-text-primary hover:border-rose hover:text-(--color-rose-deep) hover:bg-rose/10 transition-all"
+                    className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-border-default bg-bg-surface/80 text-text-primary hover:border-rose hover:text-[var(--color-rose-deep)] hover:bg-rose/15 transition-all"
                   >
                     {social.icon ? (
                       (() => {

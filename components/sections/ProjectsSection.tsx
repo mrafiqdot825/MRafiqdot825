@@ -22,11 +22,11 @@ import type { Project } from "@/types/project";
 import { motion } from "framer-motion";
 
 const STATUS_CONFIG: Record<string, { color: string; bg: string; border: string }> = {
-  Live: { color: "text-(--color-rose-deep)", bg: "bg-rose/10", border: "border-rose/30" },
-  "In Progress": { color: "text-(--color-rose-active)", bg: "bg-rose/15", border: "border-rose/35" },
-  Archived: { color: "text-text-secondary", bg: "bg-beige/40", border: "border-greige" },
-  "APK Available": { color: "text-(--color-rose-hover)", bg: "bg-rose/12", border: "border-rose/30" },
-  "Open Source": { color: "text-(--color-rose-active)", bg: "bg-rose/10", border: "border-rose/30" },
+  Live: { color: "text-[var(--color-rose-deep)]", bg: "bg-rose/10", border: "border-rose/30" },
+  "In Progress": { color: "text-[var(--color-rose-active)]", bg: "bg-rose/15", border: "border-rose/35" },
+  Archived: { color: "text-text-primary", bg: "bg-bg-surface", border: "border-border-default" },
+  "APK Available": { color: "text-[var(--color-rose-hover)]", bg: "bg-rose/12", border: "border-rose/30" },
+  "Open Source": { color: "text-[var(--color-rose-active)]", bg: "bg-rose/10", border: "border-rose/30" },
 };
 
 const getStatusConfig = (status: string) => STATUS_CONFIG[status] || STATUS_CONFIG["Live"];

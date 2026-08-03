@@ -126,16 +126,22 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <head>
-        {/* Prevent flash of default accent color for returning visitors */}
+        {/* Prevent flash of default accent color and dark theme for returning visitors */}
         <script
           dangerouslySetInnerHTML={{
             __html: `
               (function() {
                 try {
-                  var saved = localStorage.getItem('accentColor');
-                  if (saved) {
-                    var root = document.documentElement;
-                    root.style.setProperty('--color-rose', saved);
+                  var savedAccent = localStorage.getItem('accentColor');
+                  if (savedAccent) {
+                    document.documentElement.style.setProperty('--color-rose', savedAccent);
+                  }
+                  var savedMode = localStorage.getItem('themeMode');
+                  var systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                  if (savedMode === 'dark' || (!savedMode && systemDark) || (savedMode === 'system' && systemDark)) {
+                    document.documentElement.classList.add('dark');
+                  } else {
+                    document.documentElement.classList.remove('dark');
                   }
                 } catch (e) {}
               })();

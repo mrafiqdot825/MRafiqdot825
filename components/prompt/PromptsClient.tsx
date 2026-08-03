@@ -32,21 +32,21 @@ const CATEGORIES: ("All" | PromptCategory)[] = [
 const getPlatformColor = (platform: string) => {
   const norm = platform.toLowerCase();
   if (norm.includes("claude")) {
-    return "bg-rose/18 border-rose/35 text-(--color-rose-deep)";
+    return "bg-[var(--accent-50)] border-[var(--color-rose)]/50 text-[var(--color-rose-deep)] font-semibold";
   }
   if (norm.includes("chatgpt")) {
-    return "bg-cream border-beige text-text-primary";
+    return "bg-emerald-500/10 border-emerald-500/30 text-emerald-900 dark:text-emerald-300 font-semibold";
   }
   if (norm.includes("gemini")) {
-    return "bg-beige/50 border-beige text-text-primary";
+    return "bg-sky-500/10 border-sky-500/30 text-sky-900 dark:text-sky-300 font-semibold";
   }
   if (norm.includes("midjourney")) {
-    return "bg-greige/40 border-greige text-text-secondary";
+    return "bg-purple-500/10 border-purple-500/30 text-purple-900 dark:text-purple-300 font-semibold";
   }
   if (norm.includes("sora") || norm.includes("runway") || norm.includes("luma")) {
-    return "bg-beige/30 border-rose/25 text-(--color-rose-deep)";
+    return "bg-amber-500/10 border-amber-500/30 text-amber-900 dark:text-amber-300 font-semibold";
   }
-  return "bg-cream/60 border-beige/60 text-text-secondary";
+  return "bg-bg-surface border-border-default text-text-primary font-semibold";
 };
 
 export default function PromptsClient() {
@@ -130,34 +130,33 @@ export default function PromptsClient() {
 
       <main className="page-shell min-h-screen bg-transparent text-text-primary pt-2 pb-21 px-4 md:px-8 relative z-10">
         <div className="max-w-5xl mx-auto">
-          <div className="mb-2 flex justify-center">
-            <Link
+          <div className="mb-6 flex justify-center">
+            <Button
               href="/"
-              className="inline-flex items-center gap-2.5 rounded-full px-4 py-2.5 text-xs font-mono font-bold tracking-wider text-text-secondary hover:text-text-primary border border-border-default hover:border-accent-600 bg-cream/40 hover:bg-accent-600/10 transition-all duration-300 group shadow-sm hover:shadow-[0_0_15px_rgba(215,189,176,0.35)] cursor-pointer"
+              variant="liquid"
+              size="sm"
+              icon={<AppleArrowLeft className="w-4 h-4 transition-transform duration-200 group-hover:-translate-x-1" />}
+              className="rounded-full px-5 py-2.5 text-xs font-mono font-bold tracking-wider uppercase group shadow-md hover:scale-105 transition-all duration-200"
             >
-              <AppleArrowLeft className="w-4 h-4 transition-transform duration-200 group-hover:-translate-x-1 text-text-secondary group-hover:text-accent-700" />
-              <span>BACK TO PORTFOLIO</span>
-            </Link>
+              Back to Portfolio
+            </Button>
           </div>
 
           {/* Header section */}
-          <div className="text-center md:text-left mt-0 mb-1 relative">
-            <span className="inline-flex items-center gap-1.5 font-mono text-xs font-semibold uppercase tracking-[0.24em] text-accent-700 bg-accent-50/70 border border-accent-100/50 px-3.5 py-1.5 rounded-full backdrop-blur-md">
+          <div className="text-center md:text-left mt-2 mb-6 relative">
+            <span className="inline-flex items-center gap-1.5 font-mono text-xs font-bold uppercase tracking-[0.2em] text-[var(--color-rose-deep)] bg-[var(--accent-50)] border border-[var(--color-rose)]/40 px-3.5 py-1.5 rounded-full shadow-xs">
               AI Engine Toolkit
             </span>
-            <h1 className="mt-3 font-heading text-4xl font-extrabold tracking-tight sm:text-6xl text-text-primary">
+            <h1 className="mt-3 font-heading text-4xl font-extrabold tracking-tight sm:text-5xl text-text-primary">
               The AI Prompt Deck
             </h1>
-            <p className="mt-3 max-w-2xl font-body text-base md:text-lg text-text-secondary leading-relaxed">
+            <p className="mt-2.5 max-w-2xl font-body text-base text-text-primary leading-relaxed">
               A curated registry of high-performance prompt templates. Type your variables directly into the fields below, see the live compilation, and copy the customized output.
             </p>
           </div>
 
           {/* Search, Category, and Platform controls */}
-          <div className="mb-5 flex flex-col gap-5 bg-bg-surface/30 backdrop-blur-xl border border-border-default/55 p-6 rounded-[28px] shadow-2xl relative overflow-hidden group">
-            {/* Ambient border gradient highlight on hover */}
-            <div className="absolute inset-0 bg-gradient-to-r from-accent-600/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-
+          <div className="mb-8 flex flex-col gap-5 bg-bg-surface/70 border border-border-default p-6 rounded-3xl shadow-lg relative overflow-hidden">
             {/* Search Input */}
             <div className="relative w-full z-10">
               <input
@@ -165,7 +164,7 @@ export default function PromptsClient() {
                 placeholder="Search prompts by title, description, or concepts..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-12 pr-5 py-4 text-sm rounded-[18px] border border-border-default bg-bg-page/40 text-text-primary placeholder-text-muted/60 focus:outline-none focus:ring-2 focus:ring-accent-600/50 focus:border-accent-600 transition-all duration-300 backdrop-blur-md"
+                className="w-full pl-5 pr-5 py-3.5 text-sm rounded-xl border border-border-default bg-bg-page text-text-primary placeholder:text-text-secondary/70 focus:outline-none focus:ring-2 focus:ring-[var(--color-rose)]/50 focus:border-[var(--color-rose)] transition-all duration-200 shadow-xs"
               />
             </div>
 
@@ -175,10 +174,11 @@ export default function PromptsClient() {
                 <button
                   key={category}
                   onClick={() => setSelectedCategory(category)}
-                  className={`px-4 py-2 rounded-[14px] text-xs font-mono transition-all duration-300 cursor-pointer border ${selectedCategory === category
-                    ? "bg-accent-600 text-text-primary shadow-lg shadow-accent-600/25 font-semibold border-accent-500"
-                    : "bg-bg-page/30 border-border-default/80 text-text-secondary hover:bg-bg-surface-hover hover:border-border-hover hover:text-text-primary"
-                    }`}
+                  className={`px-3.5 py-1.5 rounded-xl text-xs font-mono transition-all duration-200 cursor-pointer border ${
+                    selectedCategory === category
+                      ? "bg-[var(--color-rose-deep)] text-white shadow-sm font-bold border-transparent"
+                      : "bg-bg-page border-border-default text-text-primary hover:border-[var(--color-rose)] font-medium"
+                  }`}
                 >
                   {category}
                 </button>
@@ -186,17 +186,18 @@ export default function PromptsClient() {
             </div>
 
             {/* Platform selection */}
-            <div className="flex flex-wrap gap-1.5 items-center mt-2 border-t border-border-default/30 pt-4 z-10">
-              <span className="text-[11px] font-mono uppercase tracking-wider text-text-muted mr-3">Platform:</span>
+            <div className="flex flex-wrap gap-2 items-center mt-1 border-t border-border-default/60 pt-4 z-10">
+              <span className="text-xs font-mono uppercase tracking-wider text-text-primary font-bold mr-2">Platform:</span>
               <div className="flex flex-wrap gap-1.5">
                 {allPlatforms.map((platform) => (
                   <button
                     key={platform}
                     onClick={() => setSelectedPlatform(platform)}
-                    className={`px-3 py-1 rounded-full text-xs font-body transition-all duration-300 cursor-pointer border ${selectedPlatform === platform
-                      ? "bg-accent-50 border-accent-200 text-accent-700 font-semibold dark:bg-accent-950/20 dark:border-accent-900/30 dark:text-accent-400"
-                      : "bg-transparent border-transparent text-text-muted hover:border-border-default hover:text-text-primary"
-                      }`}
+                    className={`px-3 py-1 rounded-full text-xs font-medium transition-all duration-200 cursor-pointer border ${
+                      selectedPlatform === platform
+                        ? "bg-[var(--accent-50)] border-[var(--color-rose)]/60 text-[var(--color-rose-deep)] font-bold shadow-xs"
+                        : "bg-bg-page border-border-default text-text-primary hover:border-[var(--color-rose)]"
+                    }`}
                   >
                     {platform}
                   </button>
@@ -207,16 +208,16 @@ export default function PromptsClient() {
 
           {/* Empty state fallback */}
           {filteredPrompts.length === 0 && (
-            <div className="text-center py-20 bg-bg-surface/40 border border-border-default/60 rounded-[28px] backdrop-blur-xl">
-              <AppleTerminal className="mx-auto w-10 h-10 text-text-muted mb-4" />
-              <p className="font-body text-text-secondary text-base">No prompt templates found matching your selections.</p>
+            <div className="text-center py-16 bg-bg-surface border border-border-default rounded-3xl">
+              <AppleTerminal className="mx-auto w-10 h-10 text-text-secondary mb-3" />
+              <p className="font-body text-text-primary text-base font-medium">No prompt templates found matching your selections.</p>
               <button
                 onClick={() => {
                   setSearchQuery("");
                   setSelectedCategory("All");
                   setSelectedPlatform("All");
                 }}
-                className="mt-4 inline-flex items-center gap-2 text-sm font-medium text-accent-700 hover:text-accent-800 transition-colors duration-200 cursor-pointer"
+                className="mt-3 inline-flex items-center gap-2 text-xs font-bold text-[var(--color-rose-deep)] hover:underline transition-colors duration-200 cursor-pointer uppercase tracking-wider"
               >
                 Reset filters
               </button>
@@ -224,7 +225,7 @@ export default function PromptsClient() {
           )}
 
           {/* Prompts list grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {filteredPrompts.map((prompt) => {
               const userVals = variablesState[prompt.id] || {};
               const hasVariables = prompt.variables && prompt.variables.length > 0;
@@ -234,19 +235,19 @@ export default function PromptsClient() {
               return (
                 <article
                   key={prompt.id}
-                  className="glass-panel rounded-[28px] border border-border-default p-6 md:p-8 flex flex-col justify-between transition-all duration-300 hover:border-border-hover group relative overflow-hidden bg-bg-surface/30 backdrop-blur-xl shadow-xl hover:-translate-y-0.5"
+                  className="glass-panel rounded-3xl border border-border-default p-6 md:p-7 flex flex-col justify-between transition-all duration-300 hover:border-[var(--color-rose)]/70 bg-bg-surface/80 shadow-md hover:shadow-xl relative overflow-hidden"
                 >
                   <div>
                     {/* Header tags */}
-                    <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
-                      <span className="font-mono text-[10px] uppercase tracking-wider text-accent-700 bg-accent-50 dark:bg-accent-950/20 px-2.5 py-1 rounded-md border border-accent-100/50 dark:border-accent-900/30">
+                    <div className="flex flex-wrap items-center justify-between gap-2.5 mb-4">
+                      <span className="font-mono text-xs uppercase tracking-wider text-[var(--color-rose-deep)] bg-[var(--accent-50)] px-2.5 py-1 rounded-md border border-[var(--color-rose)]/40 font-bold">
                         {prompt.category}
                       </span>
-                      <div className="flex gap-1.5">
+                      <div className="flex flex-wrap gap-1.5">
                         {prompt.platforms.map((plat) => (
                           <span
                             key={plat}
-                            className={`font-body text-[10px] font-semibold px-2 py-0.5 rounded-full border ${getPlatformColor(plat)}`}
+                            className={`font-body text-xs font-semibold px-2.5 py-0.5 rounded-full border ${getPlatformColor(plat)}`}
                           >
                             {plat}
                           </span>
@@ -255,28 +256,28 @@ export default function PromptsClient() {
                     </div>
 
                     {/* Title & Info */}
-                    <h2 className="font-heading text-xl md:text-2xl font-bold text-text-primary mb-2.5 tracking-tight leading-tight">
+                    <h2 className="font-heading text-xl md:text-2xl font-bold text-text-primary mb-2 tracking-tight leading-tight">
                       {prompt.title}
                     </h2>
-                    <p className="font-body text-[14px] text-text-secondary leading-relaxed mb-6">
+                    <p className="font-body text-sm text-text-primary leading-relaxed mb-5">
                       {prompt.summary}
                     </p>
 
                     {/* Playground variables editor */}
                     {hasVariables && (
-                      <div className="mb-6 p-4 rounded-2xl bg-bg-page/35 border border-border-default/45 backdrop-blur-md">
+                      <div className="mb-5 p-4 rounded-2xl bg-bg-page border border-border-default">
                         <div className="flex items-center gap-1.5 mb-3">
-                          <AppleSliders className="w-3.5 h-3.5 text-accent-600" />
-                          <span className="font-mono text-[10px] uppercase tracking-wider text-text-secondary font-semibold">
+                          <AppleSliders className="w-4 h-4 text-[var(--color-rose-deep)]" />
+                          <span className="font-mono text-xs uppercase tracking-wider text-text-primary font-bold">
                             Playground Variables
                           </span>
                         </div>
-                        <div className="space-y-4">
+                        <div className="space-y-3.5">
                           {prompt.variables?.map((v) => (
-                            <div key={v.name} className="flex flex-col gap-1.5">
-                              <label className="text-[11px] font-mono text-text-secondary flex justify-between">
+                            <div key={v.name} className="flex flex-col gap-1">
+                              <label className="text-xs font-mono text-text-primary font-semibold flex justify-between">
                                 <span>{v.name}</span>
-                                <span className="text-[10px] text-text-muted">{v.description}</span>
+                                <span className="text-[11px] text-text-secondary font-normal">{v.description}</span>
                               </label>
                               {v.type === "textarea" ? (
                                 <textarea
@@ -284,7 +285,7 @@ export default function PromptsClient() {
                                   value={userVals[v.name] || ""}
                                   onChange={(e) => handleVariableChange(prompt.id, v.name, e.target.value)}
                                   rows={3}
-                                  className="w-full p-3 rounded-[12px] border border-border-default bg-bg-page/40 text-xs text-text-primary focus:outline-none focus:ring-1 focus:ring-accent-600 placeholder-text-muted/40 font-body transition-all"
+                                  className="w-full p-3 rounded-xl border border-border-default bg-bg-surface text-xs text-text-primary focus:outline-none focus:ring-1 focus:ring-[var(--color-rose)] placeholder:text-text-secondary/60 font-body transition-all"
                                 />
                               ) : (
                                 <input
@@ -292,7 +293,7 @@ export default function PromptsClient() {
                                   placeholder={v.placeholder}
                                   value={userVals[v.name] || ""}
                                   onChange={(e) => handleVariableChange(prompt.id, v.name, e.target.value)}
-                                  className="w-full px-3 py-2 rounded-[12px] border border-border-default bg-bg-page/40 text-xs text-text-primary focus:outline-none focus:ring-1 focus:ring-accent-600 placeholder-text-muted/40 font-body transition-all"
+                                  className="w-full px-3 py-2 rounded-xl border border-border-default bg-bg-surface text-xs text-text-primary focus:outline-none focus:ring-1 focus:ring-[var(--color-rose)] placeholder:text-text-secondary/60 font-body transition-all"
                                 />
                               )}
                             </div>
@@ -302,12 +303,12 @@ export default function PromptsClient() {
                     )}
 
                     {/* Code block Live Preview */}
-                    <div className="mb-6">
-                      <span className="block font-mono text-[10px] uppercase tracking-wider text-text-muted mb-2 font-semibold">
+                    <div className="mb-5">
+                      <span className="block font-mono text-xs uppercase tracking-wider text-text-primary mb-1.5 font-bold">
                         Compiled Output
                       </span>
-                      <div className="glass-panel-inset rounded-2xl p-4 font-mono text-xs text-text-secondary bg-text-primary/5 overflow-y-auto max-h-[160px] border border-border-default/40 relative">
-                        <pre className="whitespace-pre-wrap break-all pr-4 select-all leading-relaxed font-mono">
+                      <div className="rounded-2xl p-4 font-mono text-xs text-text-primary bg-bg-page border border-border-default overflow-y-auto max-h-[160px] relative shadow-inner">
+                        <pre className="whitespace-pre-wrap break-all pr-4 select-all leading-relaxed font-mono font-medium">
                           {compilePrompt(prompt)}
                         </pre>
                       </div>
@@ -315,17 +316,17 @@ export default function PromptsClient() {
 
                     {/* Pro Tips collapsible */}
                     {prompt.tips && prompt.tips.length > 0 && (
-                      <div className="mb-6 border-t border-border-default/30 pt-3">
+                      <div className="mb-5 border-t border-border-default pt-3">
                         <button
                           onClick={() => toggleTips(prompt.id)}
-                          className="flex items-center gap-1.5 text-xs text-text-muted hover:text-text-primary transition-colors duration-200 cursor-pointer font-mono font-semibold"
+                          className="flex items-center gap-1.5 text-xs text-text-primary hover:text-[var(--color-rose-deep)] transition-colors duration-200 cursor-pointer font-mono font-bold"
                         >
-                          <AppleLightbulb className="w-3.5 h-3.5 text-(--color-rose-deep)" />
+                          <AppleLightbulb className="w-4 h-4 text-[var(--color-rose-deep)]" />
                           <span>Pro Tips for Best Results</span>
                           {tipsExpanded ? <AppleChevronUp className="w-3.5 h-3.5" /> : <AppleChevronDown className="w-3.5 h-3.5" />}
                         </button>
                         {tipsExpanded && (
-                          <ul className="mt-2.5 space-y-1.5 list-disc pl-4 text-xs text-text-secondary leading-relaxed font-body">
+                          <ul className="mt-2.5 space-y-1.5 list-disc pl-4 text-xs text-text-primary leading-relaxed font-body font-medium">
                             {prompt.tips.map((tip, idx) => (
                               <li key={idx}>{tip}</li>
                             ))}
@@ -336,15 +337,15 @@ export default function PromptsClient() {
                   </div>
 
                   {/* Actions Footer */}
-                  <div className="mt-4 pt-4 border-t border-border-default/30 flex justify-center w-full">
+                  <div className="mt-2 pt-3 border-t border-border-default flex justify-center w-full">
                     <Button
                       onClick={() => handleCopy(prompt)}
                       variant="liquid"
                       size="sm"
-                      className="w-full text-xs font-semibold"
+                      className="w-full text-xs font-bold"
                       icon={
                         isCopied ? (
-                          <AppleCheck className="w-4 h-4 animate-bounce" />
+                          <AppleCheck className="w-4 h-4 text-emerald-600" />
                         ) : (
                           <AppleCopy className="w-3.5 h-3.5" />
                         )
@@ -359,21 +360,15 @@ export default function PromptsClient() {
           </div>
 
           {/* Unlock More Prompts CTA Banner */}
-          <div className="mt-16 p-8 md:p-12 rounded-[28px] border border-border-default/65 bg-bg-surface/20 backdrop-blur-xl relative overflow-hidden text-center max-w-3xl mx-auto shadow-2xl">
-            {/* Background Accent Mesh */}
-            <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
-              <div className="absolute -top-12 -right-12 w-[180px] h-[180px] rounded-full bg-accent-600/10 blur-[40px]" />
-              <div className="absolute -bottom-12 -left-12 w-[180px] h-[180px] rounded-full bg-rose/10 blur-[40px]" />
-            </div>
-
+          <div className="mt-16 p-8 md:p-10 rounded-3xl border border-border-default bg-bg-surface text-center max-w-3xl mx-auto shadow-xl relative overflow-hidden">
             <div className="relative z-10">
-              <span className="inline-flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-[0.24em] text-accent-700 bg-accent-50 dark:bg-accent-950/20 px-3.5 py-1.5 rounded-full border border-accent-100/50 dark:border-accent-900/30 mb-4">
+              <span className="inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-[0.2em] text-[var(--color-rose-deep)] bg-[var(--accent-50)] px-3.5 py-1.5 rounded-full border border-[var(--color-rose)]/40 font-bold mb-3.5">
                 Unlock Full Library
               </span>
-              <h3 className="font-heading text-2xl md:text-3xl font-extrabold text-text-primary tracking-tight mb-3">
+              <h3 className="font-heading text-2xl md:text-3xl font-extrabold text-text-primary tracking-tight mb-2.5">
                 Need Custom Prompt Architectures?
               </h3>
-              <p className="font-body text-sm text-text-secondary leading-relaxed max-w-xl mx-auto mb-6">
+              <p className="font-body text-sm text-text-primary leading-relaxed max-w-xl mx-auto mb-6">
                 I design and optimize specialized prompt chains, system instructions, and RAG architectures for custom engineering and product workflows. Get in touch to unlock the full library or collaborate on custom AI integrations.
               </p>
 
@@ -382,7 +377,7 @@ export default function PromptsClient() {
                   href="/#contact"
                   variant="liquid"
                   size="md"
-                  className="px-8 font-semibold"
+                  className="px-8 font-bold"
                 >
                   Get in Touch
                 </Button>
@@ -395,3 +390,4 @@ export default function PromptsClient() {
     </>
   );
 }
+

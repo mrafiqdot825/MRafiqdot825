@@ -4,7 +4,7 @@ import { useState } from "react";
 import { services } from "@/data/services";
 import { AppleCpu, AppleSparkles, AppleServerIcon, AppleDevice, AppleCode, AppleZap, AppleLayers, AppleMessage } from "@/components/ui/AppleIcons";
 import Modal from "@/components/ui/Modal";
-import RadialGlowButton from "@/components/ui/RadialGlowButton";
+import Button from "@/components/ui/Button";
 import type { Service } from "@/types/service";
 
 const CUBE_SERVICES = [
@@ -25,6 +25,20 @@ export default function ServicesSection3D() {
     // Match with real data from services.ts or fallback to primary service
     const matched = services.find((s) => s.title.toLowerCase().includes(title.toLowerCase())) || services[0];
     setSelectedService(matched);
+  };
+
+  const handleBookConsultation = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setSelectedService(null);
+
+    setTimeout(() => {
+      const contactSection = document.getElementById("contact");
+      if (contactSection) {
+        contactSection.scrollIntoView({ behavior: "smooth" });
+      } else {
+        window.location.href = "/#contact";
+      }
+    }, 150);
   };
 
   return (
@@ -154,9 +168,15 @@ export default function ServicesSection3D() {
             </div>
 
             <div className="pt-2">
-              <RadialGlowButton href="#contact" containerClassName="w-full flex">
-                <span>Book Service Consultation</span>
-              </RadialGlowButton>
+              <Button
+                href="#contact"
+                onClick={handleBookConsultation}
+                variant="liquid"
+                size="md"
+                className="w-full font-bold text-sm justify-center"
+              >
+                Book Service Consultation
+              </Button>
             </div>
           </div>
         )}

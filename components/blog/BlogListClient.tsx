@@ -5,6 +5,7 @@ import Link from "next/link";
 import Navbar from "@/components/layout/Navbar";
 import CustomCursor from "@/components/ui/CustomCursor";
 import MouseBackgroundGlow from "@/components/ui/MouseBackgroundGlow";
+import Button from "@/components/ui/Button";
 import { blogPosts, type BlogCategory } from "@/data/blog";
 import { AppleSearch, AppleCalendar, AppleClock, AppleArrowRight, AppleUser, AppleArrowLeft } from "@/components/ui/AppleIcons";
 
@@ -77,14 +78,16 @@ const BlogListClient = () => {
       <main className="page-shell min-h-screen bg-transparent text-text-primary pt-2 pb-21 px-4 md:px-8 relative z-10">
         <div className="max-w-5xl mx-auto">
           {/* Back to Portfolio button */}
-          <div className="mb-2 flex justify-center">
-            <Link
+          <div className="mb-6 flex justify-center">
+            <Button
               href="/"
-              className="inline-flex items-center gap-2.5 rounded-full px-4 py-2.5 text-xs font-mono font-bold tracking-wider text-text-secondary hover:text-text-primary border border-border-default hover:border-accent-600 bg-cream/40 hover:bg-accent-600/10 transition-all duration-300 group shadow-sm hover:shadow-[0_0_15px_rgba(215,189,176,0.25)] cursor-pointer"
+              variant="liquid"
+              size="sm"
+              icon={<AppleArrowLeft className="w-4 h-4 transition-transform duration-200 group-hover:-translate-x-1" />}
+              className="rounded-full px-5 py-2.5 text-xs font-mono font-bold tracking-wider uppercase group shadow-md hover:scale-105 transition-all duration-200"
             >
-              <AppleArrowLeft className="w-4 h-4 transition-transform duration-200 group-hover:-translate-x-1 text-text-secondary group-hover:text-accent-700" />
-              <span>BACK TO PORTFOLIO</span>
-            </Link>
+              Back to Portfolio
+            </Button>
           </div>
 
           {/* Header Section */}

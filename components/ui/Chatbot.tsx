@@ -14,7 +14,7 @@ const formatInlineMarkdown = (text: string) => {
   return parts.map((part, i) => {
     if (i % 2 === 1) {
       return (
-        <strong key={i} className="font-semibold text-text-primary">
+        <strong key={i} className="font-bold text-text-primary">
           {part}
         </strong>
       );
@@ -40,8 +40,8 @@ const renderMessageText = (text: string) => {
         if (bulletMatch) {
           return (
             <div key={`bullet-${index}`} className="flex items-start gap-2 pl-1.5">
-              <span className="text-text-secondary select-none">•</span>
-              <p className="text-sm leading-relaxed text-inherit">
+              <span className="text-text-primary select-none font-bold">•</span>
+              <p className="text-sm leading-relaxed text-inherit font-medium">
                 {formatInlineMarkdown(bulletMatch[1])}
               </p>
             </div>
@@ -53,10 +53,10 @@ const renderMessageText = (text: string) => {
         if (numberedMatch) {
           return (
             <div key={`numbered-${index}`} className="flex items-start gap-2 pl-1.5">
-              <span className="min-w-4 text-sm text-text-secondary select-none">
+              <span className="min-w-4 text-sm text-text-primary select-none font-bold">
                 {numberedMatch[1]}.
               </span>
-              <p className="text-sm leading-relaxed text-inherit">
+              <p className="text-sm leading-relaxed text-inherit font-medium">
                 {formatInlineMarkdown(numberedMatch[2])}
               </p>
             </div>
@@ -69,7 +69,7 @@ const renderMessageText = (text: string) => {
           return (
             <p
               key={`heading-md-${index}`}
-              className="pt-1.5 text-sm font-bold text-text-primary"
+              className="pt-1.5 text-sm font-extrabold text-text-primary"
             >
               {formatInlineMarkdown(mdHeadingMatch[2])}
             </p>
@@ -82,7 +82,7 @@ const renderMessageText = (text: string) => {
           return (
             <p
               key={`heading-${index}`}
-              className="pt-1.5 text-sm font-bold text-text-primary"
+              className="pt-1.5 text-sm font-extrabold text-text-primary"
             >
               {headingMatch[1]}
             </p>
@@ -92,7 +92,7 @@ const renderMessageText = (text: string) => {
         return (
           <p
             key={`paragraph-${index}`}
-            className="text-sm leading-relaxed text-inherit"
+            className="text-sm leading-relaxed text-inherit font-medium"
           >
             {formatInlineMarkdown(line)}
           </p>
@@ -122,20 +122,20 @@ const Chatbot = () => {
   };
 
   return (
-    <Card className="liquid-glass-card relative overflow-hidden p-0 flex flex-col justify-between shadow-2xl">
+    <Card className="liquid-glass-card relative overflow-hidden p-0 flex flex-col justify-between shadow-2xl border border-border-default">
       <div className="relative flex h-full min-h-[500px] flex-col">
         {/* Header */}
         <div className="flex items-center justify-between border-b border-border-default bg-cream/40 backdrop-blur-sm px-4 py-3">
           <div className="flex items-center gap-3">
-            <span className="inline-flex h-10 w-10 items-center justify-center rounded-[12px] border border-accent-100 bg-accent-50 text-accent-700">
+            <span className="inline-flex h-10 w-10 items-center justify-center rounded-[12px] border border-rose/40 bg-rose/10 text-[var(--color-rose-deep)]">
               <AppleCpu className={ICON_CLASS.nav} />
             </span>
             <div>
               <p className="text-sm font-bold text-text-primary">
                 Rafiq Assistant
               </p>
-              <p className="flex items-center gap-2 text-xs text-text-secondary">
-                <span className="h-2 w-2 rounded-full bg-(--color-rose-deep)" />
+              <p className="flex items-center gap-2 text-xs text-text-primary font-semibold">
+                <span className="h-2 w-2 rounded-full bg-[var(--color-rose-deep)]" />
                 Online
               </p>
             </div>
@@ -159,26 +159,26 @@ const Chatbot = () => {
                   }`}
                 >
                   {isAssistant && (
-                    <span className="mb-1 inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-accent-100 bg-accent-50 text-accent-700">
+                    <span className="mb-1 inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-rose/40 bg-rose/10 text-[var(--color-rose-deep)]">
                       <AppleStar className={ICON_CLASS.action} />
                     </span>
                   )}
 
                   <div
-                    className={`max-w-[84%] rounded-2xl px-4 py-3 text-sm leading-relaxed shadow-sm ${
+                    className={`max-w-[84%] rounded-2xl px-4 py-3 text-sm leading-relaxed shadow-xs ${
                       isAssistant
-                        ? "rounded-bl-md glass-chatbot-message-assistant text-text-primary"
-                        : "rounded-br-md glass-chatbot-message-user text-accent-700"
+                        ? "rounded-bl-md bg-bg-surface/90 text-text-primary border border-border-default font-medium"
+                        : "rounded-br-md liquid-glass-accent-button text-text-primary font-semibold"
                     }`}
                   >
                     {renderMessageText(chatMessage.text)}
-                    <p className="mt-2 text-[10px] uppercase tracking-[0.12em] text-text-muted">
+                    <p className="mt-2 text-[10px] uppercase tracking-[0.12em] text-text-primary/70 font-semibold">
                       {isAssistant ? "Assistant" : "You"} • {chatMessage.time}
                     </p>
                   </div>
 
                   {!isAssistant && (
-                    <span className="mb-1 inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-border-default bg-bg-surface-hover text-text-secondary">
+                    <span className="mb-1 inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-border-default bg-bg-surface-hover text-text-primary">
                       <AppleUser className={ICON_CLASS.action} />
                     </span>
                   )}
@@ -188,14 +188,14 @@ const Chatbot = () => {
 
             {isLoading && (
               <div className="flex items-end gap-2">
-                <span className="mb-1 inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-accent-100 bg-accent-50 text-accent-700">
+                <span className="mb-1 inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-rose/40 bg-rose/10 text-[var(--color-rose-deep)]">
                   <AppleStar className={ICON_CLASS.action} />
                 </span>
-                <div className="rounded-2xl rounded-bl-md border border-border-default bg-bg-surface px-4 py-3 text-sm text-text-secondary">
+                <div className="rounded-2xl rounded-bl-md border border-border-default bg-bg-surface px-4 py-3 text-sm text-text-primary">
                   <div className="flex items-center gap-1.5">
-                    <span className="h-2 w-2 animate-bounce rounded-full bg-text-muted [animation-delay:-0.2s]" />
-                    <span className="h-2 w-2 animate-bounce rounded-full bg-text-muted [animation-delay:-0.1s]" />
-                    <span className="h-2 w-2 animate-bounce rounded-full bg-text-muted" />
+                    <span className="h-2 w-2 animate-bounce rounded-full bg-[var(--color-rose-deep)] [animation-delay:-0.2s]" />
+                    <span className="h-2 w-2 animate-bounce rounded-full bg-[var(--color-rose-deep)] [animation-delay:-0.1s]" />
+                    <span className="h-2 w-2 animate-bounce rounded-full bg-[var(--color-rose-deep)]" />
                   </div>
                 </div>
               </div>
@@ -210,7 +210,7 @@ const Chatbot = () => {
                 type="button"
                 onClick={() => sendChatMessage(prompt)}
                 disabled={isLoading}
-                className="rounded-full glass-button-secondary px-3 py-1.5 font-mono text-xs font-medium text-text-secondary disabled:cursor-not-allowed disabled:opacity-50"
+                className="rounded-full bg-bg-surface border border-border-default px-3.5 py-1.5 font-mono text-xs font-bold text-text-primary hover:border-rose hover:bg-rose/15 hover:text-[var(--color-rose-deep)] transition-all cursor-pointer shadow-xs active:scale-95 disabled:cursor-not-allowed disabled:opacity-50"
               >
                 {prompt}
               </button>
@@ -228,16 +228,16 @@ const Chatbot = () => {
                 onChange={(event) => setChatInput(event.target.value)}
                 placeholder="Type your message about experience, skills, or bio..."
                 disabled={isLoading}
-                className="w-full rounded-full glass-input py-3 pl-4 pr-12 text-sm text-text-primary outline-none placeholder:text-text-muted disabled:opacity-50"
+                className="w-full rounded-full glass-input py-3 pl-4 pr-12 text-sm text-text-primary font-medium outline-none placeholder:text-text-primary/50 disabled:opacity-50"
               />
-              <span className="pointer-events-none absolute inset-y-0 right-3 inline-flex items-center text-text-muted">
+              <span className="pointer-events-none absolute inset-y-0 right-3 inline-flex items-center text-[var(--color-rose-deep)]">
                 <AppleCpu className={ICON_CLASS.action} />
               </span>
             </div>
             <button
               type="submit"
               disabled={isLoading || !chatInput.trim()}
-              className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-accent-600 text-text-primary transition hover:bg-accent-700 active:bg-accent-800 disabled:cursor-not-allowed disabled:bg-accent-100 disabled:text-text-muted"
+              className="inline-flex h-11 w-11 items-center justify-center rounded-full liquid-glass-accent-button text-text-primary transition hover:scale-105 active:scale-95 disabled:cursor-not-allowed disabled:opacity-50 shadow-md cursor-pointer shrink-0"
               aria-label="Send message"
             >
               <AppleSend className={ICON_CLASS.action} />

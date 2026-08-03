@@ -1,6 +1,7 @@
+"use client";
+
 import { useEffect, useState, useRef } from "react";
 import { usePathname } from "next/navigation";
-import Image from "next/image";
 import { ICON_CLASS } from "@/lib/constants";
 import { useGlassCursor } from "@/hooks/useGlassCursor";
 import {
@@ -19,11 +20,7 @@ const NAV_ITEMS = [
   { label: "Home", href: "#home", icon: AppleHome },
   { label: "About", href: "#about", icon: AppleUser },
   { label: "Experience", href: "#experience", icon: AppleBriefcase },
-  {
-    label: "Projects",
-    href: "#projects",
-    icon: AppleLayers,
-  },
+  { label: "Projects", href: "#projects", icon: AppleLayers },
   { label: "Prompts", href: "/prompts", icon: AppleTerminal },
   { label: "Blog", href: "/blog", icon: AppleBook },
 ];
@@ -52,7 +49,9 @@ const Navbar = () => {
       return;
     }
 
-    const sections = NAV_ITEMS.filter((item) => item.href.startsWith("#") && item.href !== "#home")
+    const sections = NAV_ITEMS.filter(
+      (item) => item.href.startsWith("#") && item.href !== "#home"
+    )
       .map((item) => document.getElementById(item.href.slice(1)))
       .filter((section): section is HTMLElement => section !== null);
 
@@ -97,7 +96,7 @@ const Navbar = () => {
 
   const handleNavClick = (
     e: React.MouseEvent<HTMLAnchorElement>,
-    href: string,
+    href: string
   ) => {
     if (href === "#home") {
       if (isHomePage) {
@@ -109,30 +108,29 @@ const Navbar = () => {
   };
 
   return (
-    <header className="fixed inset-x-0 bottom-4 z-50 px-4 transition-all duration-300 translate-y-0 opacity-100">
+    <header className="fixed inset-x-0 bottom-4 z-50 px-2.5 sm:px-4 transition-all duration-300 translate-y-0 opacity-100">
       <nav
         ref={glassRef}
-        className="relative mx-auto flex w-full max-w-4xl items-center justify-between rounded-full px-3.5 sm:px-4 py-2 transition-all duration-300 liquid-glass-nav focus-within:ring-2 focus-within:ring-accent-100"
+        className="relative mx-auto flex w-fit max-w-full md:w-full md:max-w-4xl items-center justify-between rounded-full px-2.5 sm:px-4 py-1.5 sm:py-2 transition-all duration-300 liquid-glass-nav focus-within:ring-2 focus-within:ring-accent-100 shadow-xl"
         aria-label="Main navigation"
       >
         <div className="liquid-glass-cursor-glow" aria-hidden="true" />
 
-        {/* Left: Brand / Logo */}
-        <div className="flex items-center justify-start md:flex-1">
+        {/* Left: Brand / Logo (Desktop) */}
+        <div className="hidden md:flex items-center justify-start md:flex-1">
           <a
             href={isHomePage ? "#home" : "/"}
             onClick={(e) => handleNavClick(e, "#home")}
-            className="relative inline-flex items-center gap-1.5 sm:gap-2 rounded-full p-1 sm:pr-3 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-accent-600"
+            className="relative inline-flex items-center gap-2 rounded-full p-1 sm:pr-3 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-accent-600 cursor-pointer"
             aria-label="Go to home"
           >
-
-            <span className="hidden sm:inline text-base font-bold tracking-tight text-text-primary font-heading">
+            <span className="text-base font-bold tracking-tight text-text-primary font-heading">
               mrafiqdot825
             </span>
           </a>
         </div>
 
-        {/* Center: Nav Items */}
+        {/* Center: Nav Items Dock */}
         <div className="flex items-center justify-center">
           <ul
             ref={ulRef}
@@ -140,9 +138,10 @@ const Navbar = () => {
               setHoveredIndex(null);
               setDirection(0);
             }}
-            className="relative flex items-center gap-1 md:gap-2"
+            className="relative flex items-center gap-0.5 sm:gap-1 md:gap-2"
           >
-            <li className="pointer-events-none absolute top-0 left-0 z-30">
+            {/* Desktop Tooltip */}
+            <li className="pointer-events-none absolute top-0 left-0 z-30 hidden md:block">
               <AnimatePresence>
                 {hoveredIndex !== null && (
                   <motion.div
@@ -160,11 +159,11 @@ const Navbar = () => {
                   >
                     <div
                       className={cn(
-                        "-translate-x-1/2 px-5 py-2 rounded-lg",
+                        "-translate-x-1/2 px-4 py-1.5 rounded-lg",
                         "bg-text-primary text-offwhite",
                         "shadow-md flex items-center justify-center",
                         "border border-text-primary",
-                        "min-w-25",
+                        "min-w-20"
                       )}
                     >
                       <div className="relative h-4 flex items-center justify-center overflow-hidden w-full">
@@ -191,7 +190,7 @@ const Navbar = () => {
                               duration: 0.3,
                               ease: "easeOut",
                             }}
-                            className="text-sm font-medium tracking-wide whitespace-nowrap text-current"
+                            className="text-xs font-semibold tracking-wide whitespace-nowrap text-current"
                           >
                             {NAV_ITEMS[hoveredIndex].label}
                           </motion.span>
@@ -207,9 +206,10 @@ const Navbar = () => {
               const IconComponent = item.icon;
               const itemHref = getHref(item.href);
               const isItemHovered = hoveredIndex === index;
+              const isActive = activeHref === item.href;
 
               const handleMouseEnter = (
-                e: React.MouseEvent<HTMLAnchorElement>,
+                e: React.MouseEvent<HTMLAnchorElement>
               ) => {
                 if (hoveredIndex !== null && index !== hoveredIndex) {
                   setDirection(index > hoveredIndex ? 1 : -1);
@@ -234,23 +234,33 @@ const Navbar = () => {
                     onClick={(e) => handleNavClick(e, item.href)}
                     onMouseEnter={handleMouseEnter}
                     aria-label={item.label}
-                    aria-current={activeHref === item.href ? "page" : undefined}
-                    className={`inline-flex items-center justify-center rounded-full p-2.5 md:px-5 md:py-2 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-accent-600 focus:ring-offset-2 ${activeHref === item.href
-                      ? "liquid-glass-active-item text-text-primary font-bold shadow-sm"
-                      : "text-text-primary font-medium hover:bg-rose/15 hover:text-(--color-rose-deep)"
-                      }`}
+                    aria-current={isActive ? "page" : undefined}
+                    className={`relative inline-flex items-center justify-center rounded-full p-2 sm:p-2.5 md:px-4 md:py-2 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-accent-600 cursor-pointer ${
+                      isActive
+                        ? "liquid-glass-active-item text-text-primary font-bold shadow-sm"
+                        : "text-text-primary font-medium hover:bg-rose/15 hover:text-[var(--color-rose-deep)]"
+                    }`}
                   >
                     <motion.div
-                      whileTap={{ scale: 0.95 }}
+                      whileTap={{ scale: 0.9 }}
                       animate={{
                         scale: isItemHovered ? 1.15 : 1,
-                        y: isItemHovered ? -3 : 0,
+                        y: isItemHovered ? -2 : 0,
                       }}
-                      transition={{ type: "spring", stiffness: 300, damping: 24 }}
-                      className="flex items-center justify-center w-5.5 h-5.5"
+                      transition={{
+                        type: "spring",
+                        stiffness: 300,
+                        damping: 24,
+                      }}
+                      className="flex items-center justify-center w-5 h-5 sm:w-5.5 sm:h-5.5"
                     >
                       <IconComponent className={ICON_CLASS.nav} />
                     </motion.div>
+
+                    {/* Active Dot Indicator for Mobile */}
+                    {isActive && (
+                      <span className="md:hidden absolute -bottom-0.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-[var(--color-rose-deep)]" />
+                    )}
                   </a>
                 </li>
               );
@@ -258,11 +268,11 @@ const Navbar = () => {
           </ul>
         </div>
 
-        {/* Right: CTA Button */}
-        <div className="hidden items-center justify-end md:flex md:flex-1">
+        {/* Right: CTA Button (Desktop) */}
+        <div className="hidden md:flex items-center justify-end md:flex-1">
           <a
             href={isHomePage ? "#contact" : "/#contact"}
-            className="relative inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-bold transition focus:outline-none focus:ring-2 focus:ring-accent-600 focus:ring-offset-2 liquid-glass-accent-button text-text-primary"
+            className="relative inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-bold transition focus:outline-none focus:ring-2 focus:ring-accent-600 liquid-glass-accent-button text-text-primary cursor-pointer hover:scale-105"
           >
             <AppleMessage className={ICON_CLASS.action} />
             Let's Talk
@@ -274,3 +284,4 @@ const Navbar = () => {
 };
 
 export default Navbar;
+

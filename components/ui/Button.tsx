@@ -1,4 +1,4 @@
-import type { AnchorHTMLAttributes, ButtonHTMLAttributes, ReactNode } from "react";
+import type { AnchorHTMLAttributes, ButtonHTMLAttributes, MouseEventHandler, ReactNode } from "react";
 import { cn } from "@/lib/utils";
 import LiquidMetalButton, { type LiquidMetalProps } from "./LiquidMetalButton";
 
@@ -9,7 +9,7 @@ type ButtonProps = {
   className?: string;
   variant?: "primary" | "secondary" | "metal" | "liquid";
   type?: ButtonHTMLAttributes<HTMLButtonElement>["type"];
-  onClick?: ButtonHTMLAttributes<HTMLButtonElement>["onClick"];
+  onClick?: MouseEventHandler<HTMLButtonElement | HTMLAnchorElement>;
   disabled?: boolean;
   target?: AnchorHTMLAttributes<HTMLAnchorElement>["target"];
   rel?: AnchorHTMLAttributes<HTMLAnchorElement>["rel"];
@@ -78,7 +78,14 @@ const Button = ({
 
   if (href) {
     return (
-      <a href={href} download={download} target={target} rel={rel || (target === "_blank" ? "noopener noreferrer" : undefined)} className={baseClass}>
+      <a
+        href={href}
+        onClick={onClick}
+        download={download}
+        target={target}
+        rel={rel || (target === "_blank" ? "noopener noreferrer" : undefined)}
+        className={baseClass}
+      >
         {icon && <span className="mr-2 inline-flex items-center shrink-0">{icon}</span>}
         {children}
         {iconRight && <span className="ml-2 inline-flex items-center shrink-0">{iconRight}</span>}
