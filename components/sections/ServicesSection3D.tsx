@@ -1,8 +1,19 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { services } from "@/data/services";
-import { AppleCpu, AppleSparkles, AppleServerIcon, AppleDevice, AppleCode, AppleZap, AppleLayers, AppleMessage } from "@/components/ui/AppleIcons";
+import {
+  AppleCpu,
+  AppleSparkles,
+  AppleServerIcon,
+  AppleDevice,
+  AppleCode,
+  AppleZap,
+  AppleLayers,
+  AppleMessage,
+  AppleArrowLeft,
+  AppleArrowRight,
+} from "@/components/ui/AppleIcons";
 import Modal from "@/components/ui/Modal";
 import Button from "@/components/ui/Button";
 import type { Service } from "@/types/service";
@@ -20,9 +31,48 @@ const CUBE_SERVICES = [
 
 export default function ServicesSection3D() {
   const [selectedService, setSelectedService] = useState<Service | null>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const carouselRef = useRef<HTMLDivElement>(null);
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  const handlePrev = () => {
+    if (activeIndex > 0) {
+      setActiveIndex((prev) => prev - 1);
+    }
+  };
+
+  const handleNext = () => {
+    if (activeIndex < CUBE_SERVICES.length - 1) {
+      setActiveIndex((prev) => prev + 1);
+    }
+  };
+
+  useEffect(() => {
+    const activeCard = cardRefs.current[activeIndex];
+    const container = carouselRef.current;
+
+    if (activeCard && container) {
+      const containerWidth = container.clientWidth;
+      const cardLeft = activeCard.offsetLeft;
+      const cardWidth = activeCard.clientWidth;
+      const targetScroll = cardLeft - containerWidth / 2 + cardWidth / 2;
+
+      container.scrollTo({
+        left: targetScroll,
+        behavior: "smooth",
+      });
+    }
+  }, [activeIndex]);
+
+  const handleCardClick = (index: number, title: string) => {
+    if (index !== activeIndex) {
+      setActiveIndex(index);
+    } else {
+      handleOpenDetails(title);
+    }
+  };
 
   const handleOpenDetails = (title: string) => {
-    // Match with real data from services.ts or fallback to primary service
     const matched = services.find((s) => s.title.toLowerCase().includes(title.toLowerCase())) || services[0];
     setSelectedService(matched);
   };
@@ -42,9 +92,9 @@ export default function ServicesSection3D() {
   };
 
   return (
-    <section id="services" className="py-4 relative bg-transparent border-t border-beige">
+    <section id="services" className="py-12 relative bg-transparent border-t border-beige">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className="text-center max-w-3xl mx-auto mb-12">
           <span className="font-mono text-xs font-bold uppercase tracking-[0.25em] text-(--color-rose-deep)">
             ENGINEERING OFFERINGS
           </span>
@@ -52,53 +102,160 @@ export default function ServicesSection3D() {
             Interactive <span className="bg-gradient-to-r from-(--color-rose-active) via-rose to-(--color-rose-deep) bg-clip-text text-transparent">Service Cubes</span>
           </h2>
           <p className="mt-4 text-sm sm:text-base text-text-primary leading-relaxed font-body font-medium">
-            Click any service cube to expand complete specifications, performance metrics, and technical architecture.
+            Explore our engineering services in an interactive carousel. The active middle service is highlighted with bold specifications and elevated 3D depth.
           </p>
         </div>
 
-        {/* 3D Cubes Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {CUBE_SERVICES.map((cube) => {
-            const Icon = cube.icon;
-            return (
-              <div
-                key={cube.id}
-                onClick={() => handleOpenDetails(cube.title)}
-                className="group relative cursor-pointer"
-              >
-                {/* Glowing Outer Backdrop */}
-                <div
-                  className="absolute -inset-0.5 rounded-2xl opacity-40 group-hover:opacity-100 transition-opacity duration-500 blur-xl pointer-events-none"
-                  style={{ backgroundColor: cube.color }}
-                />
+        {/* 3D Carousel Track */}
+        <div className="relative py-4">
+          <div
+            ref={carouselRef}
+            className="flex items-center gap-6 overflow-x-auto scroll-smooth no-scrollbar py-8 px-[10vw] sm:px-[25vw] md:px-[30vw] snap-x snap-proximity"
+          >
+            {CUBE_SERVICES.map((cube, index) => {
+              const Icon = cube.icon;
+              const isActive = index === activeIndex;
 
-                {/* 3D Glass Card Container */}
-                <div className="relative liquid-glass-card liquid-glass-card-hover rounded-2xl p-6 h-full flex flex-col justify-between">
-                  <div>
-                    {/* Floating Cube Header Icon */}
-                    <div
-                      className="w-14 h-14 rounded-2xl flex items-center justify-center mb-5 border border-beige shadow-lg group-hover:scale-110 transition-transform duration-300"
-                      style={{ backgroundColor: `${cube.color}20`, color: cube.color }}
-                    >
-                      <Icon className="w-7 h-7" />
+              return (
+                <div
+                  key={cube.id}
+                  ref={(el) => {
+                    cardRefs.current[index] = el;
+                  }}
+                  onClick={() => handleCardClick(index, cube.title)}
+                  className={`group relative cursor-pointer shrink-0 transition-all duration-500 ease-out select-none snap-center ${
+                    isActive
+                      ? "w-[85vw] sm:w-[360px] md:w-[400px] scale-105 sm:scale-110 z-30"
+                      : "w-[75vw] sm:w-[300px] md:w-[320px] scale-95 z-10 opacity-70 hover:opacity-90 blur-[0.2px]"
+                  }`}
+                >
+                  {/* 3D Glass Card Container */}
+                  <div
+                    className={`relative rounded-2xl p-6 sm:p-7 min-h-[340px] flex flex-col justify-between transition-all duration-500 shadow-none ${
+                      isActive
+                        ? "liquid-glass-card ring-2 ring-(--color-rose-active) border-(--color-rose) bg-cream/95"
+                        : "liquid-glass-card border-beige"
+                    }`}
+                  >
+                    <div>
+                      {/* Active Status Badge */}
+                      {isActive && (
+                        <div className="absolute top-4 right-4 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-mono font-bold text-(--color-rose-deep) bg-rose/20 border border-rose/40 animate-pulse">
+                          <span className="w-1.5 h-1.5 rounded-full bg-(--color-rose-deep)" />
+                          ACTIVE
+                        </div>
+                      )}
+
+                      {/* Floating Header Icon */}
+                      <div
+                        className={`rounded-2xl flex items-center justify-center mb-5 border border-beige transition-all duration-500 ${
+                          isActive
+                            ? "w-16 h-16 scale-105"
+                            : "w-14 h-14 group-hover:scale-105"
+                        }`}
+                        style={{ backgroundColor: `${cube.color}25`, color: cube.color }}
+                      >
+                        <Icon className={isActive ? "w-8 h-8" : "w-7 h-7"} />
+                      </div>
+
+                      {/* Title: Bolder when Active */}
+                      <h3
+                        className={`font-heading text-text-primary transition-all duration-300 ${
+                          isActive
+                            ? "text-2xl font-black text-(--color-rose-deep) tracking-tight"
+                            : "text-xl font-bold group-hover:text-(--color-rose-deep)"
+                        }`}
+                      >
+                        {cube.title}
+                      </h3>
+
+                      {/* Description: Bolder when Active */}
+                      <p
+                        className={`mt-3 leading-relaxed font-body transition-all ${
+                          isActive
+                            ? "text-sm text-text-primary font-bold"
+                            : "text-xs text-text-primary font-medium"
+                        }`}
+                      >
+                        {cube.desc}
+                      </p>
                     </div>
 
-                    <h3 className="font-heading text-xl font-bold text-text-primary group-hover:text-(--color-rose-deep) transition-colors">
-                      {cube.title}
-                    </h3>
-                    <p className="mt-2.5 text-xs text-text-primary leading-relaxed font-body font-medium">
-                      {cube.desc}
-                    </p>
-                  </div>
-
-                  <div className="mt-6 pt-4 border-t border-beige flex items-center justify-between font-mono text-[11px] text-(--color-rose-deep) font-bold">
-                    <span>EXPLORE SPECS</span>
-                    <span className="group-hover:translate-x-1 transition-transform">→</span>
+                    {/* Action Footer */}
+                    <div
+                      className={`mt-6 pt-4 border-t flex items-center justify-between font-mono ${
+                        isActive
+                          ? "border-(--color-rose)/50 text-xs font-black text-(--color-rose-deep)"
+                          : "border-beige text-[11px] font-bold text-(--color-rose-deep)"
+                      }`}
+                    >
+                      <span>{isActive ? "CLICK FOR SPECS & METRICS" : "EXPLORE SPECS"}</span>
+                      <span
+                        className={`transition-transform duration-300 ${
+                          isActive ? "translate-x-1 scale-125" : "group-hover:translate-x-1"
+                        }`}
+                      >
+                        →
+                      </span>
+                    </div>
                   </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Carousel Controls & Navigation */}
+        <div className="flex flex-col items-center gap-5 mt-4">
+          {/* Active Service Title & Index */}
+          <div className="font-mono text-xs font-bold text-text-primary flex items-center gap-2">
+            <span className="text-(--color-rose-deep)">
+              {String(activeIndex + 1).padStart(2, "0")}
+            </span>
+            <span className="text-greige">/</span>
+            <span>{String(CUBE_SERVICES.length).padStart(2, "0")}</span>
+            <span className="mx-2 text-greige">•</span>
+            <span className="text-(--color-rose-deep) uppercase tracking-wider">
+              {CUBE_SERVICES[activeIndex].title}
+            </span>
+          </div>
+
+          {/* Prev / Next & Indicators */}
+          <div className="flex items-center gap-5">
+            <button
+              onClick={handlePrev}
+              disabled={activeIndex === 0}
+              className="liquid-glass-accent-button inline-flex items-center justify-center w-11 h-11 rounded-full text-text-primary transition-all shadow-md hover:scale-105 active:scale-95 disabled:opacity-30 disabled:pointer-events-none cursor-pointer"
+              aria-label="Previous service"
+            >
+              <AppleArrowLeft className="w-5 h-5" />
+            </button>
+
+            {/* Pagination Dots */}
+            <div className="flex items-center gap-2 px-3 py-2 rounded-full liquid-glass-card border-beige">
+              {CUBE_SERVICES.map((cube, idx) => (
+                <button
+                  key={cube.id}
+                  onClick={() => setActiveIndex(idx)}
+                  aria-label={`Go to ${cube.title}`}
+                  className={`h-2.5 rounded-full transition-all duration-300 cursor-pointer ${
+                    idx === activeIndex
+                      ? "w-8 bg-gradient-to-r from-(--color-rose-active) to-(--color-rose-deep) shadow-sm"
+                      : "w-2.5 bg-greige/50 hover:bg-greige"
+                  }`}
+                />
+              ))}
+            </div>
+
+            <button
+              onClick={handleNext}
+              disabled={activeIndex === CUBE_SERVICES.length - 1}
+              className="liquid-glass-accent-button inline-flex items-center justify-center w-11 h-11 rounded-full text-text-primary transition-all shadow-md hover:scale-105 active:scale-95 disabled:opacity-30 disabled:pointer-events-none cursor-pointer"
+              aria-label="Next service"
+            >
+              <AppleArrowRight className="w-5 h-5" />
+            </button>
+          </div>
         </div>
       </div>
 
@@ -184,3 +341,4 @@ export default function ServicesSection3D() {
     </section>
   );
 }
+

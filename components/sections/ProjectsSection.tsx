@@ -280,18 +280,18 @@ const ProjectsSection = () => {
         {selectedProjectForApk && (
           <div className="space-y-5">
             <div className="flex items-center gap-4 p-4 rounded-xl bg-rose/20 border border-rose/40">
-              <AppleDevice className="w-8 h-8 text-(--color-rose-deep)" />
+              <AppleDevice className="w-8 h-8 text-(--color-rose-deep) shrink-0" />
               <div>
                 <h4 className="font-heading font-bold text-text-primary text-base">
                   {selectedProjectForApk.title}
                 </h4>
-                <span className="font-mono text-[10px] text-text-muted uppercase">
+                <span className="font-mono text-[11px] font-bold text-(--color-rose-deep) uppercase tracking-wider block mt-0.5">
                   Android APK Package
                 </span>
               </div>
             </div>
 
-            <p className="text-xs text-text-secondary leading-relaxed">
+            <p className="text-sm font-medium text-text-primary leading-relaxed font-body">
               This mobile application is built with React Native and Expo. You can request the direct APK installation package for Android device testing.
             </p>
 
@@ -300,7 +300,7 @@ const ProjectsSection = () => {
                 href={`mailto:mrafiqdot825@gmail.com?subject=APK%20Request:%20${encodeURIComponent(selectedProjectForApk.title)}`}
                 variant="liquid"
                 size="sm"
-                className="w-full text-xs"
+                className="w-full text-xs font-bold justify-center"
                 icon={<AppleMail className="w-4 h-4" />}
               >
                 Email Request

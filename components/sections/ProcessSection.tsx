@@ -1,76 +1,334 @@
 "use client";
 
-import { AppleSearch, AppleFigmaIcon, AppleCode, AppleCloudIcon, AppleTrendingUp } from "@/components/ui/AppleIcons";
+import { useState, useEffect, useRef } from "react";
+import {
+  AppleSearch,
+  AppleFigmaIcon,
+  AppleCode,
+  AppleCpu,
+  AppleZap,
+  AppleCloudIcon,
+  AppleTrendingUp,
+  AppleArrowLeft,
+  AppleArrowRight,
+} from "@/components/ui/AppleIcons";
 
 const PROCESS_STEPS = [
-  { step: "01", stage: "Discover", title: "Architecture & Research", desc: "Understanding product goals, defining tech stack boundaries, schema design, and AI model selection.", icon: AppleSearch, color: "#8a6f62" },
-  { step: "02", stage: "Design", title: "UI/UX & Prototyping", desc: "Crafting modern glassmorphic component layouts, dynamic micro-interactions, and visual design systems.", icon: AppleFigmaIcon, color: "#b8907d" },
-  { step: "03", stage: "Develop", title: "Engineering & AI Integration", desc: "Building scalable React/Next.js client apps, FastAPI backends, LangChain/Gemini AI agents, and mobile codebases.", icon: AppleCode, color: "#d7bdb0" },
-  { step: "04", stage: "Deploy", title: "CI/CD & QA Testing", desc: "Automating Playwright test suites, Docker containerization, and zero-downtime production deployment.", icon: AppleCloudIcon, color: "#c9a999" },
-  { step: "05", stage: "Scale", title: "Monitoring & Optimization", desc: "Lighthouse optimization, Redis query caching, server monitoring, and continuous feature expansion.", icon: AppleTrendingUp, color: "#4a1b0c" },
+  {
+    step: "01",
+    stage: "Discover",
+    title: "Architecture & Research",
+    desc: "Understanding product vision, technical feasibility, system topology, schema architecture, and AI model choices.",
+    icon: AppleSearch,
+    color: "#8a6f62",
+    details: ["Requirements Audit", "Database Schema", "Tech Architecture"],
+  },
+  {
+    step: "02",
+    stage: "Design",
+    title: "UI/UX & Design System",
+    desc: "Designing responsive glassmorphic interfaces, interactive design tokens, dark mode variants, and accessibility standards.",
+    icon: AppleFigmaIcon,
+    color: "#b8907d",
+    details: ["Wireframing & Comps", "Design System", "Micro-Interactions"],
+  },
+  {
+    step: "03",
+    stage: "Engineer",
+    title: "Frontend Development",
+    desc: "Building high-performance React/Next.js client applications with clean component trees and state management.",
+    icon: AppleCode,
+    color: "#d7bdb0",
+    details: ["Next.js App Router", "TypeScript Strict", "Responsive Layouts"],
+  },
+  {
+    step: "04",
+    stage: "Integrate",
+    title: "AI & Backend Services",
+    desc: "Constructing robust Node.js/Python microservices, custom RAG search pipelines, and autonomous Gemini AI agents.",
+    icon: AppleCpu,
+    color: "#c9a999",
+    details: ["LangChain & Gemini", "REST & GraphQL", "Vector Databases"],
+  },
+  {
+    step: "05",
+    stage: "Verify",
+    title: "QA & Playwright Testing",
+    desc: "Executing Playwright end-to-end integration tests, unit test suites, security scans, and code quality audits.",
+    icon: AppleZap,
+    color: "#4a1b0c",
+    details: ["Playwright E2E", "CI/CD Workflows", "Security Audit"],
+  },
+  {
+    step: "06",
+    stage: "Deploy",
+    title: "Cloud & DevOps Delivery",
+    desc: "Automating zero-downtime deployments via Docker containerization, AWS microservices, and Vercel edge networks.",
+    icon: AppleCloudIcon,
+    color: "#8a6f62",
+    details: ["Docker Containers", "Vercel / AWS", "Zero Downtime"],
+  },
+  {
+    step: "07",
+    stage: "Scale",
+    title: "Monitoring & Optimization",
+    desc: "Continuously optimizing Lighthouse Web Vitals, Redis caching layers, telemetry analytics, and active production scale.",
+    icon: AppleTrendingUp,
+    color: "#b8907d",
+    details: ["Redis Query Caching", "Lighthouse 100", "Live Analytics"],
+  },
 ];
 
 export default function ProcessSection() {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const carouselRef = useRef<HTMLDivElement>(null);
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  // Precise smooth scroll centering when activeIndex changes
+  useEffect(() => {
+    const activeCard = cardRefs.current[activeIndex];
+    const container = carouselRef.current;
+
+    if (activeCard && container) {
+      const containerWidth = container.clientWidth;
+      const cardLeft = activeCard.offsetLeft;
+      const cardWidth = activeCard.clientWidth;
+      const targetScroll = cardLeft - containerWidth / 2 + cardWidth / 2;
+
+      container.scrollTo({
+        left: targetScroll,
+        behavior: "smooth",
+      });
+    }
+  }, [activeIndex]);
+
+  const handlePrev = () => {
+    if (activeIndex > 0) {
+      setActiveIndex((prev) => prev - 1);
+    }
+  };
+
+  const handleNext = () => {
+    if (activeIndex < PROCESS_STEPS.length - 1) {
+      setActiveIndex((prev) => prev + 1);
+    }
+  };
+
   return (
-    <section id="process" className="py-4 relative bg-transparent border-t border-beige">
+    <section id="process" className="py-12 relative bg-transparent border-t border-beige">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        {/* Section Header */}
+        <div className="text-center max-w-3xl mx-auto mb-12">
           <span className="font-mono text-xs font-bold uppercase tracking-[0.25em] text-(--color-rose-deep)">
             ENGINEERING WORKFLOW
           </span>
           <h2 className="font-heading text-3xl sm:text-5xl font-extrabold text-text-primary mt-3 tracking-tight">
-            Horizontal <span className="bg-gradient-to-r from-(--color-rose-deep) to-(--color-rose-active) bg-clip-text text-transparent">Storytelling Process</span>
+            Interactive <span className="bg-gradient-to-r from-(--color-rose-deep) via-rose to-(--color-rose-active) bg-clip-text text-transparent">Storytelling Process</span>
           </h2>
-          <p className="mt-4 text-sm sm:text-base text-text-secondary leading-relaxed font-body">
-            A systematic 5-phase engineering methodology powering scalable software deliverables.
+          <p className="mt-4 text-sm sm:text-base text-text-secondary leading-relaxed font-body font-medium">
+            A comprehensive 7-stage engineering methodology powering scalable software deliverables.
           </p>
         </div>
 
-        {/* Horizontal Step Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
+        {/* Timeline Stepper Navigation */}
+        <div className="hidden lg:flex items-center justify-between relative mb-8 px-4">
+          <div className="absolute top-1/2 left-8 right-8 h-0.5 bg-beige -translate-y-1/2 z-0" />
           {PROCESS_STEPS.map((p, idx) => {
-            const Icon = p.icon;
+            const isActive = idx === activeIndex;
             return (
-              <div
+              <button
                 key={p.step}
-                className="liquid-glass-card liquid-glass-card-hover rounded-2xl p-5 flex flex-col justify-between relative group"
+                onClick={() => setActiveIndex(idx)}
+                className={`relative z-10 flex flex-col items-center group cursor-pointer transition-all duration-300`}
               >
-                {/* Connecting Line (desktop) */}
-                {idx < PROCESS_STEPS.length - 1 && (
-                  <div className="hidden md:block absolute top-1/2 -right-2 w-4 h-0.5 bg-beige z-10" />
-                )}
-
-                <div>
-                  <div className="flex items-center justify-between mb-4">
-                    <span className="font-mono text-xl font-extrabold text-(--color-rose-active)">
-                      {p.step}
-                    </span>
-                    <div
-                      className="p-2 rounded-xl border border-beige"
-                      style={{ backgroundColor: `${p.color}20`, color: p.color }}
-                    >
-                      <Icon className="w-5 h-5" />
-                    </div>
-                  </div>
-
-                  <span className="font-mono text-[10px] uppercase font-bold text-(--color-rose-deep) tracking-widest">
-                    {p.stage}
-                  </span>
-                  <h3 className="font-heading text-base font-bold text-text-primary mt-1 group-hover:text-(--color-rose-deep) transition-colors">
-                    {p.title}
-                  </h3>
-                  <p className="mt-2 text-xs text-text-primary font-medium leading-relaxed font-body">
-                    {p.desc}
-                  </p>
+                <div
+                  className={`w-9 h-9 rounded-full flex items-center justify-center font-mono text-xs font-bold transition-all duration-300 ${
+                    isActive
+                      ? "liquid-glass-accent-button scale-110 shadow-lg text-text-primary ring-4 ring-rose/30"
+                      : "bg-cream border border-beige text-text-primary hover:border-(--color-rose)"
+                  }`}
+                >
+                  {p.step}
                 </div>
-
-                <div className="mt-4 pt-3 border-t border-beige/60 flex items-center justify-between font-mono text-[10px] text-text-primary font-bold">
-                  <span>PHASE {p.step}</span>
-                  <span className="text-(--color-rose-deep)">READY</span>
-                </div>
-              </div>
+                <span
+                  className={`mt-2 font-mono text-[10px] uppercase font-bold transition-colors ${
+                    isActive ? "text-(--color-rose-deep)" : "text-greige group-hover:text-text-primary"
+                  }`}
+                >
+                  {p.stage}
+                </span>
+              </button>
             );
           })}
+        </div>
+
+        {/* Carousel Track */}
+        <div className="relative py-4">
+          <div
+            ref={carouselRef}
+            className="flex items-center gap-6 overflow-x-auto scroll-smooth no-scrollbar py-8 px-[10vw] sm:px-[20vw] md:px-[28vw] snap-x snap-proximity"
+          >
+            {PROCESS_STEPS.map((p, idx) => {
+              const Icon = p.icon;
+              const isActive = idx === activeIndex;
+
+              return (
+                <div
+                  key={p.step}
+                  ref={(el) => {
+                    cardRefs.current[idx] = el;
+                  }}
+                  onClick={() => setActiveIndex(idx)}
+                  className={`group relative cursor-pointer shrink-0 transition-all duration-500 ease-out select-none snap-center ${
+                    isActive
+                      ? "w-[85vw] sm:w-[360px] md:w-[380px] scale-105 sm:scale-108 z-30"
+                      : "w-[75vw] sm:w-[290px] md:w-[310px] scale-95 z-10 opacity-65 hover:opacity-90 blur-[0.2px]"
+                  }`}
+                >
+                  {/* Glass Card Container */}
+                  <div
+                    className={`relative rounded-2xl p-6 sm:p-7 min-h-[350px] flex flex-col justify-between transition-all duration-500 shadow-none ${
+                      isActive
+                        ? "liquid-glass-card ring-2 ring-(--color-rose-active) border-(--color-rose) bg-cream/95"
+                        : "liquid-glass-card border-beige"
+                    }`}
+                  >
+                    <div>
+                      {/* Step Header */}
+                      <div className="flex items-center justify-between mb-4">
+                        <span
+                          className={`font-mono transition-all ${
+                            isActive
+                              ? "text-2xl font-black text-(--color-rose-deep)"
+                              : "text-xl font-extrabold text-(--color-rose-active)"
+                          }`}
+                        >
+                          {p.step}
+                        </span>
+
+                        <div
+                          className={`p-2.5 rounded-2xl border transition-all duration-500 ${
+                            isActive ? "scale-110" : ""
+                          }`}
+                          style={{
+                            backgroundColor: `${p.color}25`,
+                            borderColor: `${p.color}40`,
+                            color: p.color,
+                          }}
+                        >
+                          <Icon className={isActive ? "w-6 h-6" : "w-5 h-5"} />
+                        </div>
+                      </div>
+
+                      <span className="font-mono text-[10px] uppercase font-extrabold text-(--color-rose-deep) tracking-widest block mb-1">
+                        STAGE {p.step} • {p.stage}
+                      </span>
+
+                      <h3
+                        className={`font-heading text-text-primary transition-all duration-300 ${
+                          isActive
+                            ? "text-xl font-black text-(--color-rose-deep) tracking-tight"
+                            : "text-lg font-bold group-hover:text-(--color-rose-deep)"
+                        }`}
+                      >
+                        {p.title}
+                      </h3>
+
+                      <p
+                        className={`mt-3 leading-relaxed font-body transition-all ${
+                          isActive
+                            ? "text-xs sm:text-sm text-text-primary font-bold"
+                            : "text-xs text-text-primary font-medium opacity-90"
+                        }`}
+                      >
+                        {p.desc}
+                      </p>
+
+                      {/* Detail Tags for Active Card */}
+                      {isActive && p.details && (
+                        <div className="flex flex-wrap gap-1.5 mt-4 pt-3 border-t border-rose/30">
+                          {p.details.map((d) => (
+                            <span
+                              key={d}
+                              className="font-mono text-[10px] font-bold bg-rose/20 text-(--color-rose-deep) px-2 py-0.5 rounded-md border border-rose/30"
+                            >
+                              {d}
+                            </span>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Footer Phase Status */}
+                    <div
+                      className={`mt-6 pt-3 border-t flex items-center justify-between font-mono ${
+                        isActive
+                          ? "border-(--color-rose)/50 text-xs font-black text-(--color-rose-deep)"
+                          : "border-beige text-[10px] font-bold text-text-primary"
+                      }`}
+                    >
+                      <span>PHASE {p.step} OF 07</span>
+                      <span className="text-(--color-rose-deep) font-extrabold">
+                        {isActive ? "ACTIVE STAGE" : "READY"}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Carousel Controls */}
+        <div className="flex flex-col items-center gap-4 mt-4">
+          <div className="font-mono text-xs font-bold text-text-primary flex items-center gap-2">
+            <span className="text-(--color-rose-deep)">
+              {String(activeIndex + 1).padStart(2, "0")}
+            </span>
+            <span className="text-greige">/</span>
+            <span>07</span>
+            <span className="mx-2 text-greige">•</span>
+            <span className="text-(--color-rose-deep) uppercase tracking-wider">
+              {PROCESS_STEPS[activeIndex].title}
+            </span>
+          </div>
+
+          {/* Navigation Controls */}
+          <div className="flex items-center gap-4">
+            <button
+              onClick={handlePrev}
+              disabled={activeIndex === 0}
+              className="liquid-glass-accent-button inline-flex items-center justify-center w-10 h-10 rounded-full text-text-primary transition-all shadow-md hover:scale-105 active:scale-95 disabled:opacity-30 disabled:pointer-events-none cursor-pointer"
+              aria-label="Previous step"
+            >
+              <AppleArrowLeft className="w-5 h-5" />
+            </button>
+
+            {/* Pagination Dots */}
+            <div className="flex items-center gap-2 px-3 py-2 rounded-full liquid-glass-card border-beige">
+              {PROCESS_STEPS.map((p, idx) => (
+                <button
+                  key={p.step}
+                  onClick={() => setActiveIndex(idx)}
+                  aria-label={`Go to ${p.title}`}
+                  className={`h-2.5 rounded-full transition-all duration-300 cursor-pointer ${
+                    idx === activeIndex
+                      ? "w-8 bg-gradient-to-r from-(--color-rose-active) to-(--color-rose-deep) shadow-sm"
+                      : "w-2.5 bg-greige/50 hover:bg-greige"
+                  }`}
+                />
+              ))}
+            </div>
+
+            <button
+              onClick={handleNext}
+              disabled={activeIndex === PROCESS_STEPS.length - 1}
+              className="liquid-glass-accent-button inline-flex items-center justify-center w-10 h-10 rounded-full text-text-primary transition-all shadow-md hover:scale-105 active:scale-95 disabled:opacity-30 disabled:pointer-events-none cursor-pointer"
+              aria-label="Next step"
+            >
+              <AppleArrowRight className="w-5 h-5" />
+            </button>
+          </div>
         </div>
       </div>
     </section>
