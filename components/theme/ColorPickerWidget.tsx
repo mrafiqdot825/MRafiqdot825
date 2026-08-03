@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { useTheme, type ThemeMode } from "./ThemeProvider";
 import { ACCENT_PRESETS } from "@/lib/color";
 
-const PROMPT_TEXT = "Customize colors!";
+const PROMPT_TEXT = "Customize UI";
 
 const SunIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg
@@ -57,10 +57,10 @@ const MODE_OPTIONS: {
   value: ThemeMode;
   icon: React.FC<React.SVGProps<SVGSVGElement>>;
 }[] = [
-  { label: "Light", value: "light", icon: SunIcon },
-  { label: "Dark", value: "dark", icon: MoonIcon },
-  { label: "Auto", value: "system", icon: SystemIcon },
-];
+    { label: "Light", value: "light", icon: SunIcon },
+    { label: "Dark", value: "dark", icon: MoonIcon },
+    { label: "Auto", value: "system", icon: SystemIcon },
+  ];
 
 export default function ColorPickerWidget() {
   const { accent, setAccent, resetAccent, mode, setMode } = useTheme();
@@ -131,11 +131,10 @@ export default function ColorPickerWidget() {
                   <button
                     key={opt.value}
                     onClick={() => setMode(opt.value)}
-                    className={`flex items-center justify-center gap-1.5 py-1.5 px-2 rounded-lg text-caption font-medium transition-all cursor-pointer select-none ${
-                      isActive
-                        ? "bg-bg-page text-text-primary shadow-xs border border-border-default font-bold"
-                        : "text-text-secondary hover:text-text-primary"
-                    }`}
+                    className={`flex items-center justify-center gap-1.5 py-1.5 px-2 rounded-lg text-caption font-medium transition-all cursor-pointer select-none ${isActive
+                      ? "bg-bg-page text-text-primary shadow-xs border border-border-default font-bold"
+                      : "text-text-secondary hover:text-text-primary"
+                      }`}
                   >
                     <IconComp className="w-3.5 h-3.5 stroke-current flex-shrink-0" />
                     <span>{opt.label}</span>
@@ -196,9 +195,8 @@ export default function ColorPickerWidget() {
         onClick={handleToggleOpen}
         aria-label={open ? "Close theme color picker" : "Open theme color picker"}
         aria-expanded={open}
-        className={`liquid-glass-accent-button cursor-grab active:cursor-grabbing h-12 rounded-full flex items-center justify-center shadow-lg transition-all duration-300 hover:scale-105 active:scale-95 select-none ${
-          open ? "w-12 px-0" : "gap-2.5 px-3.5"
-        }`}
+        className={`liquid-glass-accent-button cursor-grab active:cursor-grabbing h-12 rounded-full flex items-center justify-center shadow-lg transition-all duration-300 hover:scale-105 active:scale-95 select-none ${open ? "w-12 px-0" : "gap-2.5 px-3.5"
+          }`}
       >
         {!open && displayText && (
           <span className="text-small font-medium text-text-primary tracking-tight pl-1 whitespace-nowrap cursor-grab active:cursor-grabbing">
