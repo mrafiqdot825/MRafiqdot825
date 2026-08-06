@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Link from "next/link";
 import { cn } from "@/lib/utils";
 
 export interface RadialGlowButtonProps {
@@ -199,17 +200,28 @@ export function RadialGlowButton({
       `}</style>
       
       {href ? (
-        <a
-          href={href}
-          download={download}
-          target={target}
-          rel={rel || (target === "_blank" ? "noopener noreferrer" : undefined)}
-          className={cn("rg-button", className)}
-          onClick={onClick as React.MouseEventHandler<HTMLAnchorElement>}
-          {...props}
-        >
-          {content}
-        </a>
+        (href.startsWith("/") || href.startsWith("#")) && !download && target !== "_blank" ? (
+          <Link
+            href={href}
+            className={cn("rg-button", className)}
+            onClick={onClick as React.MouseEventHandler<HTMLAnchorElement>}
+            {...props}
+          >
+            {content}
+          </Link>
+        ) : (
+          <a
+            href={href}
+            download={download}
+            target={target}
+            rel={rel || (target === "_blank" ? "noopener noreferrer" : undefined)}
+            className={cn("rg-button", className)}
+            onClick={onClick as React.MouseEventHandler<HTMLAnchorElement>}
+            {...props}
+          >
+            {content}
+          </a>
+        )
       ) : (
         <button
           disabled={disabled}

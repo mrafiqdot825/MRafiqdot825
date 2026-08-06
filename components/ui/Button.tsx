@@ -1,3 +1,4 @@
+import Link from "next/link";
 import type { AnchorHTMLAttributes, ButtonHTMLAttributes, MouseEventHandler, ReactNode } from "react";
 import { cn } from "@/lib/utils";
 import LiquidMetalButton, { type LiquidMetalProps } from "./LiquidMetalButton";
@@ -77,6 +78,23 @@ const Button = ({
   );
 
   if (href) {
+    const isInternal = (href.startsWith("/") || href.startsWith("#")) && !download && target !== "_blank";
+
+    if (isInternal) {
+      return (
+        <Link
+          href={href}
+          onClick={onClick}
+          target={target}
+          className={baseClass}
+        >
+          {icon && <span className="mr-2 inline-flex items-center shrink-0">{icon}</span>}
+          {children}
+          {iconRight && <span className="ml-2 inline-flex items-center shrink-0">{iconRight}</span>}
+        </Link>
+      );
+    }
+
     return (
       <a
         href={href}

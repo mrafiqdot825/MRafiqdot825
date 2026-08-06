@@ -16,15 +16,20 @@ import ContactSection from "@/components/sections/ContactSection";
 
 const HOME_LOADING_DURATION = 2400;
 
+let hasLoadedOnce = false;
+
 export default function HomeClient() {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(() => !hasLoadedOnce);
 
   useEffect(() => {
-    const timeoutId = window.setTimeout(() => {
-      setIsLoading(false);
-    }, HOME_LOADING_DURATION);
+    if (!hasLoadedOnce) {
+      const timeoutId = window.setTimeout(() => {
+        setIsLoading(false);
+        hasLoadedOnce = true;
+      }, HOME_LOADING_DURATION);
 
-    return () => window.clearTimeout(timeoutId);
+      return () => window.clearTimeout(timeoutId);
+    }
   }, []);
 
   if (isLoading) {

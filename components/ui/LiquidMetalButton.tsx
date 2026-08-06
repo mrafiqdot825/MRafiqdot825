@@ -1,6 +1,7 @@
 "use client";
 
 import React, { memo, forwardRef } from "react";
+import Link from "next/link";
 import { LiquidMetal as LiquidMetalShader } from "@paper-design/shaders-react";
 import { cn } from "@/lib/utils";
 
@@ -183,6 +184,25 @@ export const LiquidMetalButton = forwardRef<
     );
 
     if (href) {
+      const isInternal = (href.startsWith("/") || href.startsWith("#")) && !download && target !== "_blank";
+      const linkClass = cn(
+        "relative group cursor-pointer border-none bg-transparent p-0 outline-none transition-transform active:scale-[0.98] inline-block",
+        className
+      );
+
+      if (isInternal) {
+        return (
+          <Link
+            href={href}
+            onClick={onClick as React.MouseEventHandler<HTMLAnchorElement>}
+            className={linkClass}
+            {...props}
+          >
+            {content}
+          </Link>
+        );
+      }
+
       return (
         <a
           ref={ref}
@@ -191,10 +211,7 @@ export const LiquidMetalButton = forwardRef<
           target={target}
           rel={rel || (target === "_blank" ? "noopener noreferrer" : undefined)}
           onClick={onClick as React.MouseEventHandler<HTMLAnchorElement>}
-          className={cn(
-            "relative group cursor-pointer border-none bg-transparent p-0 outline-none transition-transform active:scale-[0.98] inline-block",
-            className
-          )}
+          className={linkClass}
           {...props}
         >
           {content}

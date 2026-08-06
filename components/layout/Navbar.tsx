@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useRef } from "react";
 import { usePathname } from "next/navigation";
+import Link from "next/link";
 import { ICON_CLASS } from "@/lib/constants";
 import { useGlassCursor } from "@/hooks/useGlassCursor";
 import {
@@ -118,7 +119,7 @@ const Navbar = () => {
 
         {/* Left: Brand / Logo (Desktop) */}
         <div className="hidden md:flex items-center justify-start md:flex-1">
-          <a
+          <Link
             href={isHomePage ? "#home" : "/"}
             onClick={(e) => handleNavClick(e, "#home")}
             className="relative inline-flex items-center gap-2 rounded-full p-1 sm:pr-3 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-accent-600 cursor-pointer"
@@ -127,7 +128,7 @@ const Navbar = () => {
             <span className="text-base font-bold tracking-tight text-text-primary font-heading">
               mrafiqdot825
             </span>
-          </a>
+          </Link>
         </div>
 
         {/* Center: Nav Items Dock */}
@@ -229,7 +230,7 @@ const Navbar = () => {
 
               return (
                 <li key={item.href}>
-                  <a
+                  <Link
                     href={itemHref}
                     onClick={(e) => handleNavClick(e, item.href)}
                     onMouseEnter={handleMouseEnter}
@@ -261,7 +262,7 @@ const Navbar = () => {
                     {isActive && (
                       <span className="md:hidden absolute -bottom-0.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-[var(--color-rose-deep)]" />
                     )}
-                  </a>
+                  </Link>
                 </li>
               );
             })}
@@ -270,13 +271,13 @@ const Navbar = () => {
 
         {/* Right: CTA Button (Desktop) */}
         <div className="hidden md:flex items-center justify-end md:flex-1">
-          <a
+          <Link
             href={isHomePage ? "#contact" : "/#contact"}
             className="relative inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-bold transition focus:outline-none focus:ring-2 focus:ring-accent-600 liquid-glass-accent-button text-text-primary cursor-pointer hover:scale-105"
           >
             <AppleMessage className={ICON_CLASS.action} />
             Let's Talk
-          </a>
+          </Link>
         </div>
       </nav>
     </header>

@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Link from "next/link";
 import { cn } from "@/lib/utils";
 
 export interface GenerateButtonProps {
@@ -327,22 +328,39 @@ export function GenerateButton({
       {styleBlock}
 
       {href ? (
-        <a
-          href={href}
-          target={target}
-          rel={rel || (target === "_blank" ? "noopener noreferrer" : undefined)}
-          className={cn("gen-btn", className)}
-          data-generating={isGenerating}
-          onFocus={() => setIsFocused(true)}
-          onBlur={() => setIsFocused(false)}
-          onClick={(e) => {
-            setIsFocused(true);
-            onClick?.(e as any);
-          }}
-          {...props}
-        >
-          {buttonContent}
-        </a>
+        (href.startsWith("/") || href.startsWith("#")) && target !== "_blank" ? (
+          <Link
+            href={href}
+            className={cn("gen-btn", className)}
+            data-generating={isGenerating}
+            onFocus={() => setIsFocused(true)}
+            onBlur={() => setIsFocused(false)}
+            onClick={(e) => {
+              setIsFocused(true);
+              onClick?.(e as any);
+            }}
+            {...props}
+          >
+            {buttonContent}
+          </Link>
+        ) : (
+          <a
+            href={href}
+            target={target}
+            rel={rel || (target === "_blank" ? "noopener noreferrer" : undefined)}
+            className={cn("gen-btn", className)}
+            data-generating={isGenerating}
+            onFocus={() => setIsFocused(true)}
+            onBlur={() => setIsFocused(false)}
+            onClick={(e) => {
+              setIsFocused(true);
+              onClick?.(e as any);
+            }}
+            {...props}
+          >
+            {buttonContent}
+          </a>
+        )
       ) : (
         <button
           type="button"
