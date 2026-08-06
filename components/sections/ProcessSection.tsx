@@ -95,19 +95,27 @@ export default function ProcessSection() {
       const maxScroll = scrollWidth - clientWidth;
       setScrollProgress(maxScroll > 0 ? (scrollLeft / maxScroll) * 100 : 0);
 
-      // Track active card index based on scroll position
+      // Track active card index based on center of visible container
+      const containerCenter = scrollLeft + clientWidth / 2;
+
       let closestIdx = 0;
       let minDistance = Infinity;
 
-      cardRefs.current.forEach((card, idx) => {
-        if (!card) return;
-        const cardLeft = card.offsetLeft;
-        const distance = Math.abs(scrollLeft - cardLeft);
-        if (distance < minDistance) {
-          minDistance = distance;
-          closestIdx = idx;
-        }
-      });
+      if (scrollLeft <= 15) {
+        closestIdx = 0;
+      } else if (scrollLeft + clientWidth >= scrollWidth - 15) {
+        closestIdx = cardRefs.current.length - 1;
+      } else {
+        cardRefs.current.forEach((card, idx) => {
+          if (!card) return;
+          const cardCenter = card.offsetLeft + card.offsetWidth / 2;
+          const distance = Math.abs(containerCenter - cardCenter);
+          if (distance < minDistance) {
+            minDistance = distance;
+            closestIdx = idx;
+          }
+        });
+      }
       setActiveIndex(closestIdx);
     }
   };
@@ -126,17 +134,24 @@ export default function ProcessSection() {
   }, []);
 
   const handleScroll = (direction: "left" | "right") => {
-    if (carouselRef.current) {
-      const { clientWidth } = carouselRef.current;
-      const scrollAmount = direction === "left" ? -clientWidth * 0.85 : clientWidth * 0.85;
-      carouselRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
-    }
+    const newIdx =
+      direction === "left"
+        ? Math.max(0, activeIndex - 1)
+        : Math.min(PROCESS_STEPS.length - 1, activeIndex + 1);
+    scrollToStep(newIdx);
   };
 
   const scrollToStep = (index: number) => {
+    setActiveIndex(index);
     const card = cardRefs.current[index];
     if (card && carouselRef.current) {
-      card.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "start" });
+      const containerWidth = carouselRef.current.clientWidth;
+      const cardWidth = card.offsetWidth;
+      const targetLeft = card.offsetLeft - (containerWidth - cardWidth) / 2;
+      carouselRef.current.scrollTo({
+        left: Math.max(0, targetLeft),
+        behavior: "smooth",
+      });
     }
   };
 
@@ -167,7 +182,7 @@ export default function ProcessSection() {
                 onClick={() => scrollToStep(idx)}
                 className={`shrink-0 px-3.5 py-1.5 rounded-full text-xs font-mono font-bold transition-all duration-300 snap-center cursor-pointer flex items-center gap-1.5 ${
                   isActive
-                    ? "liquid-glass-accent-button text-text-primary shadow-md scale-105"
+                    ? "liquid-glass-accent-button text-text-primary shadow-md scale-105 ring-2 ring-(--color-rose)"
                     : "bg-cream/80 border border-beige text-text-secondary hover:text-text-primary hover:border-rose/50"
                 }`}
               >
@@ -193,15 +208,15 @@ export default function ProcessSection() {
                 <div
                   className={`w-9 h-9 rounded-full flex items-center justify-center font-mono text-xs font-bold transition-all duration-300 ${
                     isActive
-                      ? "liquid-glass-accent-button scale-110 shadow-lg text-text-primary ring-4 ring-rose/30"
-                      : "bg-cream border border-beige text-text-primary hover:border-(--color-rose)"
+                      ? "liquid-glass-accent-button scale-125 shadow-xl text-text-primary ring-4 ring-rose/40 font-black"
+                      : "bg-cream border border-beige text-text-primary hover:border-(--color-rose) opacity-70 hover:opacity-100"
                   }`}
                 >
                   {p.step}
                 </div>
                 <span
                   className={`mt-2 font-mono text-[10px] uppercase font-bold transition-colors ${
-                    isActive ? "text-(--color-rose-deep)" : "text-greige group-hover:text-text-primary"
+                    isActive ? "text-(--color-rose-deep) font-black scale-105" : "text-greige group-hover:text-text-primary"
                   }`}
                 >
                   {p.stage}
@@ -214,7 +229,7 @@ export default function ProcessSection() {
         {/* Carousel Track — Identical to ProjectsSection */}
         <div
           ref={carouselRef}
-          className="flex items-stretch gap-6 overflow-x-auto scroll-smooth no-scrollbar snap-x snap-mandatory py-6 -mx-4 px-4 sm:mx-0 sm:px-0"
+          className="relative flex items-stretch gap-6 overflow-x-auto scroll-smooth no-scrollbar snap-x snap-mandatory py-8 -mx-4 px-[7.5vw] sm:mx-0 sm:px-[calc(50%-175px)] md:px-[calc(50%-190px)]"
         >
           {PROCESS_STEPS.map((p, idx) => {
             const Icon = p.icon;
@@ -226,14 +241,14 @@ export default function ProcessSection() {
                 ref={(el) => {
                   cardRefs.current[idx] = el;
                 }}
-                className="snap-start shrink-0 w-[85vw] sm:w-[350px] md:w-[380px] flex flex-col"
+                className="snap-center shrink-0 w-[85vw] sm:w-[350px] md:w-[380px] flex flex-col transition-transform duration-500"
               >
                 {/* Glass Card Container */}
                 <article
-                  className={`liquid-glass-card liquid-glass-card-hover flex-1 flex flex-col justify-between rounded-2xl p-6 relative overflow-hidden backdrop-blur-xl transition-all duration-300 ${
+                  className={`liquid-glass-card flex-1 flex flex-col justify-between rounded-2xl p-6 relative overflow-hidden backdrop-blur-xl transition-all duration-500 ${
                     isActive
-                      ? "ring-2 ring-(--color-rose-active) border-(--color-rose) bg-cream/90 dark:bg-cream/60 shadow-[0_16px_45px_color-mix(in_srgb,var(--color-rose)_35%,transparent)] scale-[1.02]"
-                      : "bg-cream/70 dark:bg-cream/30 border-beige/80 shadow-[0_10px_30px_-5px_rgba(44,44,42,0.1)]"
+                      ? "ring-2 ring-(--color-rose-active) border-(--color-rose) bg-cream dark:bg-cream/80 shadow-[0_20px_50px_color-mix(in_srgb,var(--color-rose)_45%,transparent)] scale-105 z-20"
+                      : "bg-cream/50 dark:bg-cream/20 border-beige/60 shadow-xs opacity-75 hover:opacity-95 scale-95 z-10"
                   }`}
                 >
                   {/* Glass Top Reflection Highlight */}
@@ -285,12 +300,25 @@ export default function ProcessSection() {
                     )}
                   </div>
 
-                  {/* Footer Phase Status */}
-                  <div className="mt-6 pt-3 border-t border-beige flex items-center justify-between font-mono text-xs font-bold text-text-primary relative z-10">
-                    <span>PHASE {p.step} OF 07</span>
-                    <span className="text-(--color-rose-deep) font-extrabold">
-                      {isActive ? "ACTIVE STAGE" : "READY"}
-                    </span>
+                  {/* Footer Phase Action Button */}
+                  <div className="mt-6 pt-3 border-t border-beige/60 relative z-10">
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        scrollToStep(idx);
+                      }}
+                      className={`w-full inline-flex items-center justify-between rounded-xl py-2 px-3.5 text-[11px] font-mono font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer ${
+                        isActive
+                          ? "liquid-glass-accent-button text-text-primary shadow-sm scale-[1.02]"
+                          : "bg-cream/80 border border-beige text-text-secondary hover:text-text-primary hover:border-[var(--color-rose)]"
+                      }`}
+                    >
+                      <span>PHASE {p.step} OF 07</span>
+                      <span className="font-extrabold flex items-center gap-1">
+                        {isActive ? "Active Stage" : "Select Stage"} →
+                      </span>
+                    </button>
                   </div>
                 </article>
               </div>
@@ -310,30 +338,12 @@ export default function ProcessSection() {
             <AppleArrowLeft className="w-5 h-5" />
           </button>
 
-          {/* Interactive Glass Pagination Dots (One per card item) */}
-          <div className="flex items-center gap-2 px-3 py-2 rounded-full liquid-glass-card border-beige/80 backdrop-blur-xl shadow-xs">
-            {PROCESS_STEPS.map((p, idx) => {
-              const isActive = idx === activeIndex;
-              return (
-                <button
-                  key={p.step}
-                  type="button"
-                  onClick={() => {
-                    const card = cardRefs.current[idx];
-                    if (card && carouselRef.current) {
-                      card.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "start" });
-                    }
-                  }}
-                  aria-label={`Go to ${p.title}`}
-                  title={p.title}
-                  className={`h-2.5 rounded-full transition-all duration-500 cursor-pointer flex items-center justify-center relative ${
-                    isActive
-                      ? "w-8 bg-gradient-to-r from-(--color-rose-active) via-rose to-(--color-rose-deep) shadow-[0_2px_10px_color-mix(in_srgb,var(--color-rose)_60%,transparent)] ring-2 ring-(--color-rose)/40 scale-105"
-                      : "w-2.5 bg-greige/60 hover:bg-(--color-rose-deep) hover:scale-125"
-                  }`}
-                />
-              );
-            })}
+          {/* Progress Line Indicator matching reference image */}
+          <div className="h-1.5 w-36 sm:w-48 rounded-full bg-beige/60 overflow-hidden relative shadow-inner">
+            <div
+              className="absolute top-0 bottom-0 left-0 bg-gradient-to-r from-(--color-rose-active) via-rose to-(--color-rose-deep) rounded-full transition-all duration-300 ease-out shadow-[0_0_10px_color-mix(in_srgb,var(--color-rose)_60%,transparent)]"
+              style={{ width: `${scrollProgress}%` }}
+            />
           </div>
 
           <button

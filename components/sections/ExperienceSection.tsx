@@ -25,7 +25,7 @@ const ExperienceSection = () => {
 
       <div className="relative max-w-5xl mx-auto py-4 pl-6 md:pl-0">
         {/* Timeline Center Line */}
-        <div className="absolute left-[15px] md:left-1/2 top-0 bottom-0 w-0.5 bg-[var(--color-rose-active)]/40 -translate-x-1/2" />
+        <div className="absolute left-[15px] md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-transparent via-[var(--color-rose-active)]/50 to-transparent -translate-x-1/2 shadow-[0_0_8px_rgba(215,189,176,0.4)]" />
 
         <div className="space-y-12 md:space-y-16">
           {experience.map((item, index) => {
@@ -40,11 +40,26 @@ const ExperienceSection = () => {
                 viewport={{ once: true }}
                 className="relative grid md:grid-cols-2 gap-6 md:gap-16 items-center"
               >
-                {/* Glowing Node */}
-                <div className="absolute left-[15px] md:left-1/2 top-6 md:top-1/2 -translate-x-1/2 -translate-y-1/2 z-10 flex items-center justify-center w-8 h-8">
-                  <div className="h-5 w-5 rounded-full bg-bg-page border-2 border-[var(--color-rose-deep)] shadow-md flex items-center justify-center">
-                    <div className="h-2 w-2 rounded-full bg-[var(--color-rose-deep)]" />
-                  </div>
+                {/* Horizontal Indicator Line connecting Center Spine to Card */}
+                <div className="md:hidden absolute left-[15px] top-6 w-6 h-0.5 bg-gradient-to-r from-[var(--color-rose-deep)] via-[var(--color-rose)] to-transparent z-0" />
+                <div
+                  className={`hidden md:block absolute top-1/2 h-0.5 z-0 ${
+                    isEven
+                      ? "left-1/2 w-8 bg-gradient-to-r from-[var(--color-rose-deep)] via-[var(--color-rose)] to-transparent"
+                      : "right-1/2 w-8 bg-gradient-to-l from-[var(--color-rose-deep)] via-[var(--color-rose)] to-transparent"
+                  } -translate-y-1/2`}
+                />
+                <div
+                  className={`hidden md:block absolute top-1/2 h-0.5 z-0 ${
+                    isEven
+                      ? "right-1/2 w-8 bg-gradient-to-l from-[var(--color-rose-deep)]/40 to-transparent"
+                      : "left-1/2 w-8 bg-gradient-to-r from-[var(--color-rose-deep)]/40 to-transparent"
+                  } -translate-y-1/2`}
+                />
+
+                {/* Timeline Horizontal Line Indicator */}
+                <div className="absolute left-[15px] md:left-1/2 top-6 md:top-1/2 -translate-x-1/2 -translate-y-1/2 z-10 flex items-center justify-center">
+                  <div className="w-8 h-1 rounded-full bg-gradient-to-r from-[var(--color-rose-deep)] via-[var(--color-rose-hover)] to-[var(--color-rose-deep)] shadow-[0_0_10px_color-mix(in_srgb,var(--color-rose)_80%,transparent)] border border-[var(--color-rose-deep)]" />
                 </div>
 
                 {/* Date Period Badge */}
@@ -90,7 +105,7 @@ const ExperienceSection = () => {
                     <ul className="text-sm text-text-primary font-normal space-y-2.5 leading-relaxed font-body">
                       {item.responsibilities.map((resp, i) => (
                         <li key={i} className="flex items-start gap-2.5">
-                          <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--color-rose-deep)]" />
+                          <span className="mt-2.5 h-0.5 w-3.5 shrink-0 rounded-full bg-[var(--color-rose-deep)]" />
                           <span>{resp}</span>
                         </li>
                       ))}
